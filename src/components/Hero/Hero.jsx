@@ -1,45 +1,52 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../../App.css"
+import myImage from '../../assets/1.jpg';
+import myImage1 from '../../assets/2.jpg';
+import myImage2 from '../../assets/3.jpg';
+
 
 export const Hero = () => {
   return (
-    <div>
-      <Carousel>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src=""
-            alt="First slide" />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="holder.js/800x400?text=Second slide&bg=282c34"
-            alt="Second slide" />
+    <Carousel>
+    <Carousel.Item>
+      <img
+        className="d-block w-100"
+        src={myImage}
+        alt="First slide"
+      />
+      <Carousel.Caption>
+        <h3>First Slide</h3>
+        <p>Some description goes here</p>
+      </Carousel.Caption>
+    </Carousel.Item>
 
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="holder.js/800x400?text=Third slide&bg=20232a"
-            alt="Third slide" />
+    <Carousel.Item>
+      <img
+        className="d-block w-100"
+        src={myImage1}
+        alt="Second slide"
+      />
+      <Carousel.Caption>
+        <h3>Second Slide</h3>
+        <p>Another description goes here</p>
+      </Carousel.Caption>
+    </Carousel.Item>
 
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-    </div>
+    <Carousel.Item>
+      <img
+        className="d-block w-100"
+        src={myImage2}
+        alt="Second slide"
+      />
+      <Carousel.Caption>
+        <h3>Second Slide</h3>
+        <p>Another description goes here</p>
+      </Carousel.Caption>
+    </Carousel.Item>
+
+  </Carousel>
   );
 };
 

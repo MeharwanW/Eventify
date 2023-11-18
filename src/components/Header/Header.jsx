@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Header.css"
 import Button from 'react-bootstrap/Button';
+import "../../App.css"
 
 const Header = () => {
     return (
