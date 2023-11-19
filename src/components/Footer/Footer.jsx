@@ -1,5 +1,24 @@
 import React from 'react'
 import "../../App.css"
+import mysvg from "./images/gpay.svg"
+import mysvg1 from "./images/fb.png"
+import mysvg2 from "./images/half.png"
+import mysvg3 from "./images//star.png"
+import mysvg4 from "./images/mastercard.svg"
+import mysvg5 from "./images/cash.png"
+import mysvg6 from "./images/insta.png"
+import mysvg7 from "./images/twitter.svg"
+import mysvg8 from "./images/paypal.svg"
+import mysvg9 from "./images/apple.png"
+import mysvg0 from "./images/visa.svg"
+import mysvg11 from "./images/wp.gif"
+import mysvg12 from "./images/logo.png"
+
+
+
+
+
+
 
 const Footer = () => {
   return (
@@ -16,13 +35,13 @@ const Footer = () => {
                 <br />
                 <br />
                 <p>Review us:</p>
-                <img src="/images/logo.jpg" alt="Website Logo" /> 
+                <img src={mysvg12} alt="Website Logo" /> 
                 <div class="stars">
-                    <img src='/images/star.png' alt="Website Logo" />
-                    <img src="/images/star.png" alt="Website Logo" />
-                    <img src="/images/star.png" alt="Website Logo" />
-                    <img src="/images/star.png" alt="Website Logo" />
-                    <img src="/images/half.png" alt="Website Logo" />
+                    <img src={mysvg3} alt="Website Logo" />
+                    <img src={mysvg3} alt="Website Logo" />
+                    <img src={mysvg3} alt="Website Logo" />
+                    <img src={mysvg3} alt="Website Logo" />
+                    <img src={mysvg2} alt="Website Logo" />
                 </div>
                 
     
@@ -36,13 +55,13 @@ const Footer = () => {
               <p>Khudad Pilaza Near Station Road Sukkur Sindh</p>
               <div class="social-icons">
                 <a href="https://www.facebook.com/">
-                    <img src="/images/fb.png" alt="Facebook"/>
+                    <img src={mysvg1} alt="Facebook"/>
                 </a>
                 <a href="https://www.instagram.com">
-                    <img src="images/insta.png" alt="Instagram" />
+                    <img src={mysvg6} alt="Instagram" />
                 </a>
                 <a href="https://twitter.com/">
-                    <img src="images/twitter.svg" alt="Twitter" />
+                    <img src={mysvg7} alt="Twitter" />
                 </a>
               </div>
             </div>
@@ -55,7 +74,7 @@ const Footer = () => {
               <p>Mon-Sun: 1:00PM - 11:00AM</p>
               <div class="whatsapp-section">
                 <a href="https://web.whatsapp.com/">
-                    <img src="/images/wp.gif" alt="WhatsApp" />
+                    <img src={mysvg11} alt="WhatsApp" />
                 </a>
                 <span>WhatsApp us</span>
               </div>
@@ -67,14 +86,14 @@ const Footer = () => {
               <h2>We Accept</h2>
               <div class="accept-logos">
     
-                <img src="images/gpay.svg" alt="GPay" />
-                <img src="images/paypal.svg" alt="PayPal" />
-                <img src="images/mastercard.svg" alt="Mastercard" />
+                <img src={mysvg} alt="GPay" />
+                <img src={mysvg8} alt="PayPal" />
+                <img src={mysvg4} alt="Mastercard" />
               </div>
               <div class="accept-logos">
-                <img src="images/visa.svg" alt="Visa" />
-                <img src="images/apple.png" alt="Apple" />
-                <img src="images/cash.png" alt="Cash" />
+                <img src={mysvg0} alt="Visa" />
+                <img src={mysvg9} alt="Apple" />
+                <img src={mysvg5} alt="Cash" />
               </div>
             </div>
           </div>
