@@ -14,12 +14,6 @@ import mysvg0 from "./images/visa.svg"
 import mysvg11 from "./images/wp.gif"
 import mysvg12 from "./images/logo.png"
 
-
-
-
-
-
-
 const Footer = () => {
   return (
     <div class="footer">

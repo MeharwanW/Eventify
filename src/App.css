@@ -96,6 +96,7 @@ body {
   .slide {
     flex: 0 0 100%;
     transition: transform 0.5s ease;
+    overflow: hidden;
   }
   .about-res-p {
     width: 70%;

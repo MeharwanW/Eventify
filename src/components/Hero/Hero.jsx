@@ -9,10 +9,10 @@ import myImage2 from '../../assets/3.jpg';
 
 export const Hero = () => {
   return (
-    <Carousel>
+    <Carousel className='slide'>
     <Carousel.Item>
       <img
-        className="d-block w-100"
+        className="d-block"
         src={myImage}
         alt="First slide"
       />
