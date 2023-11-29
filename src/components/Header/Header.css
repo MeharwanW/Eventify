@@ -24,7 +24,7 @@
 }
 .h-menu
 {
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .h-menu>*:hover
@@ -34,17 +34,13 @@
 }
 .Logo img
 { 
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 20px;
 }
 .Logo
 {
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     margin-left: 60px;
-}
-.Nav-s
-{
-    font-size: large;
 }

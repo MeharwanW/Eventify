@@ -184,12 +184,12 @@ body {
   .footer {
     background: no-repeat black; /* Replace with the path to your image */
     padding: 0px;
-    height: 80vh;
+    height: 80%;
     width: 100vw;
   }
   
   .row {
-    margin-top: 15%;
+    margin-top: 5%;
   }
   
   .contact-item1{
@@ -232,7 +232,7 @@ body {
     color: white;
     width: 100%;
     text-align: center;
-    margin-top: 120px;
+    /* margin-top: 120px; */
     margin-bottom: orem;
   }
   .copyright a {

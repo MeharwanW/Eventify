@@ -1,27 +1,27 @@
 [
   {
-    "name": "Islamabad",
+    "name": "Wedding",
     "price": "47,043",
     "detail": "Khudad Pilaza Islamabad",
-    "image": "./r1.png"
+    "image": "./1/6.jpeg"
   },
   {
-    "name": "Lahore",
+    "name": "Metting",
     "price": "66,353",
     "detail": "Khudad Pilaza Lahore Punjab",
-    "image": "./r2.png"
+    "image": "./1/13.jpeg"
   },
   {
-    "name": "Karachi",
+    "name": "Party",
     "price": "35,853",
     "detail": "Khudad Pilaza Karachi Sindh",
-    "image": "./r3.png"
+    "image": "./1/9.jpeg"
   },
   {
-    "name": "Sukkur",
+    "name": "Reception",
     "price": "47,043",
     "detail": "Khudad Pilaza Sukkur Sindh",
-    "image": "./r1.png"
+    "image": "./1/8.jpeg"
   },
   {
     "name": "Jacobabad",

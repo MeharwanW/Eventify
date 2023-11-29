@@ -20,6 +20,28 @@
 {
     width: 100%;
     max-width: 15rem;
+
+}
+.r-card2>video
+{
+    width: 100%;
+    max-width: 15rem;
+
+}
+.r-card1>img
+{
+    width: 230px;
+    height: 220px;
+    max-width: 15rem;
+    border-radius: 10px;
+
+}
+.r-card2>video
+{
+    height: 200px;
+    width: 300px;
+    max-width: 15rem;
+    border-radius: 10px;
 }
 .r-card>:nth-child(2)
 {
