@@ -1,46 +1,68 @@
-.h-wrapper
-{
+.h-wrapper {
     justify-content: center;
     text-align: center;
-    width: 130px;
+    width: 120px;
     border-radius: 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
 }
-.h-wrapper:hover
-{
-       color: black;
-       background-color: rgb(98, 24, 24);
-       color: white;
+
+.h-wrapper:hover {
+
+    background-color: rgb(98, 24, 24);
+    color: white;
+    text-decoration: none;
+
 }
-.h-container
-{
+
+.h-wrapper:checked {
+    color: black;
+}
+
+.h-container {
     justify-content: space-between;
     padding-top: 1rem;
     padding-bottom: 1rem;
     color: var(--secondary);
 }
-.nav-link
-{
-    color:black;
+
+.nav-link {
+    color: black;
 }
-.h-menu
+.color
 {
+    background: linear-gradient(
+        180deg,
+        rgba(36, 3, 1, 0) 0%,
+        rgba(120, 5, 22, 0.46) 271.91%
+    );
+}
+.h-menu {
     gap: 1rem;
 }
 
-.h-menu>*:hover
-{
-    
-    cursor:pointer;
+.h-menu>*:hover {
+    cursor: pointer;
 }
-.Logo img
-{ 
-    width: 60px;
-    height: 60px;
+
+.Logo img {
+    width: 50px;
+    height: 50px;
     border-radius: 20px;
 }
-.Logo
-{
+
+.Logo {
     height: 80px;
     width: 80px;
-    margin-left: 60px;
+    margin-left: 40px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: none;
+
 }

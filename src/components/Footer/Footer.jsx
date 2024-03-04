@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../App.css"
+// import "../../App.css"
 import mysvg from "./images/gpay.svg"
 import mysvg1 from "./images/fb.png"
 import mysvg2 from "./images/half.png"
@@ -17,7 +17,7 @@ import mysvg12 from "./images/logo.png"
 const Footer = () => {
   return (
     <div class="footer">
-        <div class="container">
+        <div class="">
           <div class="row">
             <div class="col-md">
             <div class="contact-item1">
