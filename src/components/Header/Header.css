@@ -34,9 +34,41 @@
 {
     background: linear-gradient(
         180deg,
-        rgba(36, 3, 1, 0) 0%,
-        rgba(120, 5, 22, 0.46) 271.91%
+        #24030100 0%,
+        #78051675 271.91%
     );
+}
+/* Color of the links BEFORE scroll */
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler .fa-bars {
+  color: #fff;
+}
+
+/* Color of the links AFTER scroll */
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler .fa-bars {
+  color: #4f4f4f;
+}
+.border
+{
+    width: 20%;
+    height: 100%;
+    border: 2px solid black;
+}
+.border-full{
+    width: 55%;
+    height: 100%;
+  
+}
+/* Color of the navbar AFTER scroll */
+.navbar-scrolled {
+  background-color: #fff;
+}
+
+/* An optional height of the navbar AFTER scroll */
+.navbar.navbar-scroll.navbar-scrolled {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .h-menu {
     gap: 1rem;
@@ -47,15 +79,18 @@
 }
 
 .Logo img {
-    width: 50px;
+   
+    width: 150px;
     height: 50px;
-    border-radius: 20px;
+
+  
 }
 
 .Logo {
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 150px;
     margin-left: 40px;
+    padding-bottom: 10px;
 }
 
 .link {
@@ -65,4 +100,8 @@
 .link:hover {
     text-decoration: none;
 
+}
+.border
+{
+    border-radius: 50px;
 }

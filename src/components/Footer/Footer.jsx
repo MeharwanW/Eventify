@@ -12,15 +12,15 @@ import mysvg8 from "./images/paypal.svg"
 import mysvg9 from "./images/apple.png"
 import mysvg0 from "./images/visa.svg"
 import mysvg11 from "./images/wp.gif"
-import mysvg12 from "./images/logo.png"
+import mysvg12 from "./images/logo.svg"
 
 const Footer = () => {
   return (
-    <div class="footer">
+    <div class="footer color border">
         <div class="">
           <div class="row">
             <div class="col-md">
-            <div class="contact-item1">
+            <div class="contact-item1 redText">
               <h2>Contact Us</h2>
            
               <p>Phone: 0348-8365045</p>

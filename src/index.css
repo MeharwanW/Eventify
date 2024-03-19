@@ -11,6 +11,7 @@ body{
     rgba(36, 3, 1, 0) 0%,
     rgba(108, 3, 19, 0.46) 271.91%
 );
+
 }
 *
 {
@@ -25,7 +26,7 @@ code {
   --secondary: rgba(255, 255, 255, 0.78);
   --black: #131110;
   --blue-gradient: linear-gradient(97.05deg, #4066ff 3.76%, #2949c6 100%);
-  --red-gradient: linear-gradient(97.05deg, #c4101c 3.76%, #490308 100%);
+  --black-gradient: linear-gradient(97.05deg, #e1d7d7 3.76%, #1a1919 100%);
   --orange-gradient: linear-gradient(270deg, #ffb978 0%, #ff922d 100%);
   --blue: #4066ff;
   --lightBlue: #eeeeff;
@@ -56,6 +57,7 @@ a {
   color: #b20b16;
   font-size: 1.2rem;
   font-weight: 600;
+  font-family: "GFS Didot", serif;
 }
 .button
 {
@@ -155,4 +157,17 @@ a {
   .redText {
     font-size: 1.2rem;
   }
+}
+.border
+{
+  border-radius: 20px;
+  border: rgb(150, 20, 20);
+  color: #490308;
+}
+.font
+{
+  
+    font-family: "GFS Didot", serif;
+    font-weight: 400;
+    font-style: normal;
 }

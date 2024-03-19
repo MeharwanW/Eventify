@@ -10,7 +10,7 @@ import { sliderSettings } from "../../utils/common.js";
 const Residencies = () => {
   return (
     <section className="r-wrapper">
-      <div className="paddings innerWidth r-container box">
+      <div className="paddings innerWidth r-container box2">
         <div className="r-head flexColStart">
           <span className="redText">Browse By Category</span>
         </div>
@@ -27,7 +27,7 @@ const Residencies = () => {
         </Swiper>
       </div>
 
-      <div className="paddings innerWidth r-container box">
+      <div className="paddings innerWidth r-container box1  ">
         <div className="r-head flexColStart">
           <span className="redText">Popular Venues</span>
         </div>
@@ -61,16 +61,19 @@ const Residencies = () => {
         ))}
          </Swiper>
             
-      <Swiper {...sliderSettings}>
-        {data2.map((card, i) => (
-            <SwiperSlide key={i}>
-
-          <div key={i} className="videoCard r-card">
-            <video src={card.video} alt="home" />
-          </div>
-            </SwiperSlide>
-        ))}
-         </Swiper>
+         <Swiper {...sliderSettings}>
+  {data2.map((card, i) => (
+    <SwiperSlide key={i}>
+      <div className="videoCard r-card">
+        <video controls>
+          <source src={card.video} type="video/mp4" />
+          {/* Add additional <source> elements for other video formats if needed */}
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </SwiperSlide>
+  ))}
+</Swiper>
       </div>
 </div>
       

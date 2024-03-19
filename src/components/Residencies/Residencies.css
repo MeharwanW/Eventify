@@ -104,5 +104,16 @@
 }
 .box
 {
+   
     border-radius: 20px;
+}
+.box1
+{
+    border-radius: 20px;
+    background-color: rgb(56, 8, 8);
+}
+.box2
+{
+    border-radius: 20px;
+    background-color: rgba(147, 7, 70, 0.975);
 }
