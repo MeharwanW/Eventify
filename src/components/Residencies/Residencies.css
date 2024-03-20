@@ -12,7 +12,7 @@
 .r-card>img
 {
     width: 100%;
-
+    border-radius: 20px;
     height: 35vh;
     max-width: 15rem;
 
@@ -49,18 +49,19 @@
     overflow: hidden; 
 }
 .r-buttons
-{ /* Residencies.css */
+{ 
 
     .r-wrapper {
-      padding: 20px; /* Add padding around the section */
+      padding: 20px; 
     }
     
     .r-container {
-      margin-bottom: 20px; /* Add margin between each container */
+      margin-bottom: 20px;
     }
     
     .r-card {
-      margin: 10px; /* Add margin around each card */
+      margin: 10px;
+      
     }
     
     .flexCenter {
@@ -101,19 +102,4 @@
 {
     width: 100%;
     height: 35vh;
-}
-.box
-{
-   
-    border-radius: 20px;
-}
-.box1
-{
-    border-radius: 20px;
-    background-color: rgb(56, 8, 8);
-}
-.box2
-{
-    border-radius: 20px;
-    background-color: rgba(147, 7, 70, 0.975);
 }

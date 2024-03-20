@@ -1,5 +1,5 @@
 import React from 'react'
-// import "../../App.css"
+import "../../App.css"
 import mysvg from "./images/gpay.svg"
 import mysvg1 from "./images/fb.png"
 import mysvg2 from "./images/half.png"
@@ -16,21 +16,21 @@ import mysvg12 from "./images/logo.svg"
 
 const Footer = () => {
   return (
-    <div class="footer color border">
-        <div class="">
-          <div class="row">
-            <div class="col-md">
-            <div class="contact-item1 redText">
+    <div className="footer font">
+        <div className="">
+          <div className="row">
+            <div className="col-md">
+            <div className="contact-item1 redText">
               <h2>Contact Us</h2>
            
-              <p>Phone: 0348-8365045</p>
-              <p>Email: Meharwanw@gmail.com</p>
-              <div class="review-section">
+              <p className='font'>Phone: 0348-8365045</p>
+              <p className='font'>Email: Meharwanw@gmail.com</p>
+              <div className="review-section">
                 <br />
                 <br />
-                <p>Review us:</p>
+                <p className='font'>Review us:</p>
                 <img src={mysvg12} alt="Website Logo" /> 
-                <div class="stars">
+                <div className="stars">
                     <img src={mysvg3} alt="Website Logo" />
                     <img src={mysvg3} alt="Website Logo" />
                     <img src={mysvg3} alt="Website Logo" />
@@ -43,11 +43,11 @@ const Footer = () => {
             </div>
           </div>
     
-          <div class="col-md">
-            <div class="contact-item1">
-              <h2>Find Us</h2>
-              <p>Khudad Pilaza Near Station Road Sukkur Sindh</p>
-              <div class="social-icons">
+          <div className="col-md">
+            <div className="contact-item1">
+              <h2 className='font'>Find Us</h2>
+              <p className='font'>Khudad Pilaza Near Station Road Sukkur Sindh</p>
+              <div className="social-icons">
                 <a href="https://www.facebook.com/">
                     <img src={mysvg1} alt="Facebook"/>
                 </a>
@@ -61,30 +61,30 @@ const Footer = () => {
             </div>
           </div>
     
-          <div class="col-md">
-            <div class="contact-item1">
-              <h2>Business Hours</h2>
-              <p>Open 7-Days a week</p>
-              <p>Mon-Sun: 1:00PM - 11:00AM</p>
-              <div class="whatsapp-section">
+          <div className="col-md">
+            <div className="contact-item1 font">
+              <h2 >Business Hours</h2>
+              <p className='font'>Open 7-Days a week</p>
+              <p className='font'>Mon-Sun: 1:00PM - 11:00AM</p>
+              <div className="whatsapp-section">
                 <a href="https://web.whatsapp.com/">
                     <img src={mysvg11} alt="WhatsApp" />
                 </a>
-                <span>WhatsApp us</span>
+                <span className='font'>WhatsApp us</span>
               </div>
             </div>
           </div>
          
-          <div class="col-md">
-            <div class="contact-item1">
-              <h2>We Accept</h2>
-              <div class="accept-logos">
+          <div className="col-md">
+            <div className="contact-item1">
+              <h2 className='font'>We Accept</h2>
+              <div className="accept-logos">
     
                 <img src={mysvg} alt="GPay" />
                 <img src={mysvg8} alt="PayPal" />
                 <img src={mysvg4} alt="Mastercard" />
               </div>
-              <div class="accept-logos">
+              <div className="accept-logos">
                 <img src={mysvg0} alt="Visa" />
                 <img src={mysvg9} alt="Apple" />
                 <img src={mysvg5} alt="Cash" />
@@ -94,7 +94,7 @@ const Footer = () => {
         </div>
       </div>
       
-      <div class="copyright">
+      <div className="copyright">
         <p> 
           <a href="#">Terms of Use</a> | 
           <a href="#">Privacy & Cookies Policy</a> | 

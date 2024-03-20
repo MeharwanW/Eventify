@@ -66,7 +66,7 @@ export const Hero = () => {
         </Carousel.Item>
       </Carousel>
 
-      <div className='flexCenter'>
+      <div className='flexCenter border-gradient box-shadow'>
         <div className='margin'>
           <form className="">
             <div className="search-container">
@@ -74,7 +74,7 @@ export const Hero = () => {
                 type="text"
                 name=""
                 placeholder="Search"
-                className="search-input"
+                className="search-input font"
                 value={value}
                 onChange={onChange}
               />
@@ -95,7 +95,7 @@ export const Hero = () => {
                 type="text"
                 name=""
                 placeholder="Search"
-                className="search-input2"
+                className="search-input2 font"
                 value={value1}
                 onChange={onChange1}
               />
@@ -110,7 +110,7 @@ export const Hero = () => {
           </form>
         </div>
         <div className="margin">
-          <button className='button' value="button">Search</button>
+          <button className='button font' value="button">Search</button>
         </div>
       </div>
     </div>

@@ -182,12 +182,11 @@ body {
     width: 30px; /* Adjust the icon size as needed */
   }
   
-  /* footer */
+  
   
   .footer {
-    background: no-repeat black; /* Replace with the path to your image */
+    background: no-repeat rgb(8, 8, 8); 
     padding: 0px;
-    height: 80%;
     width: 100vw;
   }
   

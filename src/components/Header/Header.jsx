@@ -12,9 +12,9 @@ const Header = () => {
 
   return (
     <section>
-      <div className="d-flex justify-content-between h-menu navbar shadow-5-strong fixed-top navbar-scroll --black-gradient" activeKey="/home">
+      <div className="d-flex justify-content-between h-menu navbar shadow-5-strong fixed-top navbar-scroll " activeKey="/home">
         <div className="">
-          <span className="Logo ">
+          <span className="Logo">
             <img src={Logo} alt="" srcset="" />
           </span>
         </div>
@@ -48,12 +48,12 @@ const Header = () => {
         
 
         <div className="h-menu">
-          <Link to="/Login" className="link font"><Button className="link " variant="" >
+          <Link to="/Login" className="link font "><Button className="link button" variant="" >
             Login
-          </Button>{" "}</Link>
-          <Link to="SignUp" className="link font primaryText"><Button className="link" variant="">
+          </Button>{""}</Link>
+          <Link to="SignUp" className="link font "><Button className="link button" variant="">
             Sign Up
-          </Button>{" "}</Link>
+          </Button>{""}</Link>
         </div>
       </div>
       <Outlet />

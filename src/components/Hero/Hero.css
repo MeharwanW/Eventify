@@ -4,20 +4,22 @@
 }
 .search-container {
     position: relative;
+
   }
   
   .search-input {
-    width: 200px;
+    width: 100%;
+    color: white;
+    border-radius: 5px;
   }
   
-  .suggestions {
+  .suggestions{
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     background-color: #fff;
     border: 1px solid #ccc;
-    border-top: none;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
@@ -31,10 +33,12 @@
     background-color: #f2f2f2;
   }
   
-  /* Styles for the second search box */
+ 
   
   .search-input2 {
-    width: 300px;
+    width: 100%;
+    color: white;
+    border-radius: 5px;
   }
   
   .suggestions2 {
@@ -44,11 +48,22 @@
     width: 100%;
     background-color: #fff;
     border: 1px solid #ccc;
-    border-top: none;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
-  
+  .border-gradient
+  {
+    margin-left: 10%;
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 80%;
+  }
+  .box-shadow
+  {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-image: linear-gradient(to right top, #73756b, #6a6653, #65563c, #634429, #60301d, #6a2a1b, #75201b, #80101f, #9d1122, #ba1424, #d81923, #f62121);
+  }
+
   .suggestion-item2 {
     padding: 10px;
     cursor: pointer;

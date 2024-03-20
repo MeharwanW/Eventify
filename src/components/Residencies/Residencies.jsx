@@ -10,7 +10,7 @@ import { sliderSettings } from "../../utils/common.js";
 const Residencies = () => {
   return (
     <section className="r-wrapper">
-      <div className="paddings innerWidth r-container box2">
+      <div className="paddings innerWidth r-container">
         <div className="r-head flexColStart">
           <span className="redText">Browse By Category</span>
         </div>
@@ -27,7 +27,7 @@ const Residencies = () => {
         </Swiper>
       </div>
 
-      <div className="paddings innerWidth r-container box1  ">
+      <div className="paddings innerWidth r-container">
         <div className="r-head flexColStart">
           <span className="redText">Popular Venues</span>
         </div>
@@ -38,14 +38,14 @@ const Residencies = () => {
               <div className="flexColStart r-card">
                 <img src={card.image} alt="home" />
                 <span className="primaryText">{card.name}</span>
-                <span className="secondaryText">{card.detail}</span>
+                <span className="secondaryText font">{card.detail}</span>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      <div className="paddings innerWidth r-container box ">
+      <div className="paddings innerWidth r-container">
         <div className="r-head flexColStart">
           <span className="redText">Featured Video</span>
         </div>
@@ -67,7 +67,7 @@ const Residencies = () => {
       <div className="videoCard r-card">
         <video controls>
           <source src={card.video} type="video/mp4" />
-          {/* Add additional <source> elements for other video formats if needed */}
+          {}
           Your browser does not support the video tag.
         </video>
       </div>
@@ -76,9 +76,6 @@ const Residencies = () => {
 </Swiper>
       </div>
 </div>
-      
-   
-      
     </section>
   );
 };
