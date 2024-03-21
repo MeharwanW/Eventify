@@ -4,7 +4,7 @@ import "./SearchBar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.css";
 import Button from "react-bootstrap/Button";
-import Logo from "../Footer/images/logo.svg";
+import Logo from "../Footer/images/logo.png";
 import { Outlet, Link } from "react-router-dom";
 
 
@@ -12,13 +12,13 @@ const Header = () => {
 
   return (
     <section>
-      <div className="d-flex justify-content-between h-menu navbar shadow-5-strong fixed-top navbar-scroll " activeKey="/home">
+      <div className="d-flex justify-content-between navbar fixed-top navbar-scroll" activeKey="/home">
         <div className="">
           <span className="Logo">
             <img src={Logo} alt="" srcset="" />
           </span>
         </div>
-        <div className="d-flex">
+        <div className="d-flex flexCenter">
           <Nav.Item>
             <Nav.Link className="h-wrapper" eventKey="/Home">
               <Link to="Home" className="h-wrapper font">Home</Link>
@@ -47,13 +47,13 @@ const Header = () => {
         </div>
         
 
-        <div className="h-menu">
-          <Link to="/Login" className="link font "><Button className="link button" variant="" >
+        <div className="">
+          <Link to="/Login" className="font"><button className="button" variant="" >
             Login
-          </Button>{""}</Link>
-          <Link to="SignUp" className="link font "><Button className="link button" variant="">
+          </button>{""}</Link>
+          <Link to="SignUp" className="font link"><button className="button" variant="">
             Sign Up
-          </Button>{""}</Link>
+          </button>{""}</Link>
         </div>
       </div>
       <Outlet />

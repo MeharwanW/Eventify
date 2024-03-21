@@ -64,6 +64,9 @@ export const Hero = () => {
         <Carousel.Item>
           <img className="" src={myImage2} alt="Third slide" />
         </Carousel.Item>
+        <Carousel.Item>
+          <img className="" src={myImage2} alt="Third slide" />
+        </Carousel.Item>
       </Carousel>
 
       <div className='flexCenter border-gradient box-shadow'>
@@ -95,7 +98,7 @@ export const Hero = () => {
                 type="text"
                 name=""
                 placeholder="Search"
-                className="search-input2 font"
+                className="search-input2"
                 value={value1}
                 onChange={onChange1}
               />

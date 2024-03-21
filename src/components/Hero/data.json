@@ -1,0 +1,28 @@
+{
+"Cdata": [
+    {
+      "image": "../../assets/1.jpg",
+      "caption": "San Francisco"
+    },
+    {
+      "image": "./1.jpg",
+      "caption": "Scotland"
+    },
+    {
+      "image": "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg",
+      "caption": "Darjeeling"
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Palace_of_Fine_Arts_%2816794p%29.jpg/1200px-Palace_of_Fine_Arts_%2816794p%29.jpg",
+      "caption": "San Francisco"
+    },
+    {
+      "image": "https://i.natgeofe.com/n/f7732389-a045-402c-bf39-cb4eda39e786/scotland_travel_4x3.jpg",
+      "caption": "Scotland"
+    },
+    {
+      "image": "https://www.tusktravel.com/blog/wp-content/uploads/2020/07/Best-Time-to-Visit-Darjeeling-for-Honeymoon.jpg",
+      "caption": "Darjeeling"
+    }
+  ]
+}

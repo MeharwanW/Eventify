@@ -22,17 +22,5 @@
     "price": "47,043",
     "detail": "Khudad Pilaza Sukkur Sindh",
     "image": "./1/8.jpeg"
-  },
-  {
-    "name": "Jacobabad",
-    "price": "66,353",
-    "detail": "Khudad Pilaza Jacobabad Sindh",
-    "image": "./r2.png"
-  },
-  {
-    "name": "Pishawar",
-    "price": "35,853",
-    "detail": "Khudad Pilaza Pishawar Punjab",
-    "image": "./r3.png"
   }
 ]

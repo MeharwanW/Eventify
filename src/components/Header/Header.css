@@ -1,19 +1,15 @@
 .h-wrapper {
     justify-content: center;
     text-align: center;
-    width: 120px;
+    padding-left: 30px;
     border-radius: 20px;
     text-decoration: none;
-    color: black;
-    font-size: 15px;
+    font-size: 18px;
+    color: #FFFFFF;
 }
-
 .h-wrapper:hover {
-
-    background-color: rgb(98, 24, 24);
-    color: white;
+    color: #FF6B6B;
     text-decoration: none;
-
 }
 
 .h-wrapper:checked {
@@ -30,6 +26,10 @@
 .nav-link {
     color: black;
 }
+.navbar-fixed-top.scrolled {
+    background-color: #3b3636 !important;
+    transition: background-color 200ms linear;
+  }
 .color
 {
     background: linear-gradient(
@@ -38,17 +38,13 @@
         #78051675 271.91%
     );
 }
-/* Color of the links BEFORE scroll */
-.navbar-scroll .nav-link,
-.navbar-scroll .navbar-toggler .fa-bars {
-  color: #fff;
+
+.navbar
+{
+    background-color: #314455;
+    color: #FFFFFF;
 }
 
-/* Color of the links AFTER scroll */
-.navbar-scrolled .nav-link,
-.navbar-scrolled .navbar-toggler .fa-bars {
-  color: #4f4f4f;
-}
 .border
 {
     width: 20%;
@@ -58,20 +54,11 @@
 .border-full{
     width: 55%;
     height: 100%;
-  
-}
-/* Color of the navbar AFTER scroll */
-.navbar-scrolled {
-  background-color: #fff;
 }
 
-/* An optional height of the navbar AFTER scroll */
-.navbar.navbar-scroll.navbar-scrolled {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
 .h-menu {
     gap: 1rem;
+    
 }
 
 .h-menu>*:hover {
@@ -79,22 +66,22 @@
 }
 
 .Logo img {
+   height: 40px;
+    width: 60px;
+    border-radius: 10px;
    
-    width: 150px;
-    height: 50px;
-
-  
 }
 
 .Logo {
-    height: 50px;
-    width: 150px;
+    height: 70px;
+    width: 50px;
     margin-left: 40px;
     padding-bottom: 10px;
 }
 
 .link {
     text-decoration: none;
+    padding-left: 5px;
 }
 
 .link:hover {

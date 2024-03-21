@@ -12,7 +12,7 @@ import mysvg8 from "./images/paypal.svg"
 import mysvg9 from "./images/apple.png"
 import mysvg0 from "./images/visa.svg"
 import mysvg11 from "./images/wp.gif"
-import mysvg12 from "./images/logo.svg"
+import mysvg12 from "./images/logo.png"
 
 const Footer = () => {
   return (
@@ -92,16 +92,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
-      
-      <div className="copyright">
-        <p> 
-          <a href="#">Terms of Use</a> | 
-          <a href="#">Privacy & Cookies Policy</a> | 
-          <a href="#">Trading Terms</a> | 
-          <a href="#">Powered by Eventify</a>
-        </p>
-        <p>&copy;2023. The Content on this website is owned by us and our licensors. Do not copy any content.</p>
       </div>
     </div>
 

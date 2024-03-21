@@ -12,15 +12,15 @@ const Residencies = () => {
     <section className="r-wrapper">
       <div className="paddings innerWidth r-container">
         <div className="r-head flexColStart">
-          <span className="redText">Browse By Category</span>
+          <span className="heading">Browse By Category</span>
         </div>
         <Swiper {...sliderSettings}>
-          <SliderButton/>
+        
           {data.map((card, i) => (
             <SwiperSlide key={i}>
-              <div className="flexCenter r-card">
+              <div className="r-card">
                 <img src={card.image} alt="home" />
-                <span className="primaryText">{card.name}</span>
+                <span className="flexCenter heading font">{card.name}</span>
               </div>
             </SwiperSlide>
           ))}
@@ -29,16 +29,16 @@ const Residencies = () => {
 
       <div className="paddings innerWidth r-container">
         <div className="r-head flexColStart">
-          <span className="redText">Popular Venues</span>
+          <span className="heading">Popular Venues</span>
         </div>
         <Swiper {...sliderSettings}>
           <SliderButton/>
           {data1.map((card, i) => (
             <SwiperSlide key={i}>
-              <div className="flexColStart r-card">
+              <div className="flexCenter r-card">
                 <img src={card.image} alt="home" />
-                <span className="primaryText">{card.name}</span>
-                <span className="secondaryText font">{card.detail}</span>
+                <span className="flexCenter heading">{card.name}</span>
+                <span className="flexCenter font">{card.detail}</span>
               </div>
             </SwiperSlide>
           ))}
@@ -47,7 +47,7 @@ const Residencies = () => {
 
       <div className="paddings innerWidth r-container">
         <div className="r-head flexColStart">
-          <span className="redText">Featured Video</span>
+          <span className="heading">Featured Video</span>
         </div>
       <div className="flexCenter">
       <Swiper {...sliderSettings}>
