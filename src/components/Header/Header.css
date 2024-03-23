@@ -1,21 +1,24 @@
+.navbar {
+    background-color: #314455;
+    color: #FFFFFF;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1000;
+}
+
 .h-wrapper {
     padding-top: 5px;
     justify-content: center;
     text-align: center;
-    margin-left: 25px;
-    border-radius: 20px;
+    margin-left: 45px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px;
     color: #FFFFFF;
 }
 
 .h-wrapper:hover {
     color: #FF6B6B;
-    text-decoration: none;
-}
-
-.h-wrapper:checked {
-    color: black;
 }
 
 .h-container {
@@ -29,16 +32,6 @@
     color: black;
 }
 
-.navbar {
-    background-color: #314455;
-    color: #FFFFFF;
-    transition: background-color 0.3s ease;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
 
 
 .h-menu {
@@ -70,6 +63,5 @@
 
 .link:hover {
     text-decoration: none;
-
 }
 
