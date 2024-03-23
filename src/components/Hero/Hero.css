@@ -17,7 +17,16 @@
     width: 100%;
     box-sizing: border-box;
   }
-  
+  .carousal-text
+  {
+    color: white;
+    margin-bottom: 20%;
+  }
+  .font-size
+  {
+    font-size: 50px;
+    font-weight: 600;
+  }
   .suggestions{
     position: absolute;
     top: 100%;

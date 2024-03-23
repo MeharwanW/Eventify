@@ -1,95 +1,84 @@
-
-.container{
+.contain {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     margin: auto;
-    margin-top: 200px;
-    padding-bottom: 30px;
+    align-items: center;
+    background-color: #FF6B6B;
+    margin-top: 5%;
 }
-.header{
+
+.shadow-box {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 9px;
-    width: 100%;
-    margin-top: 30px;
+    background-color: white;
+    width: 30%;
+    height: 80%;
 }
-.text{
-    color: #8d0606;
-    font-size: 48px;
-    font-weight: 700;
 
+.text {
+    color: #FF6B6B;
+    font-weight: 600;
 }
-.underline{
+
+.underline {
     width: 61px;
     height: 6px;
-    background-color: #8d0606;
+    background-color: #FF6B6B;
     border-radius: 9px;
-
 }
-.inputs{
-    margin-top: 55px;
+
+.inputs {
     display: flex;
     flex-direction: column;
-    gap: 25px;
 }
-.input{
+
+.input {
     display: flex;
     align-items: center;
-    margin:auto;
-    width: 480px;
-    height: 80px;
+    margin: auto;
+    width: 60%;
+    height: 30%;
     background-color: #eaeaea;
     border-radius: 6px;
 }
-.input img{
-    margin: 0px 30px;
 
+.input img {
+    margin: 0px 30px;
 }
-.input input{
-    height:50px;
+
+.input input {
+    height: 50px;
     width: 400px;
     background: transparent;
     border: none;
     outline: none;
-    color: #797979;
-    font-size: 19px;
+    color: black;
+    font-size: 14px;
 
 }
-.forget-password{
+
+.forget-password {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 27px;
     color: #797979;
-    font-size: 18px;
+    font-size: 10px;
 }
-.forget-password span{
-    color: #8d0606;
-    cursor: pointer;
-}
-.submit-container{
-    display:flex;
-    gap: 30px;
-    margin: 60px auto;
 
-}
-.submit{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    width: 220px;
-    height: 59px;
-    color: #fff;
-    background-color: #8d0606;
-    border-radius: 50px;
-    font-size:19px;
-    font-weight: 700;
+.forget-password {
     cursor: pointer;
 }
-.gray{
-    background-color:#EAEAEA;
+
+.submit-container {
+    display: flex;
+}
+
+.gray {
+    background-color: #EAEAEA;
     color: #676767;
-
 }
-

@@ -6,6 +6,7 @@ import "./Hero.css";
 import myImage from '../../assets/1.jpg';
 import myImage1 from '../../assets/2.jpg';
 import myImage2 from '../../assets/3.jpg';
+import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
 import data from "../Header/full_names.json";
 
 
@@ -54,21 +55,37 @@ export const Hero = () => {
 
   return (
     <div className='hero-section'>
-      <Carousel>
-        <Carousel.Item>
-          <img className="" src={myImage} alt="First slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="" src={myImage1} alt="Second slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="" src={myImage2} alt="Third slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="" src={myImage2} alt="Third slide" />
-        </Carousel.Item>
-      </Carousel>
+     <MDBCarousel showIndicators showControls fade dark>
+      <MDBCarouselItem itemId={1}>
+        <img src={myImage} className='d-block w-100' alt='...' />
+        <MDBCarouselCaption>
+          <div className="carousal-text font">
+          <h1 className='font-size'>WELCOME TO</h1>
+         <h1 className='font-size color-text'>EVENTIFY</h1>
+          </div>
+        </MDBCarouselCaption>
+      </MDBCarouselItem>
 
+      <MDBCarouselItem itemId={2}>
+        <img src={myImage1} className='d-block w-100' alt='...' />
+        <MDBCarouselCaption>
+        <div className="carousal-text font">
+          <h1 className='font-size'>WELCOME TO</h1>
+         <h1 className='font-size color-text'>EVENTIFY</h1>
+          </div>
+        </MDBCarouselCaption>
+      </MDBCarouselItem>
+
+      <MDBCarouselItem itemId={3}>
+        <img src={myImage2} className='d-block w-100' alt='...' />
+        <MDBCarouselCaption>
+        <div className="carousal-text font">
+          <h1 className='font-size'>WELCOME TO</h1>
+         <h1 className='font-size color-text'>EVENTIFY</h1>
+          </div>
+        </MDBCarouselCaption>
+      </MDBCarouselItem>
+    </MDBCarousel>
       <div className='flexCenter border-gradient box-shadow'>
         <div className='margin'>
           <form className="">

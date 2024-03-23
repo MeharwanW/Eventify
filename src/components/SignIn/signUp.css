@@ -1,4 +1,4 @@
-.container{
+.contain{
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -27,9 +27,8 @@
 
 }
 .inputs{
-    margin-top: 55px;
+    margin-top: 25px;
     display: flex;
-    
     gap: 25px;
 }
 .input{
@@ -56,7 +55,7 @@
 }
 .submit-container{
     display:flex;
-    gap: 30px;
+   
     margin: 60px auto;
 
 }
@@ -65,7 +64,7 @@
     justify-content: center;
     align-items: center;
     width: 220px;
-    height: 59px;
+    
     color: #fff;
     background-color: #8d0606;
     border-radius: 50px;

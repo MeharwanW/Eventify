@@ -155,7 +155,10 @@ a {
     font-size: 1.2rem;
   }
 }
-
+.color-text
+{ 
+  color: #FF6B6B
+}
 .font
 {
     font-family: "GFS Didot", serif;

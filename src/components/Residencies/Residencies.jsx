@@ -15,7 +15,6 @@ const Residencies = () => {
           <span className="heading">Browse By Category</span>
         </div>
         <Swiper {...sliderSettings}>
-        
           {data.map((card, i) => (
             <SwiperSlide key={i}>
               <div className="r-card">

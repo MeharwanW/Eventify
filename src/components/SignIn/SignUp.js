@@ -9,25 +9,24 @@ import phone from '../SignIn/phone.svg'
 export const SignUp = () => {
   return (
     <>
-        <div className="container">
+        <div className="contain">
 
-            <div className="header">
-                <div className="text">Sign Up</div>
+            <div className="header shadow-box">
+                <div className="text font">Sign Up</div>
                 <div className="underline"></div>
-            </div>
 
             <div className="inputs row">
                 <div className="input col col-sm-12 col-md-4 col-lg-4">
                     <img src={name} alt="" />
-                    <input type="text" placeholder='Name' />
+                    <input className='font' type="text" placeholder='Name' />
                 </div>
                 <div className="input col col-sm-12 col-md-4 col-lg-4">
                     <img src={email} alt="" />
-                    <input type="email" placeholder='Email' />
+                    <input className='font' type="email" placeholder='Email' />
                 </div>
                 <div className="input col col-sm-12 col-md-4 col-lg-4">
                     <img src={name} alt="" />
-                    <input type="text" placeholder='CNIC' />
+                    <input className='font' type="text" placeholder='CNIC' />
                 </div>
             </div>
 
@@ -35,25 +34,26 @@ export const SignUp = () => {
             <div className="inputs row">
                 <div className="input col col-sm-12 col-md-6 col-lg-6">
                     <img src={name} alt="" />
-                    <input type="text" placeholder='Username' />
+                    <input className='font' type="text" placeholder='Username' />
                 </div>
                 
                 <div className="input col col-sm-12 col-md-6 col-lg-6">
                     <img src={phone} alt="" />
-                    <input type="number" placeholder='Phone Number' />
+                    <input className='font' type="number" placeholder='Phone Number' />
                 </div>
             </div>
 
             <div className="inputs row">        
                 <div className="input col col-sm-12 col-md-12 col-lg-12">
                     <img src={password} alt="" />
-                    <input type="password" placeholder='Password' />
+                    <input className='font' type="password" placeholder='Password' />
                 </div>
             </div>
             <div className="submit-container">
-                    <button className="submit">Submit</button>
+                    <button className="button">Submit</button>
                 </div>
 
+            </div>
         </div>
     </>
   )

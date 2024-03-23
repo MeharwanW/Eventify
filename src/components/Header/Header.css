@@ -1,12 +1,14 @@
 .h-wrapper {
+    padding-top: 5px;
     justify-content: center;
     text-align: center;
-    padding-left: 30px;
+    margin-left: 25px;
     border-radius: 20px;
     text-decoration: none;
     font-size: 18px;
     color: #FFFFFF;
 }
+
 .h-wrapper:hover {
     color: #FF6B6B;
     text-decoration: none;
@@ -26,39 +28,21 @@
 .nav-link {
     color: black;
 }
-.navbar-fixed-top.scrolled {
-    background-color: #3b3636 !important;
-    transition: background-color 200ms linear;
-  }
-.color
-{
-    background: linear-gradient(
-        180deg,
-        #24030100 0%,
-        #78051675 271.91%
-    );
-}
 
-.navbar
-{
+.navbar {
     background-color: #314455;
     color: #FFFFFF;
+    transition: background-color 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
-.border
-{
-    width: 20%;
-    height: 100%;
-    border: 2px solid black;
-}
-.border-full{
-    width: 55%;
-    height: 100%;
-}
 
 .h-menu {
     gap: 1rem;
-    
 }
 
 .h-menu>*:hover {
@@ -66,10 +50,10 @@
 }
 
 .Logo img {
-   height: 40px;
+    height: 40px;
     width: 60px;
     border-radius: 10px;
-   
+
 }
 
 .Logo {
@@ -88,7 +72,4 @@
     text-decoration: none;
 
 }
-.border
-{
-    border-radius: 50px;
-}
+

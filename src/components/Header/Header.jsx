@@ -3,7 +3,6 @@ import Nav from "react-bootstrap/Nav";
 import "./SearchBar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.css";
-import Button from "react-bootstrap/Button";
 import Logo from "../Footer/images/logo.png";
 import { Outlet, Link } from "react-router-dom";
 
@@ -26,12 +25,17 @@ const Header = () => {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="h-wrapper" eventKey="/Venue">
-              <Link to="Vanue" className="h-wrapper font">Venue</Link>
+              <Link to="Venues" className="h-wrapper font">Venue</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="h-wrapper" to="/Social Media">
-              <Link to="SocialMedia" className="h-wrapper font">Social Media</Link>
+              <Link to="Suppliers" className="h-wrapper font">Suppliers</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link className="h-wrapper" to="/Social Media">
+              <Link to="Media" className="h-wrapper font">Media</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -41,7 +45,7 @@ const Header = () => {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="h-wrapper" to="/Contact">
-              <Link to="ContactUs" className="h-wrapper font">Contact Us</Link>
+              <Link to="Contacts" className="h-wrapper font">Contact Us</Link>
             </Nav.Link>
           </Nav.Item>
         </div>
@@ -60,5 +64,6 @@ const Header = () => {
     </section>
   );
 };
-
 export default Header;
+
+ 
