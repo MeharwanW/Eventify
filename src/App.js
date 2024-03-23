@@ -9,7 +9,7 @@ import Media from "./components/Media/Media";
 import Suppliers from "./components/Suppliers/Suppliers";
 import Contacts from "./components/Contacts/Contacts";
 import About from "./components/About/About";
-
+import SearchVenue from "./components/SearchVenue/SearchVenue";
 
 function App() {
  
@@ -28,6 +28,7 @@ function App() {
           <Route path="Contacts" element={<Contacts />} />
           <Route path="Suppliers" element={<Suppliers />} />
           <Route path="About" element={<About />} />
+          <Route path="SearchVenues" element={<SearchVenue />} />
         </Route>
       </Routes>
       </BrowserRouter>
