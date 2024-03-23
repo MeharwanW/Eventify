@@ -40,7 +40,7 @@ export default function SearchVenue() {
 
   const onChange2 = (event) => {
     const { value } = event.target;
-    setValue(value);
+    setValue2(value);
     if (value) {
       const searchTerm = value.toLowerCase();
       const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
@@ -51,7 +51,7 @@ export default function SearchVenue() {
   };
   const onChange3 = (event) => {
     const { value } = event.target;
-    setValue(value);
+    setValue3(value);
     if (value) {
       const searchTerm = value.toLowerCase();
       const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
@@ -135,7 +135,7 @@ export default function SearchVenue() {
               />
               <div className="suggestions">
                 {suggestions2.map(item => (
-                  <div key={item.id} onClick={() => onSearch2(item)} className="suggestion-item">
+                  <div key={item.id} onClick={() => onSearch2(item)} className="suggestion-item2">
                     {item.full_name}
                   </div>
                 ))}
