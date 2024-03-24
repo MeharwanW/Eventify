@@ -5,7 +5,6 @@ import "./Hero.css";
 import myImage from '../../assets/1.jpg';
 import myImage1 from '../../assets/2.jpg';
 import myImage2 from '../../assets/3.jpg';
-import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
 import data from "../Header/full_names.json";
 
 
@@ -158,7 +157,7 @@ export const Hero = () => {
         </div>
       </div>
       <div className='box'>
-        
+
       </div>
       </div>
       );

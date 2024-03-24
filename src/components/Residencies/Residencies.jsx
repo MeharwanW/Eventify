@@ -42,7 +42,6 @@ const Residencies = () => {
              
             </SwiperSlide>
           ))}
-        
         </Swiper>
         
       </div>
