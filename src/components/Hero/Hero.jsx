@@ -132,7 +132,7 @@ export const Hero = () => {
           <button className='button font' value="button">Search</button>
         </div>
       </div>
-      <div className='flexColCenter aboutSection font'>
+      <div className='flexColCenter aboutSection font shadow-box'>
         <h1>ABOUT US</h1>
         <div className='aboutText'>
           <p className='font'>What sets Eventify apart is not just our expertise but also our unwavering commitment to integrity, trust, and passion for our craft. With us, you're not just a client; you're a valued partner in creating moments that will be cherished for a lifetime. Let us weave the threads of your imagination into an exquisite tapestry of moments, where each thread represents a memory etched in time. With Eventify by your side, your next event will be nothing short of extraordinary. Let's embark on this journey together and create magic that transcends boundaries.</p>
@@ -157,6 +157,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
+      
       </div>
       );
 };

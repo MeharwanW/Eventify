@@ -7,13 +7,15 @@
   border-radius: 10px; 
   padding: 20px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 .r-card
 {
-    gap: 0.6rem;
+    gap: 0.3rem;
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 15px;
     transition: all 300ms ease-in;
+    margin-bottom: 15px;
 }
 .r-card>img
 {
@@ -44,61 +46,15 @@
     scale: 1.025;
     cursor: pointer;
     background-image: linear-gradient(to right, #FFC3B3, #C9EFFF);
-    box-shadow: 0px 72px 49px -51px rgba(147, 3, 3, 0.21);
-}
-.swiper-horizontal
-{
-    overflow: hidden; 
+    
 }
 .r-buttons
 { 
-
-    .r-wrapper {
-      padding: 20px; 
-    }
-    
-    .r-container {
-      margin-bottom: 20px;
-    }
-    
-    .r-card {
-      margin: 10px;
-      
-    }
-    
-    .flexCenter {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .flexColStart {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
-    .redText {
-      color: red;
-    }
-    
-    .primaryText {
-      color: #333;
-      font-weight: bold;
-    }
-    
-    .secondaryText {
-      color: #666;
-    }
-    
-    border-radius: 2px;
-    gap: 1rem;
-    border-color: aliceblue;
+    gap: 1rem; 
 }
 .videoCard
 {
-    width: 250px;
-
+   width: 100%;
 }
 .videoCard>video
 {

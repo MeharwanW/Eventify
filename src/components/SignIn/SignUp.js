@@ -1,6 +1,5 @@
 import React from 'react'
-import '../SignIn/signUp.css'
-
+import './signUp.css'
 import name from '../SignIn/user.svg'
 import password from '../SignIn/lock.svg'
 import email from '../SignIn/envelope.svg'
@@ -10,7 +9,6 @@ export const SignUp = () => {
   return (
     <>
         <div className="contain">
-
             <div className="header shadow-box">
                 <div className="text font">Sign Up</div>
                 <div className="underline"></div>

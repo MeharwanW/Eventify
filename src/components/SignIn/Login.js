@@ -1,14 +1,11 @@
-
-import '../SignIn/login.css'
+import './login.css'
 import name from '../SignIn/user.svg'
 import password from '../SignIn/lock.svg'
  
 
 export const Login = () => {
   return (
-    <div>
         <div className="contain">
-          
             <div className="header shadow-box">
                 <h2 className="text font">Log In</h2>
                 <div className="underline"></div>
@@ -32,7 +29,6 @@ export const Login = () => {
             </div>
         </div>
       </div>
-    </div>
   )
 }
 

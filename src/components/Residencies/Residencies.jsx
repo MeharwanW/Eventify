@@ -11,7 +11,7 @@ const Residencies = () => {
   return (
     <section className="r-wrapper">
       <div className="paddings innerWidth r-container">
-        <div className="r-head flexColStart">
+        <div className="r-head flexCenter">
           <span className="heading">Browse By Category</span>
         </div>
         <Swiper {...sliderSettings}>
@@ -27,11 +27,11 @@ const Residencies = () => {
       </div>
 
       <div className="paddings innerWidth r-container">
-        <div className="r-head flexColStart">
+        <div className="r-head flexCenter">
           <span className="heading">Popular Venues</span>
         </div>
-        <Swiper {...sliderSettings}>
-          <SliderButton/>
+        <Swiper {...sliderSettings}> 
+        <SliderButton/>
           {data1.map((card, i) => (
             <SwiperSlide key={i}>
               <div className="flexCenter r-card">
@@ -39,27 +39,28 @@ const Residencies = () => {
                 <span className="flexCenter heading">{card.name}</span>
                 <span className="flexCenter font">{card.detail}</span>
               </div>
+             
             </SwiperSlide>
           ))}
+        
         </Swiper>
+        
       </div>
 
       <div className="paddings innerWidth r-container">
-        <div className="r-head flexColStart">
+        <div className="r-head flexCenter">
           <span className="heading">Featured Video</span>
         </div>
       <div className="flexCenter">
       <Swiper {...sliderSettings}>
         {data2.map((card, i) => (
             <SwiperSlide key={i}>
-
           <div key={i} className="videoCard r-card">
             <video src={card.video} alt="home" />
           </div>
             </SwiperSlide>
         ))}
          </Swiper>
-            
          <Swiper {...sliderSettings}>
   {data2.map((card, i) => (
     <SwiperSlide key={i}>

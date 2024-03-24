@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <section>
-      <div className="d-flex justify-content-between navbar fixed-top navbar-scroll" activeKey="/home">
+      <div className="justify-content-between navbar fixed-top navbar-scroll" activeKey="/home">
         <div className="">
           <span className="Logo">
             <img src={Logo} alt="" srcset="" />
@@ -24,33 +24,31 @@ const Header = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="h-wrapper" eventKey="/Venue">
+            <Nav.Link className="" eventKey="/Venue">
               <Link to="Venues" className="h-wrapper font">Venue</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="h-wrapper" to="/Social Media">
+            <Nav.Link className="" to="/Social Media">
               <Link to="Suppliers" className="h-wrapper font">Suppliers</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="h-wrapper" to="/Social Media">
+            <Nav.Link className="" to="/Social Media">
               <Link to="Media" className="h-wrapper font">Media</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="h-wrapper" to="/About">
+            <Nav.Link className="" to="/About">
               <Link to="About" className="h-wrapper font">About</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="h-wrapper" to="/Contact">
+            <Nav.Link className="" to="/Contact">
               <Link to="Contacts" className="h-wrapper font">Contact Us</Link>
             </Nav.Link>
           </Nav.Item>
         </div>
-        
-
         <div className="">
           <Link to="/Login" className="font"><button className="button" variant="" >
             Login
