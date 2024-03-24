@@ -157,7 +157,9 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      
+      <div className='box'>
+        
+      </div>
       </div>
       );
 };
