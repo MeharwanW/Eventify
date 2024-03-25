@@ -3,9 +3,7 @@ import Footer from '../Footer/Footer';
 import SearchVenue from '../SearchVenue/SearchVenue';
 import "./venue.css"
 import "swiper/css";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import data1 from "../../utils/slider1.json"
-import { sliderSettings } from "../../utils/common.js";
 
 export default function Venue() {
   return (
