@@ -1,145 +1,133 @@
-.hero-section
-{
-  margin: 20px 0 10px 0;
+.hero-section {
+  margin: 0% 0 1% 0;
 }
-.margin{
-    margin: 25px;
+
+.margin {
+  margin: 2.5%;
 }
+
 .search-container {
-    position: relative;
-    display: inline-block;
-  }
-  .search
-  {
-    flex-wrap: nowrap;
-    width: 100%;
-    height: fit-content;
-  }
-  
-  .search-input {
-    background-color: #FFFFFF;
-    color: #314455;
-    border: 1px solid #314455;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .carousal-text
-  {
-    color: white;
-    margin-bottom: 20%;
-  }
-  .font-size
-  {
-    font-size: 50px;
-    font-weight: 600;
-  }
-  .suggestions{
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background-color: #f1f1f1;
-  }
-  
-  
-  
-  .suggestion-item {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .suggestion-item:hover {
-    background-color: #f2f2f2;
-  }
-  
- 
-  
+  position: relative;
+  display: inline-block;
+}
+
+.search {
+  flex-wrap: nowrap;
+  width: 100%;
+  height: auto;
+}
+
+.search-input,
+.search-input2 {
+  background-color: #FFFFFF;
+  color: #314455;
+  border: 1px solid #314455;
+  border-radius: 5px;
+  padding: 4.5%;
+
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.suggestions,
+.suggestions2 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item,
+.suggestion-item2 {
+  padding: 1.5%;
+  cursor: pointer;
+}
+
+.suggestion-item:hover,
+.suggestion-item2:hover {
+  background-color: #f2f2f2;
+}
+
+.border-gradient {
+  margin-top: 2.5%;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding: 2%;
+}
+
+.aboutSection {
+  margin-top: 2%;
+  padding-bottom: 2%;
+}
+
+.aboutText {
+  margin-top: 2%;
+  width: 75%;
+  font-weight: 400;
+  margin-bottom: 3%;
+}
+
+.gallerySection {
+  padding-top: 5%;
+  border-radius: 20px;
+}
+
+.galleryDes {
+  margin: 2% 0 5% 0;
+  width: 90%;
+  padding: 0% 2% 0 2%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.galleryText {
+  width: 40%;
+  margin-top: 1%;
+}
+
+.galleryImg {
+  width: 40%;
+}
+
+.galleryImg img {
+  width: 100%;
+}
+
+.aboutSection h1,
+.gallerySection h1 {
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 768px) {
+  .search-input,
   .search-input2 {
-    background-color: #FFFFFF;
-    color: #314455;
-    border: 1px solid #314455;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .suggestions2 {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  .border-gradient
-  {
-    margin-top: 20px;
-    background-color: #FFFFFF;
-    border-radius: 20px;
-    padding: 20px;
+    padding: 2%;
   }
 
+  .suggestion-item,
   .suggestion-item2 {
-    padding: 10px;
-    cursor: pointer;
+    padding: 2%;
   }
-  
-  .suggestion-item2:hover {
-    background-color: #f2f2f2;
-  }
-  .aboutSection 
-  {
-    margin-top: 20px;
-    padding-bottom: 20PX;
-  }
-  .aboutText
-  {
-    margin-top: 2%;
-      width: 75%;
-      font-weight: 400;
-      margin-bottom: 30px;
-  }
-  .gallerySection
-  {
-    padding-top: 5%;
-    border-radius: 20px;
-  }
-  .galleryDes
-  {
-    margin: 2% 0 5% 0;
+
+  .aboutText {
     width: 90%;
-    padding: 0% 2% 0 2%;
-    display: flex;
-    justify-content: space-evenly;
   }
-  .galleryText
-  {
-      width: 40%;
-      margin-top: 1%;
+
+  .galleryDes {
+    flex-direction: column;
+    align-items: center;
   }
-  .galleryImg
-  {
-    width: 40%;
+
+  .galleryText,
+  .galleryImg {
+    width: 90%;
   }
-  .galleryImg img
-  {
-    width: 100%;
-  }
- 
-  .aboutSection h1
-  {
-    font-weight: 600;
-  }
-  .gallerySection h1
-  {
-    font-weight: 600;
-  }
+}
+.carousal-text
+{
+  margin-bottom: 50%;
+}

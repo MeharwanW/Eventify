@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../App.css";
 import "./Hero.css";
-import myImage from '../../assets/1.jpg';
-import myImage1 from '../../assets/2.jpg';
-import myImage2 from '../../assets/3.jpg';
+import myImage from '../../assets/wedding5.jpg';
+import myImage1 from '../../assets/Meeting1.jpg';
+import myImage2 from '../../assets//Party1.jpg';
 import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
 import data from "../Header/full_names.json";
 
@@ -54,13 +54,13 @@ export const Hero = () => {
 
   return (
     <div className='hero-section'>
-      <MDBCarousel showIndicators showControls fade dark>
+      <MDBCarousel fade interval={3000}>
         <MDBCarouselItem itemId={1}>
           <img src={myImage} className='d-block w-100' alt='...' />
           <MDBCarouselCaption>
-            <div className="carousal-text font">
-              <h1 className='font-size'>WELCOME TO</h1>
-              <h1 className='font-size color-text'>EVENTIFY</h1>
+            <div className="carousal-text font font-size bold-text">
+              <h1 className='bold-text'>WELCOME TO</h1>
+              <h1 className='color-text'>EVENTIFY</h1>
             </div>
           </MDBCarouselCaption>
         </MDBCarouselItem>
@@ -68,9 +68,9 @@ export const Hero = () => {
         <MDBCarouselItem itemId={2}>
           <img src={myImage1} className='d-block w-100' alt='...' />
           <MDBCarouselCaption>
-            <div className="carousal-text font">
-              <h1 className='font-size'>WELCOME TO</h1>
-              <h1 className='font-size color-text'>EVENTIFY</h1>
+            <div className="carousal-text font font-size bold-text">
+              <h1 className='bold-text'>WELCOME TO</h1>
+              <h1 className='bold-text color-text'>EVENTIFY</h1>
             </div>
           </MDBCarouselCaption>
         </MDBCarouselItem>
@@ -78,9 +78,9 @@ export const Hero = () => {
         <MDBCarouselItem itemId={3}>
           <img src={myImage2} className='d-block w-100' alt='...' />
           <MDBCarouselCaption>
-            <div className="carousal-text font">
-              <h1 className='font-size'>WELCOME TO</h1>
-              <h1 className='font-size color-text'>EVENTIFY</h1>
+            <div className="carousal-text font font-size bold-text">
+              <h1 className='bold-text'>WELCOME TO</h1>
+              <h1 className='bold-text color-text'>EVENTIFY</h1>
             </div>
           </MDBCarouselCaption>
         </MDBCarouselItem>
@@ -92,7 +92,7 @@ export const Hero = () => {
               <input
                 type="text"
                 name=""
-                placeholder="Search"
+                placeholder="Catagory"
                 className="search-input font"
                 value={value}
                 onChange={onChange}
@@ -113,8 +113,8 @@ export const Hero = () => {
               <input
                 type="text"
                 name=""
-                placeholder="Search"
-                className="search-input2"
+                placeholder="Location"
+                className="search-input2 font"
                 value={value1}
                 onChange={onChange1}
               />
@@ -157,9 +157,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      <div className='box'>
-        
-      </div>
+      <div className='box'></div>
       </div>
       );
 };

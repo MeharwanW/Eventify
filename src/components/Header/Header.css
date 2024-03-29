@@ -1,38 +1,33 @@
 .navbar {
+
     background-color: #314455;
     color: #FFFFFF;
     position: fixed;
-    top: 0px;
+    height: 9%;
+    padding-bottom: 4.5%;
     width: 100%;
     z-index: 1000;
+    overflow: hidden;
 }
 
-.h-wrapper {
-    padding-top: 5px;
-    justify-content: center;
-    text-align: center;
-    margin-left: 45px;
+.linkSection {
+    width: 60%;
+}
+
+.LinksInfo {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 12px;
     color: #FFFFFF;
 }
 
-.h-wrapper:hover {
+.LinksInfo:hover {
     color: #FF6B6B;
-}
-
-.h-container {
-    justify-content: space-between;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    color: var(--secondary);
+    text-decoration-line: none;
 }
 
 .nav-link {
     color: black;
 }
-
-
 
 .h-menu {
     gap: 1rem;
@@ -43,17 +38,16 @@
 }
 
 .Logo img {
-    height: 40px;
-    width: 60px;
-    border-radius: 10px;
-
+    height: 35px;
+    width: 150px;
+   
 }
 
 .Logo {
-    height: 70px;
-    width: 50px;
-    margin-left: 40px;
-    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    width: 25%;
 }
 
 .link {
@@ -63,5 +57,36 @@
 
 .link:hover {
     text-decoration: none;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .menuSection {
+        width: 100%; 
+    }
+
+    .Logo {
+        width: 50%; 
+    }
+
+    .link {
+        display: none;
+    }
+}
+
+.svgImg
+{
+    width: 25px;
+    height: 25px;
+}
+.links:hover
+{
+    transform: scale(1.3);
+    fill: #FF6B6B;
+}
+.links
+{
+    transition: all 80ms ease;
 }
 

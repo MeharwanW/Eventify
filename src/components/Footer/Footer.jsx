@@ -20,11 +20,10 @@ const Footer = () => {
         <div className="">
           <div className="row">
             <div className="col-md">
-            <div className="contact-item1 redText">
-              <h2>Contact Us</h2>
-           
-              <p className='font'>Phone: 0348-8365045</p>
-              <p className='font'>Email: Meharwanw@gmail.com</p>
+            <div className="contact-item1 font">
+              <h4 className=' bold-text'>Contact Us</h4>
+              <p >Phone: 0348-8365045</p>
+              <p >Email: Meharwanw@gmail.com</p>
               <div className="review-section">
                 <br />
                 <br />
@@ -44,9 +43,9 @@ const Footer = () => {
           </div>
     
           <div className="col-md">
-            <div className="contact-item1">
-              <h2 className='font'>Find Us</h2>
-              <p className='font'>Khudad Pilaza Near Station Road Sukkur Sindh</p>
+            <div className="contact-item1 font">
+              <h4 className='bold-text'>Find Us</h4>
+              <p>Khudad Pilaza Near Station Road Sukkur Sindh</p>
               <div className="social-icons">
                 <a href="https://www.facebook.com/">
                     <img src={mysvg1} alt="Facebook"/>
@@ -63,7 +62,7 @@ const Footer = () => {
     
           <div className="col-md">
             <div className="contact-item1 font">
-              <h2 >Business Hours</h2>
+              <h4 className='bold-text'>Business Hours</h4>
               <p className='font'>Open 7-Days a week</p>
               <p className='font'>Mon-Sun: 1:00PM - 11:00AM</p>
               <div className="whatsapp-section">
@@ -76,8 +75,8 @@ const Footer = () => {
           </div>
          
           <div className="col-md">
-            <div className="contact-item1">
-              <h2 className='font'>We Accept</h2>
+            <div className="contact-item1 font">
+              <h4 className='bold-text'>We Accept</h4>
               <div className="accept-logos">
     
                 <img src={mysvg} alt="GPay" />
