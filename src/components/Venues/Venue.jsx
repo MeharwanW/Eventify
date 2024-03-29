@@ -11,6 +11,14 @@ export default function Venue() {
         <div className='venueContent'>
           <div className='venueDisplay'>
           <img src="./1/background1.jpg" alt="" srcset="" />
+          <div className='flexColCenter venueDislayText font font-size'>
+          <h1 className='font font-size bold-text'>We are <span className='color-text'>EVENTIFY</span></h1>
+          <div className='flexColCenter'>
+          <h2 className=''>We bring</h2>
+          <h3>dream Events</h3>
+          <h2>to life</h2>
+          </div>
+          </div>
           <h1 className='font'>Our EVENT Venues</h1>
           </div>
           <div className='venueSearch'></div>

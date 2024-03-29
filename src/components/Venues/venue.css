@@ -2,7 +2,6 @@
 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 100%;
 }
 .venueDisplay
@@ -13,12 +12,11 @@
 {
     margin-left: 35%;
     font-weight: 600;
-    margin-top: 20px;
+   
 }
 .venueDisplay>img
 {
     width: 100%;
-    height: 100vh;
 }
 .eventVenue
 {
@@ -26,6 +24,11 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 60px;
     width: 100%;
-    height: 100%;
-  
+    height: 100%; 
+}
+.venueDislayText
+{
+    position: relative;
+    transform: translateY(-250%);
+    color: #FFFFFF;
 }
