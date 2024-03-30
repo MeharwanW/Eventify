@@ -22,6 +22,9 @@ body {
   }
   
   .footer {
+     
+    margin-top: 20px;
+    bottom: 0;
     background-color: #314455; 
     color: #FFFFFF;
   }

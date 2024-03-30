@@ -1,0 +1,20 @@
+.suppliersDisplay
+{
+   top: 2;
+    width: 100%;
+}
+.suppliersScreen
+{
+     width: 100%;   
+}
+.suppliersScreen img
+{
+    width: 100%;
+}
+
+.supplierVanue
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+}

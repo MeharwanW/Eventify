@@ -9,13 +9,23 @@ import Media from "./components/Media/Media";
 import Suppliers from "./components/Suppliers/Suppliers";
 import Contacts from "./components/Contacts/Contacts";
 import About from "./components/About/About";
-
-
+import React, { useState, useEffect } from 'react';
+import Logo from "./components/logo";
 function App() {
- 
+  const [showLogo, setShowLogo] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowLogo(false);
+    }, 3000);
+
+    
+    return () => clearTimeout(timeout);
+  }, []); 
+
   return (
     <div className="App">
-     
+     {showLogo && <Logo />}
         <BrowserRouter>
       <Routes>
         <Route path="/" element={<Header />}>

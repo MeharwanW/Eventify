@@ -3,9 +3,9 @@
     background-color: #314455;
     color: #FFFFFF;
     position: fixed;
-    height: 9%;
-    padding-bottom: 4.5%;
+    height: 10%;
     width: 100%;
+    margin-bottom: 3%;
     z-index: 1000;
     overflow: hidden;
 }

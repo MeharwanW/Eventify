@@ -37,7 +37,7 @@ export const SignUp = () => {
                 
                 <div className="input col col-sm-12 col-md-6 col-lg-6">
                     <img src={phone} alt="" />
-                    <input className='font' type="number" placeholder='Phone Number' />
+                    <input className='font' type="tel" placeholder='Phone Number' />
                 </div>
             </div>
 

@@ -20,11 +20,13 @@ const Header = () => {
 
   return (
     <section>
-      <div className=" justify-content-between navbar fixed-top navbar-scroll" activeKey="/home">
+      <div className="justify-content-between navbar fixed-top navbar-scroll" activeKey="/home">
         <div className="">
-          <div className="Logo">
+        <Link to="Home" >
+        <div className="Logo">
             <img className="svgImg" src={Logo} alt="" srcset="" />
           </div>
+        </Link>
         </div>
         <div className="d-flex linkSection justify-content-around">
           <Nav.Item>
