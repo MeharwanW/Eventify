@@ -1,9 +1,11 @@
-.contain {
+.contain{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    width: 100%;
     background-color: #FF6B6B;
-    margin-top: 5%;
+    
 }
 
 .shadow-box {
@@ -11,17 +13,16 @@
 }
 
 .header {
+ 
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
-    width: 90%; 
-    max-width: 32%;
-    height: 20%;
-    padding: 10px; 
+    width: 30%; 
+    padding: 2%;
 }
 
-.text {
+.text{
     color: #FF6B6B;
     font-weight: 600;
 }
@@ -36,6 +37,8 @@
 .inputs {
     display: flex;
     flex-direction: column;
+    margin-top: 25px;
+    gap: 25px;
 }
 
 .input {
@@ -44,6 +47,7 @@
     background-color: #eaeaea;
     border-radius: 6px;
     width: 100%;
+    height: 50px;
 }
 
 .input img {
@@ -56,8 +60,8 @@
     background: transparent;
     border: none;
     outline: none;
-    color: black;
-    font-size: 14px;
+    color: #000000;
+    font-size: 16px;
 }
 
 .forget-password {
@@ -71,8 +75,8 @@
 
 .submit-container {
     display: flex;
-    justify-content: center; /* Center submit button */
-    margin-top: 20px; /* Add margin for better spacing */
+    justify-content: center; 
+    margin-top: 10% auto;  
 }
 
 .gray {
@@ -80,25 +84,83 @@
     color: #676767;
 }
 
-/* Media Queries for Responsiveness */
-@media only screen and (min-width: 768px) {
-    .header {
-        width: 100vw;
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .header
+    {
+        margin-top: 5%;
+        width: 80%;
+    }
+  
+}
+
+@media only screen and (max-width: 510px) {
+    .header
+    {
+        margin-top: 5%;
+        width: 100%;
+        height: 60%;
+    }
+    .input
+    {
+        padding:2%;
     }
 }
 
-@media only screen and (min-width: 1024px) {
-    .header {
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+    .header
+    {
+        margin-top: 5%;
         width: 60%;
     }
 }
-@media only screen and (max-width: 910px) {
-    .header {
-        width: 100%;
-    }
-    .navbar
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+    .header
     {
-        overflow: hidden;
-        flex-wrap: wrap;
+        height: 80%;
+        width: 50%;
+    }
+}
+@media only screen and (max-width: 1023px) {
+    .header
+    {
+        margin-top: 5%;
+        width: 50%;
+        height: 80%;
+    }
+}
+@media only screen and (max-height: 650px) {
+    .header
+    {
+        margin-top: 5%;
+        width: 50%;
+        height: 100%;
+    }
+    .input
+    {
+        padding: 4px;
+        
+    }
+}
+
+@media only screen and (max-width: 1027px) {
+    .header
+    {
+        margin-top: 5%;
+        width: 40%;
+        height: 50%;
+    }
+}
+@media only screen and (min-width: 1028px) {
+    .header
+    {
+        margin-top: 5%;
+        width: 40%;
+        height: 70%;
     }
 }

@@ -3,6 +3,10 @@
   padding: 0px;
   margin: 0px;
 }
+.App
+{
+  overflow: hidden;
+}
 body {
     overflow: hidden;
     overflow-y: scroll;

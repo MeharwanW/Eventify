@@ -1,101 +1,149 @@
-.contain {
+.contains{
     display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 100px; /* Adjust margin for smaller devices */
-    padding-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    height:min-content;
+    width: 100%;
+    height: 100vh;
+    background-color: #FF6B6B;
 }
 
-.header {
+.headers{
+  
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 9px;
-    width: 100%;
-    margin-top: 30px;
+    height: 90vh;
+    background-color: white;
+   
 }
 
 .text {
-    color: #8d0606;
-    font-size: 32px; /* Adjust font size for smaller devices */
-    font-weight: 700;
+    color: #FF6B6B;
+    font-weight: 600;
 }
 
 .underline {
     width: 61px;
     height: 6px;
-    background-color: #8d0606;
+    background-color: #FF6B6B;
     border-radius: 9px;
 }
 
-.inputs {
-    margin-top: 25px;
+.inputs1 {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
 }
 
-.input {
+.input1 {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 50px;
+    
+    padding: 7%;
+    margin-top: 5%;
     background-color: #eaeaea;
     border-radius: 6px;
 }
 
-.input img {
+.input1 img {
     margin: 0px 15px; 
 }
 
-.input input {
-    flex: 1; 
-    height: 50px;
-    width: 100%; 
+.input1 input {
+    
+    height: 5%;
     background: transparent;
     border: none;
     outline: none;
-    color: #797979;
+    color: #000000;
     font-size: 16px; 
 }
 
-.submit-container {
+.submit-container1 {
     display: flex;
     justify-content: center;
-    margin: 40px auto; /* Adjust margin for smaller devices */
+    margin: 10% auto; 
 }
 
-.submit {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 220px;
-    height: 50px; /* Ensure consistent button height */
-    color: #fff;
-    background-color: #8d0606;
-    border-radius: 50px;
-    font-size: 16px; /* Adjust font size for smaller devices */
-    font-weight: 700;
-    cursor: pointer;
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .headers
+    {
+        margin-top: 5%;
+        width: 80%;
+    }
+  
 }
 
-/* Media Queries for Responsiveness */
-@media only screen and (min-width: 768px) {
-    .text {
-        font-size: 48px;
+@media only screen and (max-width: 510px) {
+    .headers
+    {
+        margin-top: 5%;
+        width: 400px;
+        height: 80%;
     }
-    
-    .input {
-        width: 480px;
+    .input1
+    {
+        padding:2%;
     }
 }
 
-@media only screen and (min-width: 1024px) {
-    .contain {
-        margin-top: 150px;
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+    .headers
+    {
+        margin-top: 5%;
+        width: 60%;
     }
-    
-    .input {
-        width: 100%;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+    .headers
+    {
+        height: 70%;
+        width: 50%;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .headers
+    {
+        margin-top: 5%;
+        width: 50%;
+        height: 100%;
+    }
+}
+@media only screen and (max-height: 600px) {
+    .headers
+    {
+        margin-top: 5%;
+        width: 3%;
+        height: 100%;
+    }
+    .input1
+    {
+        padding: 9px;
+        
+    }
+}
+
+@media only screen and (max-width: 1027px) {
+    .headers
+    {
+        margin-top: 5%;
+        width: 50%;
+        height: 70%;
+    }
+}
+@media only screen and (min-width: 1028px) {
+    .headers
+    {
+        margin-top: 5%;
+        width: 30%;
+        height: 80%;
     }
 }

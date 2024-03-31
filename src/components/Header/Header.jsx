@@ -8,9 +8,9 @@ import { Outlet, Link } from "react-router-dom";
 import venueSvg1 from "../../assets/Venue.svg";
 import aboutSvg1 from "../../assets/about.svg";
 import homeSvg1 from "../../assets/home.svg";
- import contactSvg1 from "../../assets/contact.svg";
-import mediaSvg1 from"../../assets/media.svg";
- import supplierSvg1 from"../../assets/supplier.svg";
+import contactSvg1 from "../../assets/contact.svg";
+import mediaSvg1 from "../../assets/media.svg";
+import supplierSvg1 from "../../assets/supplier.svg";
 
 
 import React from 'react';
@@ -22,70 +22,70 @@ const Header = () => {
     <section>
       <div className="justify-content-between navbar fixed-top navbar-scroll" activeKey="/home">
         <div className="">
-        <Link to="Home" >
-        <div className="Logo">
-            <img className="svgImg" src={Logo} alt="" srcset="" />
-          </div>
-        </Link>
+          <Link to="Home" >
+            <div className="Logo">
+              <img className="svgImg" src={Logo} alt="" srcset="" />
+            </div>
+          </Link>
         </div>
         <div className="d-flex linkSection justify-content-around">
           <Nav.Item>
             <Nav.Link className="links" eventKey="/Home">
-            <Link to="Home">
-            <div className="flexColCenter">
-              <img className="svgImg flexColCenter"  src={homeSvg1} alt="" srcset="" />
-              <div className="LinksInfo font">Home</div>
-              </div>
+              <Link to="Home">
+                <div className="flexColCenter">
+                  <img className="svgImg flexColCenter" src={homeSvg1} alt="" srcset="" />
+                  <div className="LinksInfo font">Home</div>
+                </div>
               </Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" eventKey="/Venue">
-            <Link to="Venues">
-            <div className="flexColCenter">
-              <img className="svgImg flexColCenter"  src={venueSvg1} alt="" srcset="" />
-              <div className="LinksInfo font">Venue</div>
-              </div>
+              <Link to="Venues">
+                <div className="flexColCenter">
+                  <img className="svgImg flexColCenter" src={venueSvg1} alt="" srcset="" />
+                  <div className="LinksInfo font">Venue</div>
+                </div>
               </Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/Suppliers">
-            <Link to="Suppliers">
-            <div className="flexColCenter">
-              <img className="svgImg flexColCenter"  src={supplierSvg1} alt="" srcset="" />
-              <div className="LinksInfo font">Supplier</div>
-              </div>
+              <Link to="Suppliers">
+                <div className="flexColCenter">
+                  <img className="svgImg flexColCenter" src={supplierSvg1} alt="" srcset="" />
+                  <div className="LinksInfo font">Supplier</div>
+                </div>
               </Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/Social Media">
-            <Link to="Media">
-            <div className="flexColCenter">
-              <img className="svgImg flexColCenter"  src={mediaSvg1} alt="" srcset="" />
-              <div className="LinksInfo font">Media</div>
-              </div>
+              <Link to="Media">
+                <div className="flexColCenter">
+                  <img className="svgImg flexColCenter" src={mediaSvg1} alt="" srcset="" />
+                  <div className="LinksInfo font">Media</div>
+                </div>
               </Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/About">
-            <Link to="About">
-            <div className="flexColCenter">
-              <img className="svgImg flexColCenter"  src={aboutSvg1} alt="" srcset="" />
-              <div className="LinksInfo font">About</div>
-              </div>
+              <Link to="About">
+                <div className="flexColCenter">
+                  <img className="svgImg flexColCenter" src={aboutSvg1} alt="" srcset="" />
+                  <div className="LinksInfo font">About</div>
+                </div>
               </Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/Contact">
-            <Link to="Contacts">
-            <div className="flexColCenter">
-              <img className="svgImg flexColCenter"  src={contactSvg1} alt="" srcset="" />
-              <div className="LinksInfo font">Contact</div>
-              </div>
+              <Link to="Contacts">
+                <div className="flexColCenter">
+                  <img className="svgImg flexColCenter" src={contactSvg1} alt="" srcset="" />
+                  <div className="LinksInfo font">Contact</div>
+                </div>
               </Link>
             </Nav.Link>
           </Nav.Item>
@@ -100,9 +100,9 @@ const Header = () => {
         </div>
       </div>
       <Outlet />
+
     </section>
   );
 };
 export default Header;
 
- 

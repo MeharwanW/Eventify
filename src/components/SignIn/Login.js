@@ -10,11 +10,12 @@ export const Login = () => {
                 <h2 className="text font">Log In</h2>
                 <div className="underline"></div>
             
-            <div className="inputs">
+         <form action="">
+            <div className="inputs flexColCenter">
                 <div className="input">
                     <img src={name} alt="" />
                     <input className='font' type="text" placeholder='Username' />
-                </div>
+                    </div>
                 <div className="input">
                     <img src={password} alt="" />
                     <input  className='font' type="password" placeholder='Password' />
@@ -27,6 +28,9 @@ export const Login = () => {
                     <button className="button">Login</button>
                 </div>
             </div>
+            
+
+            </form>   
         </div>
       </div>
   )
