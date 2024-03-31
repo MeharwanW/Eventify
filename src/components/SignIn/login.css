@@ -96,71 +96,101 @@
 }
 
 @media only screen and (max-width: 510px) {
-    .header
-    {
-        margin-top: 5%;
-        width: 100%;
-        height: 60%;
-    }
-    .input
-    {
-        padding:2%;
-    }
+  .contain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #FF6B6B;
+    
+}
+
+.shadow-box {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.header {
+ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 30%; 
+    padding: 2%;
+}
+
+.text{
+    color: #FF6B6B;
+    font-weight: 600;
+}
+
+.underline {
+    width: 61px;
+    height: 6px;
+    background-color: #FF6B6B;
+    border-radius: 9px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    gap: 25px;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    background-color: #eaeaea;
+    border-radius: 6px;
+    width: 100%;
+    height: 50px;
+}
+
+.input img {
+    margin: 0px 15px;
+}
+
+.input input {
+    flex: 1; 
+    height: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #000000;
+    font-size: 16px;
+}
+
+.forget-password {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #797979;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: 10% auto;  
+}
+
+.gray {
+    background-color: #EAEAEA;
+    color: #676767;
 }
 
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 600px) {
     .header
     {
         margin-top: 5%;
-        width: 60%;
+        width: 90%;
     }
+  
+}
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (max-width: 992px) {
-    .header
-    {
-        height: 80%;
-        width: 50%;
-    }
-}
-@media only screen and (max-width: 1023px) {
-    .header
-    {
-        margin-top: 5%;
-        width: 50%;
-        height: 80%;
-    }
-}
-@media only screen and (max-height: 650px) {
-    .header
-    {
-        margin-top: 5%;
-        width: 50%;
-        height: 100%;
-    }
-    .input
-    {
-        padding: 4px;
-        
-    }
-}
-
-@media only screen and (max-width: 1027px) {
-    .header
-    {
-        margin-top: 5%;
-        width: 40%;
-        height: 50%;
-    }
-}
-@media only screen and (min-width: 1028px) {
-    .header
-    {
-        margin-top: 5%;
-        width: 40%;
-        height: 70%;
-    }
-}

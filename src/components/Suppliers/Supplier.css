@@ -18,3 +18,26 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 60px;
 }
+
+@media only screen and (max-width: 768px){
+    .suppliersDisplay
+{
+    margin-top: 15%;
+    width: 100%;
+}
+.suppliersScreen
+{
+     width: 100%;   
+}
+.suppliersScreen img
+{
+    width: 100%;
+}
+
+.supplierVanue
+{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 60px;
+}
+}

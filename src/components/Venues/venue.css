@@ -10,7 +10,8 @@
 }
 .venueDisplay>h1
 {
-    margin-left: 35%;
+
+    margin: 35%;
     font-weight: 600;
    
 }
@@ -31,4 +32,44 @@
     position: relative;
     transform: translateY(-250%);
     color: #FFFFFF;
+}
+
+@media only screen and (max-width: 768px) {
+    .venueContent
+{
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+
+}
+.venueDisplay
+{
+    width: 100%;
+}
+.venueDisplay>h1
+{
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+   
+}
+.venueDisplay>img
+{
+    width: 100%;
+}
+.eventVenue
+{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 60px;
+    width: 100%;
+    height: 100%; 
+}
+.venueDislayText
+{
+    position: relative;
+    transform: translateY(-250%);
+    color: #FFFFFF;
+}
+
 }

@@ -1,31 +1,30 @@
-.contactScreen
-{
+.contactScreen {
     margin-top: 2%;
     width: 100%;
     height: 100vh;
     background-color: #FF6B6B;
 }
-.contactBox
-{
-    
-    width: 70%; 
+
+.contactBox {
+
+    width: 70%;
     height: 80%;
     background-color: #ece5e5;
 }
-.contactLogo
-{
+
+.contactLogo {
     background-color: #314455;
     width: 40%;
     height: 100%;
 }
-.contactForum
-{
+
+.contactForum {
     overflow: hidden;
     width: 60%;
     height: 100%;
 }
-.contact-inputs
-{
+
+.contact-inputs {
     padding: 7% 15% 7% 15%;
     height: 10%;
     border: none;
@@ -34,56 +33,58 @@
     font-weight: 400;
     border-radius: 10px;
 }
-.contact
-{
+
+.contact {
     gap: 20px
 }
-.contact-title hr
-{
+
+.contact-title hr {
     border: none;
     width: 130px;
     height: 5px;
     background-color: #FF6B6B;
     border-radius: 20px;
 }
-.contact textarea
-{
+
+.contact textarea {
     height: 140px;
     padding-top: 10px;
-    
+
 }
-.contact-inputs:focus
-{
+
+.contact-inputs:focus {
     border: 2px solid #FF6B6B;
     background-color: #ece5e5;
 }
+
 .dialog-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* semi-transparent overlay */
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .dialog-content {
+}
+
+.dialog-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
-  }
-  
-  .dialog-content p {
+}
+
+.dialog-content p {
     margin: 0;
     font-size: 18px;
     color: #333;
-  }
-  
-  .dialog-content button {
+}
+
+.dialog-content button {
     margin-top: 10px;
     padding: 8px 16px;
     border: none;
@@ -92,9 +93,68 @@
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .dialog-content button:hover {
+}
+
+.dialog-content button:hover {
     background-color: #0056b3;
-  }
-  
+}
+
+@media only screen and (max-width: 768px) {
+    .contactScreen {
+        margin-top: 2%;
+        width: 100%;
+        height: 100vh;
+        background-color: #FF6B6B;
+    }
+
+    .contactBox {
+        margin-top: 10%;
+        width: 70%;
+        height: 80%;
+        background-color: #ece5e5;
+    }
+
+    .contactLogo {
+       display: none;
+    }
+
+    .contactForum {
+        width: 60%;
+        height: 100%;
+    }
+
+    .contact-inputs {
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        padding: 7% 0% 7% 15%;
+        height: 10%;
+        border: none;
+        outline: none;
+        align-items: start;
+        font-weight: 400;
+        border-radius: 10px;
+    }
+
+    
+
+    .contact-title hr {
+        border: none;
+        width: 130px;
+        height: 5px;
+        background-color: #FF6B6B;
+        border-radius: 20px;
+    }
+
+    .contact textarea {
+        height: 140px;
+        padding-top: 10px;
+
+    }
+
+    .contact-inputs:focus {
+        border: 2px solid #FF6B6B;
+        background-color: #ece5e5;
+    }
+
+}

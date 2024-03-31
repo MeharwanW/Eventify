@@ -103,9 +103,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .hero-section {
+    margin: 5% 0 0% 0;
+  }
   .search-input,
   .search-input2 {
-    padding: 2%;
+    padding: 5%;
   }
 
   .suggestion-item,
@@ -117,9 +120,15 @@
     width: 90%;
   }
 
+  .gallerySection
+  {
+    align-items: center;
+    justify-content: center;
+  }  
   .galleryDes {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .galleryText,
