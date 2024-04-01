@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./contact.css";
-import logo from "../../assets/logo1.png";
+import logo from "../../assets/logo3.png";
 
 export default function Contacts() {
   const [isEmailSent, setIsEmailSent] = useState(false);

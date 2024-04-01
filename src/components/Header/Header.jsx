@@ -12,6 +12,8 @@ import contactSvg1 from "../../assets/contact.svg";
 import mediaSvg1 from "../../assets/media.svg";
 import supplierSvg1 from "../../assets/supplier.svg";
 import { useState } from 'react';
+import { BiLogInCircle } from "react-icons/bi";
+import { VscSignIn } from "react-icons/vsc";
 
 
 import React from 'react';
@@ -24,12 +26,13 @@ const Header = () => {
   window.addEventListener('resize', () => {
     setWindowWidth(window.innerWidth);
   });
+ 
   return (
     <section>
       
     
       <div className="justify-content-between navbar fixed-top" activeKey="/home">
-        <div className="">
+        <div className="Logo1">
           <Link to="Home" >
             <div className="Logo">
               <img className="svgImg" src={Logo} alt="" srcSet="" />
@@ -40,20 +43,22 @@ const Header = () => {
           <NavItems />
         </div>
         )}
-        <div className="buttons">
+        {!showMenu && windowWidth >= 485 &&(<div className="buttons">
           <Link to="/Login" className="font"><button className="button" variant="">
             Login
           </button></Link>
           <Link to="SignUp" className="font link"><button className="button" variant="">
             Sign Up
           </button></Link>
-        </div>
+        </div>)}
         
       {windowWidth <953 && (<div className={`dropdown-menu ${showMenu ? 'show' : ''}`}>
-          <NavItems />
+          <div onClick={() => setShowMenu(!showMenu)}><NavItems /></div>
         </div>)}
         {windowWidth <953 &&(<div className="icon" onClick={() => setShowMenu(!showMenu)}>&#9776;</div>)}
       </div>
+      
+      
      
       { <Outlet />}
     </section>
@@ -61,6 +66,11 @@ const Header = () => {
 }
 
 function NavItems() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  window.addEventListener('resize', () => {
+    setWindowWidth(window.innerWidth);
+  });
   return (
     <>
     
@@ -124,6 +134,28 @@ function NavItems() {
               </Link>
             </Nav.Link>
           </Nav.Item>
+          {windowWidth <953 &&( <Nav.Item>
+            <Nav.Link className="links" to="/SignUp">
+              <Link to="SignUp">
+                <div className="flexColCenter">
+                <BiLogInCircle/>
+                  <div className="LinksInfo font">SignUp</div>
+                </div>
+              </Link>
+            </Nav.Link>
+          </Nav.Item>)}
+          {windowWidth <953 &&( <Nav.Item>
+            <Nav.Link className="links" to="/login">
+              <Link to="login">
+                <div className="flexColCenter">
+                  
+                  <VscSignIn/>
+                  <div className="LinksInfo font">Login</div>
+                </div>
+              </Link>
+            </Nav.Link>
+          </Nav.Item>)}
+        
     </>
   );
 }

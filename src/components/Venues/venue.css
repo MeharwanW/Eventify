@@ -10,10 +10,9 @@
 }
 .venueDisplay>h1
 {
-
-    margin: 35%;
-    font-weight: 600;
-   
+    display: flex;
+    justify-content: center;
+    font-weight: 600;  
 }
 .venueDisplay>img
 {

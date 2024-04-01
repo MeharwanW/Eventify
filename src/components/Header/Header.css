@@ -84,7 +84,6 @@ a:hover
 
 
   @media only screen and (max-width: 953px) {
-    
     .Logo {
         align-items: center;
       width: 100%; 
@@ -110,5 +109,14 @@ a:hover
   {
     cursor: pointer;
     margin-right: 5px;
+  }
+
+  @media only screen and (max-width: 483px)
+  {
+    .Logo1
+    {
+        justify-content: center;
+        align-items: center;
+    }  
   }
   

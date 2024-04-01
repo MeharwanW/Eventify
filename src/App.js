@@ -9,6 +9,7 @@ import Media from "./components/Media/Media";
 import Suppliers from "./components/Suppliers/Suppliers";
 import Contacts from "./components/Contacts/Contacts";
 import About from "./components/About/About";
+import AdminHub from "./components/Profile/Adminhub";
 function App() {
 
   return (
@@ -26,9 +27,11 @@ function App() {
           <Route path="Contacts" element={<Contacts />} />
           <Route path="Suppliers" element={<Suppliers />} />
           <Route path="About" element={<About />} />
+          <Route path="Dashboard" element={<AdminHub />} />
         </Route>
       </Routes>
       </BrowserRouter>
+      
     </div>
   );
 }
