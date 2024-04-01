@@ -33,7 +33,7 @@
     color: #FFFFFF;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 868px) {
     .venueContent
 {
     margin-top: 10%;
@@ -70,5 +70,8 @@
     transform: translateY(-250%);
     color: #FFFFFF;
 }
-
+.search
+{
+    flex-direction: column;
+}
 }

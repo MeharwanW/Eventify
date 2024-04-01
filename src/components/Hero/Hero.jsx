@@ -7,7 +7,8 @@ import myImage1 from '../../assets/Meeting1.jpg';
 import myImage2 from '../../assets//Party1.jpg';
 import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
 import data from "../Header/full_names.json";
-
+import galleryimg from "../../assets/wedding5.jpg"
+import galleryimg1 from "../../assets/party3.jpg"
 
 export const Hero = () => {
   const [value, setValue] = useState("");
@@ -146,11 +147,11 @@ export const Hero = () => {
             <button className='button'>View Story</button>
           </div>
           
-          <div className='galleryImg'> <img src="./1/wedding5.jpg" alt="" /></div>
+          <div className='galleryImg'> <img src={galleryimg} alt="" /></div>
           </div>
         
         <div className='galleryDes flexenter'>
-          <div className='galleryImg'> <img src="./1/meeting1.jpg" alt="" /></div>
+          <div className='galleryImg'> <img src={galleryimg1} alt="" /></div>
           <div className='galleryText '>
             <p className='font'>Drawing from a rich tapestry of services, Eventify offers a comprehensive suite tailored to meet your unique needs. Our three-tier system, designed for efficiency and efficacy, streamlines the planning process, allowing us to deliver exceptional results within your desired timeframe and budget.</p>
             <button className='button'>View Story</button>

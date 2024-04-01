@@ -2,7 +2,9 @@ import React from 'react'
 import Footer from '../Footer/Footer';
 import CountUp from 'react-countup';
 import "./About.css"
-
+import galleryimg1 from "../../assets/background4.jpg"
+import galleryimg2 from "../../assets/party3.jpg"
+import galleryimg3 from "../../assets/Party1.jpg"
 export default function About() {
   return (
     <div>
@@ -14,11 +16,11 @@ export default function About() {
             <p className='font'>Introducing Eventify - where dreams become events and moments become memories. Nestled in the vibrant heart of Pakistan, Eventify stands as a beacon of excellence in the realm of event management. With a fusion of creativity, precision, and dedication, we craft experiences that transcend the ordinary, making every occasion an unforgettable journey..</p>
             
           </div>
-          <div className='galleryImg'> <img src="./1/wedding5.jpg" alt="" /></div>
+          <div className='galleryImg'> <img src={galleryimg1} alt="" /></div>
           </div>
         
         <div className='galleryDes flexenter'>
-          <div className='galleryImg'> <img src="./1/meeting1.jpg" alt="" /></div>
+          <div className='galleryImg'> <img src={galleryimg2} alt="" /></div>
           <div className='galleryText '>
           <h2>What We Offer</h2>
             <p className='font'>Drawing from a rich tapestry of services, Eventify offers a comprehensive suite tailored to meet your unique needs. Our three-tier system, designed for efficiency and efficacy, streamlines the planning process, allowing us to deliver exceptional results within your desired timeframe and budget.</p>
@@ -73,7 +75,7 @@ export default function About() {
           <h2>Who We Are</h2>
             <p className='font'>Introducing Eventify - where dreams become events and moments become memories. Nestled in the vibrant heart of Pakistan, Eventify stands as a beacon of excellence in the realm of event management. With a fusion of creativity, precision, and dedication, we craft experiences that transcend the ordinary, making every occasion an unforgettable journey..</p>
           </div>
-          <div className='galleryImg'> <img src="./1/wedding5.jpg" alt="" /></div>
+          <div className='galleryImg'> <img src={galleryimg3} alt="" /></div>
           </div>
           </div>
         <Footer></Footer>
