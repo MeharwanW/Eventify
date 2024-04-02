@@ -4,6 +4,7 @@ import name from '../SignIn/user.svg'
 import password from '../SignIn/lock.svg'
 import email from '../SignIn/envelope.svg'
 import phone from '../SignIn/phone.svg'
+import { Link } from 'react-router-dom'
 
 export const SignUp = () => {
   return (
@@ -50,8 +51,17 @@ export const SignUp = () => {
             <div className="submit-container1">
                     <button className="button">Submit</button>
                 </div>
+                
             </div>
         </form>
+
+        <Link to="/login">
+        <div className="forget-password">
+                       <span className='font '>Already Registered?
+                        </span> <span className='font color-text'>Login</span>
+                    </div>
+        
+        </Link>
             </div>
         </div>
     </>

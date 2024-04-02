@@ -1,15 +1,29 @@
 import React from "react";
 import "./Residencies.css";
-import "swiper/css";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import data from "../../utils/slider.json";
 import data1 from "../../utils/slider1.json";
 import data2 from "../../utils/slider2.json";
 import { sliderSettings } from "../../utils/common.js";
+import { useState } from "react";
+import myImg from "../../assets/supplier.jpg";
 
 const Residencies = () => {
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
+
+  const handleSupplierClick = (supplier) => {
+    setSelectedSupplier(supplier);
+  };
   return (
     <section className="r-wrapper">
+       <div className='suppliersScreen'>
+        {selectedSupplier && (
+          <SupplierInfo supplier={selectedSupplier} onClose={() => setSelectedSupplier(null)} />
+        )}
+        {!selectedSupplier && (
+          <img src={myImg} alt="" srcSet="" />
+        )}
+      </div>
       <div className="paddings innerWidth r-container">
         <div className="r-head flexCenter">
           <span className="heading">Browse By Category</span>
@@ -17,7 +31,7 @@ const Residencies = () => {
         <Swiper {...sliderSettings}>
           {data.map((card, i) => (
             <SwiperSlide key={i}>
-              <div className="r-card">
+              <div onClick={() => handleSupplierClick(card)} className="r-card">
                 <img src={card.image} alt="home" />
                 <span className="flexCenter heading font">{card.name}</span>
               </div>
@@ -34,7 +48,7 @@ const Residencies = () => {
         <SliderButton/>
           {data1.map((card, i) => (
             <SwiperSlide key={i}>
-              <div className="flexCenter r-card">
+              <div onClick={() => handleSupplierClick(card)} className="flexCenter r-card">
                 <img src={card.image} alt="home" />
                 <span className="flexCenter heading">{card.name}</span>
                 <span className="flexCenter font">{card.detail}</span>
@@ -90,3 +104,15 @@ const SliderButton = () => {
     </div>
   );
 };
+
+function SupplierInfo({ supplier, onClose }) {
+  return (
+    <div className="supplierInfoOverlay" onClick={onClose}>
+      <div className="supplierInfoContainer" onClick={(e) => e.stopPropagation()}>
+        <h2>{supplier.name}</h2>
+        <p>{supplier.description}</p>
+        <button className='button' onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+}

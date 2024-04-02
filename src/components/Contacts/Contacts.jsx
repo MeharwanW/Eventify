@@ -9,6 +9,10 @@ export default function Contacts() {
     email: '',
     message: ''
   });
+  const SentEmailDisplay = () =>
+  {
+    setIsEmailSent(false);
+  }
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -57,7 +61,7 @@ export default function Contacts() {
             <button type="submit" className='button'>Submit</button>
           </form>
           {isEmailSent && (
-            <div className="dialog-overlay">
+            <div onClick={SentEmailDisplay} className="dialog-overlay">
               <div className="dialog-content">
                 <p>Email sent!</p>
               </div>
