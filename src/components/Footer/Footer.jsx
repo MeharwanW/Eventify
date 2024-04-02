@@ -12,7 +12,7 @@ import mysvg8 from "./images/paypal.svg"
 import mysvg9 from "./images/apple.png"
 import mysvg0 from "./images/visa.svg"
 import mysvg11 from "./images/wp.gif"
-import mysvg12 from "./images/logo.png"
+import mysvg12 from "../../assets/logo2.png"
 
 const Footer = () => {
   return (
@@ -45,7 +45,7 @@ const Footer = () => {
           <div className="col-md">
             <div className="contact-item1 font">
               <h4 className='bold-text'>Find Us</h4>
-              <p>Khudad Pilaza Near Station Road Sukkur Sindh</p>
+              <p>Khudad Plaza Near Station Road Sukkur Sindh</p>
               <div className="social-icons">
                 <a href="https://www.facebook.com/">
                     <img src={mysvg1} alt="Facebook"/>
