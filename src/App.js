@@ -22,7 +22,7 @@ function App() {
       
       window.addEventListener('load', handleLoad);
       setInterval(() => {
-        setLoaded(true);
+        setLoaded(false);
       }, 2000);
     }, []);
   return (
