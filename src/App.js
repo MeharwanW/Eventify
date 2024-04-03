@@ -19,8 +19,11 @@ function App() {
       const handleLoad = () => {
         setLoaded(false);
       };
-  
+      
       window.addEventListener('load', handleLoad);
+      setInterval(() => {
+        setLoaded(true);
+      }, 2000);
     }, []);
   return (
     <div className="App">
