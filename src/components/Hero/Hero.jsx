@@ -61,7 +61,7 @@ export const Hero = () => {
           <MDBCarouselCaption>
             <div className="carousal-text font font-size bold-text">
               <h1 className='bold-text'>WELCOME TO</h1>
-              <h1 className='color-text'>EVENTIFY</h1>
+              <h1 className='color-text bold-text'>EVENTIFY</h1>
             </div>
           </MDBCarouselCaption>
         </MDBCarouselItem>
@@ -71,7 +71,7 @@ export const Hero = () => {
           <MDBCarouselCaption>
             <div className="carousal-text font font-size bold-text">
               <h1 className='bold-text'>WELCOME TO</h1>
-              <h1 className='bold-text color-text'>EVENTIFY</h1>
+              <h1 className='color-text bold-text'>EVENTIFY</h1>
             </div>
           </MDBCarouselCaption>
         </MDBCarouselItem>
@@ -81,7 +81,7 @@ export const Hero = () => {
           <MDBCarouselCaption>
             <div className="carousal-text font font-size bold-text">
               <h1 className='bold-text'>WELCOME TO</h1>
-              <h1 className='bold-text color-text'>EVENTIFY</h1>
+              <h1 className='color-text bold-text'>EVENTIFY</h1>
             </div>
           </MDBCarouselCaption>
         </MDBCarouselItem>

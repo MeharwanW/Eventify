@@ -10,11 +10,22 @@ import Suppliers from "./components/Suppliers/Suppliers";
 import Contacts from "./components/Contacts/Contacts";
 import About from "./components/About/About";
 import AdminHub from "./components/Profile/Adminhub";
+import { useState , useEffect} from "react";
+import Preloader from "./components/Preloader";
 function App() {
+  const [loaded, setLoaded] = useState(true);
 
+    useEffect(() => {
+      const handleLoad = () => {
+        setLoaded(false);
+      };
+  
+      window.addEventListener('load', handleLoad);
+    }, []);
   return (
     <div className="App">
     
+    {loaded ? <Preloader /> :
         <BrowserRouter>
       <Routes>
         <Route path="/" element={<Header />}>
@@ -28,10 +39,11 @@ function App() {
           <Route path="Suppliers" element={<Suppliers />} />
           <Route path="About" element={<About />} />
           <Route path="Dashboard" element={<AdminHub />} />
+          
         </Route>
       </Routes>
       </BrowserRouter>
-      
+}
     </div>
   );
 }

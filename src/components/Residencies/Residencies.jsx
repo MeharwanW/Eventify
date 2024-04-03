@@ -6,7 +6,7 @@ import data1 from "../../utils/slider1.json";
 import data2 from "../../utils/slider2.json";
 import { sliderSettings } from "../../utils/common.js";
 import { useState } from "react";
-import myImg from "../../assets/supplier.jpg";
+
 
 const Residencies = () => {
   const [selectedSupplier, setSelectedSupplier] = useState(null);
@@ -21,7 +21,7 @@ const Residencies = () => {
           <SupplierInfo supplier={selectedSupplier} onClose={() => setSelectedSupplier(null)} />
         )}
         {!selectedSupplier && (
-          <img src={myImg} alt="" srcSet="" />
+          <div></div>
         )}
       </div>
       <div className="paddings innerWidth r-container">

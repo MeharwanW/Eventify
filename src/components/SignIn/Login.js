@@ -31,11 +31,14 @@ export const Login = () => {
                        <span className='font'>Forget Password?
                         </span> <span className='font color-text'>Click Here</span>
                     </div>
+                    <div className='CreateAcc'>
                     <Link to="/SignUp">
-                    <div className="submit-container">
+                    <div className="flexCenter">
                     <button  className="button font">Create new account</button>
-                </div>
-                </Link>
+                 </div>
+                    </Link>
+                    </div>
+                    
             </div>
             
 

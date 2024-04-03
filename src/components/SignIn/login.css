@@ -85,26 +85,8 @@
 }
 
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    .header
-    {
-        margin-top: 5%;
-        width: 80%;
-    }
-  
-}
 
-@media only screen and (max-width: 510px) {
-  .contain{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    background-color: #FF6B6B;
-    
-}
+
 
 .shadow-box {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -175,6 +157,7 @@
     display: flex;
     justify-content: center; 
     margin-top: 10% auto;  
+    width: 100%;
 }
 
 .gray {
@@ -182,7 +165,24 @@
     color: #676767;
 }
 
+@media only screen and (max-width: 510px) {
+    .contain{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      background-color: #FF6B6B;
+      
+  }
+ 
+  .CreateAcc
+  {
+    width: 60%;
+  }
 
+
+}
 
 @media only screen and (max-width: 600px) {
     .header
@@ -190,9 +190,18 @@
         margin-top: 5%;
         width: 90%;
     }
+    .input {
+        display: flex;
+        align-items: center;
+        background-color: #eaeaea;
+        border-radius: 6px;
+        width: 70%;
+        height: 50px;
+    }
+
   
 }
-}
+
 @media only screen and (max-width: 900px) {
     .header
     {
