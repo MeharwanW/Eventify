@@ -12,6 +12,8 @@ import About from "./components/About/About";
 import AdminHub from "./components/Profile/Adminhub";
 import { useState , useEffect} from "react";
 import Preloader from "./components/Preloader";
+
+
 function App() {
   const [loaded, setLoaded] = useState(true);
 
@@ -41,8 +43,7 @@ function App() {
           <Route path="Contacts" element={<Contacts />} />
           <Route path="Suppliers" element={<Suppliers />} />
           <Route path="About" element={<About />} />
-          <Route path="Dashboard" element={<AdminHub />} />
-          
+          <Route path="Dashboard" element={<AdminHub />} /> 
         </Route>
       </Routes>
       </BrowserRouter>
