@@ -41,7 +41,7 @@
 .input1 {
     display: flex;
     align-items: center;
-    padding: 7%;
+    padding: 3%;
     margin-top: 5%;
     background-color: #eaeaea;
     border-radius: 6px;
@@ -71,7 +71,7 @@
 
 
 
-@media only screen and (max-width: 580px){
+@media only screen and (max-width: 767px){
     .headers{
         margin-top: 15%;
         display: flex;
@@ -79,7 +79,7 @@
         justify-content: center;
         align-items: center;
         height: 70%;
-        width: 90%;
+        width: 70%;
         background-color: white;
        
     }
@@ -88,9 +88,16 @@
         align-items: center;
         padding: 3%;
         background-color: #eaeaea;
+        border-radius: 6%;
+    }
+    .input1 {
+        display: flex;
+        align-items: center;
+        padding: 3%;
+        margin-top: 5%;
+        background-color: #eaeaea;
         border-radius: 6px;
     }
-   
 }
 
 
