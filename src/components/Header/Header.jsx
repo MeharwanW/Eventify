@@ -55,7 +55,7 @@ const Header = () => {
       {windowWidth <953 && (<div className={`dropdown-menu ${showMenu ? 'show' : ''}`}>
           <div onClick={() => setShowMenu(!showMenu)}><NavItems /></div>
         </div>)}
-        {windowWidth <953 &&(<div className="icon" onClick={() => setShowMenu(!showMenu)}>&#9776;</div>)}
+        {windowWidth <953 &&(<div className="icon font" onClick={() => setShowMenu(!showMenu)}>&#9776;Menu</div>)}
       </div>
       
       
