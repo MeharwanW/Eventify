@@ -7,30 +7,26 @@
 }
 
 .search-container {
-  position: relative;
-  display: inline-block;
+  position: absolute;
 }
 
 .search {
-  flex-wrap: nowrap;
   width: 100%;
   height: auto;
 }
 
-.search-input,
-.search-input2 {
+.search-input{
   background-color: #FFFFFF;
   color: #314455;
   border: 1px solid #314455;
   border-radius: 5px;
   padding: 4.5%;
-
   width: 100%;
   box-sizing: border-box;
 }
 
-.suggestions,
-.suggestions2 {
+.suggestions
+ {
   position: absolute;
   top: 100%;
   left: 0;
@@ -104,11 +100,12 @@
 
 @media only screen and (max-width: 768px) {
   .hero-section {
-    margin: 5% 0 0% 0;
+    margin: 3% 0 0% 0;
   }
   .search-input,
   .search-input2 {
     padding: 5%;
+    justify-content: center;
   }
 
   .suggestion-item,
@@ -139,4 +136,25 @@
 .carousal-text
 {
   margin-bottom: 50%;
+}
+@media only screen and (max-width: 481px) {
+  .search-Box
+  {
+    padding: 20%;
+  }
+ .galleryText p{
+  display: none;
+ }
+ .galleryText 
+ {
+  margin: 2% 0 3% 50% 
+ }
+ .galleryDes{
+  display: flex;
+ flex-direction: column;
+ }
+ .galleryDes .galleryImg
+ {
+  order: 1;
+ }
 }

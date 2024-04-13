@@ -86,7 +86,7 @@ export const Hero = () => {
           </MDBCarouselCaption>
         </MDBCarouselItem>
       </MDBCarousel>
-      <div className='flexCenter border-gradient box-shadow'>
+      <div className='flexCenter border-gradient box-shadow search-Box'>
         <div className='margin'>
           <form className="">
             <div className="search-container">
@@ -115,11 +115,11 @@ export const Hero = () => {
                 type="text"
                 name=""
                 placeholder="Location"
-                className="search-input2 font"
+                className="search-input font"
                 value={value1}
                 onChange={onChange1}
               />
-              <div className="suggestions2">
+              <div className="suggestions">
                 {suggestions1.map(item => (
                   <div key={item.id} onClick={() => onSearch1(item)} className="suggestion-item2">
                     {item.full_name}

@@ -43,7 +43,7 @@ const Header = () => {
           <NavItems />
         </div>
         )}
-        {!showMenu && windowWidth >= 485 &&(<div className="buttons">
+        {!showMenu && windowWidth > 952 &&(<div className="buttons">
           <Link to="/Login" className="font"><button className="button" variant="">
             Login
           </button></Link>
