@@ -109,9 +109,20 @@ function SupplierInfo({ supplier, onClose }) {
   return (
     <div className="supplierInfoOverlay" onClick={onClose}>
       <div className="supplierInfoContainer" onClick={(e) => e.stopPropagation()}>
-        <h2>{supplier.name}</h2>
-        <p>{supplier.description}</p>
-        <button className='button' onClick={onClose}>Close</button>
+      <div className="paddings innerWidth r-container">
+        <Swiper {...sliderSettings}>
+          {data.map((i) => (
+            <SwiperSlide key={i}>
+              <div className="r-card">
+                <img src={supplier.image} alt="home" />
+                <span className="flexCenter heading font">{supplier.name}</span>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+       
       </div>
     </div>
   );
