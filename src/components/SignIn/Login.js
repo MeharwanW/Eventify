@@ -4,9 +4,8 @@ import password from '../SignIn/lock.svg'
 import { Link } from 'react-router-dom'
 
 
-export const Login = () => {
-   
-  
+export const Login = () => {    
+        
   return (
         <div className="contain">
             <div className="header shadow-box">

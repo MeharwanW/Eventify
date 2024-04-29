@@ -5,7 +5,8 @@
 }
 .suppliersScreen
 {
-     width: 100%;   
+    
+     width: 100%;
 }
 .suppliersScreen img
 {
@@ -47,16 +48,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 2000;
     background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
+  
   .supplierInfoContainer {
+    overflow: scroll;
     background-color: #fff;
     padding: 20px;
+    height: 100%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
   }
@@ -72,4 +76,8 @@
     margin-bottom: 20px;
   }
   
-  
+  .card-Menu
+  {
+    width: 100%;
+    height: 30%;
+  }
