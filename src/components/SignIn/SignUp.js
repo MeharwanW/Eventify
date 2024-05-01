@@ -27,10 +27,10 @@ export const SignUp = () => {
                 name,password,email,CNIC,userName,number
             })
             .then(res=>{
-                if(res.data=="exist"){
+                if(res.data==="exist"){
                     alert("User already exists")
                 }
-                else if(res.data=="notexist"){
+                else if(res.data==="notexist"){
                     navigate('/Home')
                 }
             })
@@ -54,39 +54,39 @@ export const SignUp = () => {
         <form action="">
             <div className="inputs1 ">
                 <div className="input1 ">
-                    <img src={name} alt="" />
-                    <input className='font' type="text" placeholder='Name' />
+                    <img src={user} alt="" />
+                    <input className='font' type="text" onChange={(e)=>{setName(e.target.value)}} placeholder='Name' />
                 </div>
                 <div className="input1 ">
-                    <img src={email} alt="" />
-                    <input className='font' type="email" placeholder='Email' />
+                    <img src={mail} alt="" />
+                    <input className='font' type="email" onChange={(e)=>{setEmail(e.target.value)}} placeholder='Email' />
                 </div>
                 <div className="input1 ">
-                    <img src={name} alt="" />
-                    <input className='font' type="text" placeholder='CNIC' />
+                    <img src={user} alt="" />
+                    <input className='font' type="text" onChange={(e)=>{setCNIC(e.target.value)}} placeholder='CNIC' />
                 </div>
             
 
                 
                 <div className="input1 ">
-                    <img src={name} alt="" />
-                    <input className='font' type="text" placeholder='Username' />
+                    <img src={user} alt="" />
+                    <input className='font' type="text" onChange={(e)=>{setUserName(e.target.value)}} placeholder='Username' />
                 </div>
                 
                 <div className="input1">
                     <img src={phone} alt="" />
-                    <input className='font' type="tel" placeholder='Phone Number' />
+                    <input className='font' type="tel" onChange={(e)=>{setNumber(e.target.value)}} placeholder='Phone Number' />
                 </div>
             
 
         
                 <div className="input1 col col-sm-12 col-md-12 col-lg-12">
-                    <img src={password} alt="" />
-                    <input className='font' type="password" placeholder='Password' />
+                    <img src={pass} alt="" />
+                    <input className='font' type="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
                 </div>
             
             <div className="submit-container1">
-                    <button className="button">Submit</button>
+                    <button className="button" onClick={submit}>Submit</button>
                 </div>
                 
             </div>

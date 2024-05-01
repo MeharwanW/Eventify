@@ -5,11 +5,6 @@ import axios from 'axios'
 import { useNavigate,Link } from 'react-router-dom'
 import React, {useState} from "react"
 
-
-<<<<<<< HEAD
-export const Login = () => {    
-        
-=======
 export const Login = () => {
     
     
@@ -43,7 +38,6 @@ export const Login = () => {
         }
     }
 
->>>>>>> backend
   return (
         <div className="contain">
             <div className="header shadow-box">
