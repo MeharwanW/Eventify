@@ -44,7 +44,7 @@ export const SignUp = () => {
         }
     }
   
-    return (
+  return (
     <>
         <div className="contains">
             <div className="headers shadow-box">
@@ -79,7 +79,7 @@ export const SignUp = () => {
                 </div>
             
 
-                   
+        
                 <div className="input1 col col-sm-12 col-md-12 col-lg-12">
                     <img src={pass} alt="" />
                     <input className='font' type="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
