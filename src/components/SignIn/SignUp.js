@@ -51,42 +51,42 @@ export const SignUp = () => {
                 <div className="text font">Sign Up</div>
                 <div className="underline"></div>
 
-        <form action="POST">
+        <form action="">
             <div className="inputs1 ">
                 <div className="input1 ">
-                    <img src={user} alt="" />
-                    <input className='font' type="text" onChange={(e)=>{setName(e.target.value)}} placeholder='Name' />
+                    <img src={name} alt="" />
+                    <input className='font' type="text" placeholder='Name' />
                 </div>
                 <div className="input1 ">
-                    <img src={mail} alt="" />
-                    <input className='font' type="email" onChange={(e)=>{setEmail(e.target.value)}} placeholder='Email' />
+                    <img src={email} alt="" />
+                    <input className='font' type="email" placeholder='Email' />
                 </div>
                 <div className="input1 ">
-                    <img src={user} alt="" />
-                    <input className='font' type="text" onChange={(e)=>{setCNIC(e.target.value)}} placeholder='CNIC' />
+                    <img src={name} alt="" />
+                    <input className='font' type="text" placeholder='CNIC' />
                 </div>
             
 
                 
                 <div className="input1 ">
-                    <img src={user} alt="" />
-                    <input className='font' type="text" onChange={(e)=>{setUserName(e.target.value)}} placeholder='Username' />
+                    <img src={name} alt="" />
+                    <input className='font' type="text" placeholder='Username' />
                 </div>
                 
                 <div className="input1">
                     <img src={phone} alt="" />
-                    <input className='font' type="tel" onChange={(e)=>{setNumber(e.target.value)}} placeholder='Phone Number' />
+                    <input className='font' type="tel" placeholder='Phone Number' />
                 </div>
             
 
         
                 <div className="input1 col col-sm-12 col-md-12 col-lg-12">
-                    <img src={pass} alt="" />
-                    <input className='font' type="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
+                    <img src={password} alt="" />
+                    <input className='font' type="password" placeholder='Password' />
                 </div>
             
             <div className="submit-container1">
-                    <button className="button" onClick={submit}>Submit</button>
+                    <button className="button">Submit</button>
                 </div>
                 
             </div>
