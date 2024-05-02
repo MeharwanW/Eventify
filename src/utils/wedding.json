@@ -1,0 +1,27 @@
+[
+    {
+      "description":"The ceremony takes place under a majestic floral arch, surrounded by loved ones. Vows are exchanged amidst the tranquility of nature, creating an unforgettable moment of love and beauty.",
+      "image": "./wedding1.jpg"
+    },
+    {
+      "description": "Imagine walking into a sun-drenched garden with a gentle breeze carrying the scent of flowers. Soft music plays as the bride, adorned in a flowing gown, walks down an aisle lined with blooming roses",
+      "image": "./wedding2.jpg"
+    },
+    {
+      "description":"Stepping into a quaint, historic chapel adorned with lace and candles, guests are transported to a bygone era. The bride, reminiscent of a Hollywood starlet, glides down the aisle in a vintage gown",
+      "image": "./wedding3.jpg"
+    },
+    {
+      "description":"The ceremony is filled with old-world charm, from the romantic vows to the nostalgic melodies played by a live jazz band. Every detail, from the antique décor to the classic black-and-white photographs, exudes timeless elegance.",
+      "image": "./wedding4.jpg"
+    },
+    {
+      "description":"Surrounded by azure waters and golden sands, the couple exchanges vows on a secluded beach at sunset. Palm trees sway gently in the warm breeze as loved ones gather to witness the union.",
+      "image": "./wedding5.jpg"
+    },
+    {
+      "description":"The ceremony is intimate yet breathtaking, with the ocean as a backdrop and the soft glow of tiki torches illuminating the scene. After saying "I do" beneath a floral arch, guests enjoy a tropical feast and dance the night away under the stars.",
+      "image": "./party1.jpg"
+    }
+  ]
+  

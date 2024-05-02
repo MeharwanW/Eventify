@@ -4,59 +4,46 @@ import user from '../SignIn/user.svg'
 import pass from '../SignIn/lock.svg'
 import mail from '../SignIn/envelope.svg'
 import phone from '../SignIn/phone.svg'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import {useState} from "react"
 import axios from 'axios'
 
-
-
 export const SignUp = () => {
-  
-    const [name, setName] = useState("")
-    const [password, setPassword] = useState("")
-    const [email, setEmail] = useState("")
-    const [CNIC, setCNIC] = useState("")
-    const [userName, setUserName] = useState("")
-    const [number, setNumber] = useState("")
-
-    const navigate = useNavigate(); 
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [CNIC, setCNIC] = useState('');
+    const [userName, setUserName] = useState('');
+    const [number, setNumber] = useState('');
+   
+    const navigate = useNavigate();
 
     async function submit(e) {
         e.preventDefault();
-    
-        if (!name || !email || !CNIC || !userName || !number || !password) {
-            alert("Please fill in all fields");
-            return;
-        }
-    
-        const formData = { 
-            client_name: name, 
-            client_email: email, 
-            client_cnic: CNIC, 
-            client_username: userName,
-            client_phone: number, 
-            client_password: password 
-        };
-    
-        try {
-            const response = await axios.post('http://localhost:3000/SignUp', formData);
-            console.log(response.data.message); // "User created successfully"
-            // Handle success, e.g., redirect to login page
 
-            if(response.data){
-                navigate("/Login")
-            }
-            else{
-                alert("User Already Exist")
-            }
-        } catch (error) {
-            console.error("Error: ", error.message); // Log the error message
-            alert("Failed to create user. Please try again."); // Show an error message to the user
+        try{
+            await axios.post("http://localhost:3000/SignUp",{
+                name,password,email,CNIC,userName,number
+            })
+            .then(res=>{
+                if(res.data=="exist"){
+                    alert("User already exists")
+                }
+                else if(res.data=="notexist"){
+                    navigate('/Home')
+                }
+            })
+            .catch(e=>{
+                alert("wrong details")
+                console.log(e);
+            })
+        }
+        catch{
+            console.log(e)
         }
     }
-    
   
-  return (
+    return (
     <>
         <div className="contains">
             <div className="headers shadow-box">
@@ -91,7 +78,7 @@ export const SignUp = () => {
                 </div>
             
 
-        
+                   
                 <div className="input1 col col-sm-12 col-md-12 col-lg-12">
                     <img src={pass} alt="" />
                     <input className='font' type="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' />
@@ -104,7 +91,7 @@ export const SignUp = () => {
             </div>
         </form>
 
-        <Link to="/Login">
+        <Link to="/login">
         <div className="forget-password">
                        <span className='font '>Already Registered?
                         </span> <span className='font color-text'>Login</span>

@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Residencies.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import data from "../../utils/slider.json";
 import data1 from "../../utils/slider1.json";
 import data2 from "../../utils/slider2.json";
 import { sliderSettings } from "../../utils/common.js";
+import data4 from "../../utils/reception.json";
 
 const Residencies = () => {
-  const [selectedSupplier, setSelectedSupplier] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSuppliers, setSelectedSuppliers] = useState([]);
 
-  const handleSupplierClick = (supplier) => {
-    setSelectedSupplier(supplier);
+  const handleSupplierClick = (category) => {
+    setSelectedCategory(category);
+    // Filter supplier data based on the selected category
+    const filteredSuppliers = data4.filter((supplier) => supplier.name === category);
+    setSelectedSuppliers(filteredSuppliers);
   };
 
   return (
@@ -22,7 +27,7 @@ const Residencies = () => {
         <Swiper {...sliderSettings}>
           {data.map((card, i) => (
             <SwiperSlide key={i}>
-              <div onClick={() => handleSupplierClick(card)} className="r-card">
+              <div onClick={() => handleSupplierClick(card.name)} className="r-card">
                 <img src={card.image} alt="home" />
                 <span className="flexCenter heading font">{card.name}</span>
               </div>
@@ -38,10 +43,10 @@ const Residencies = () => {
         <Swiper {...sliderSettings}>
           {data1.map((card, i) => (
             <SwiperSlide key={i}>
-              <div onClick={() => handleSupplierClick(card)} className="flexCenter r-card">
+              <div onClick={() => handleSupplierClick(card.name)} className="flexCenter r-card">
                 <img src={card.image} alt="home" />
                 <span className="flexCenter heading">{card.name}</span>
-                <span className="flexCenter font">{card.detail}</span>
+                
               </div>
             </SwiperSlide>
           ))}
@@ -63,8 +68,8 @@ const Residencies = () => {
         </Swiper>
       </div>
 
-      {selectedSupplier && (
-        <SupplierInfo supplier={selectedSupplier} onClose={() => setSelectedSupplier(null)} />
+      {selectedSuppliers.length > 0 && (
+        <SupplierInfo selectedSuppliers={selectedSuppliers} onClose={() => setSelectedSuppliers([])} />
       )}
     </section>
   );
@@ -72,21 +77,19 @@ const Residencies = () => {
 
 export default Residencies;
 
-const SupplierInfo = ({ supplier, onClose }) => {
-  const [showDescription, setShowDescription] = useState(false);
-
-  const toggleDescription = () => {
-    setShowDescription(!showDescription);
-  };
-
+const SupplierInfo = ({ selectedSuppliers, onClose }) => {
   return (
     <div className="supplierInfoOverlay" onClick={onClose}>
       <div className="supplierInfoContainer flexCenter" onClick={(e) => e.stopPropagation()}>
-        <div className="flexCenter">
-          <div className="r-card">
-            <img src={supplier.image} alt="home" onClick={toggleDescription} />
-            {showDescription && <p>{supplier.description}</p>}
+       <div className="flexCenter">
+        {selectedSuppliers.map((supplier, index) => (
+          <div key={index} className="r-card1">
+            <div className="r-card">
+              <img src={supplier.image} alt="home" />
+              <p>{supplier.description}</p>
+            </div>
           </div>
+        ))}
         </div>
         <button className="button" onClick={onClose}>
           Close
