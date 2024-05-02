@@ -46,7 +46,7 @@ const Residencies = () => {
               <div onClick={() => handleSupplierClick(card.name)} className="flexCenter r-card">
                 <img src={card.image} alt="home" />
                 <span className="flexCenter heading">{card.name}</span>
-                
+                <span className="flexCenter font">{card.detail}</span>
               </div>
             </SwiperSlide>
           ))}
@@ -78,19 +78,23 @@ const Residencies = () => {
 export default Residencies;
 
 const SupplierInfo = ({ selectedSuppliers, onClose }) => {
+  const [selectedSupplierIndex, setSelectedSupplierIndex] = useState(null);
+
+  const handleCardClick = (index) => {
+    setSelectedSupplierIndex(index);
+  };
+
   return (
     <div className="supplierInfoOverlay" onClick={onClose}>
       <div className="supplierInfoContainer flexCenter" onClick={(e) => e.stopPropagation()}>
-       <div className="flexCenter">
         {selectedSuppliers.map((supplier, index) => (
-          <div key={index} className="r-card1">
-            <div className="r-card">
+          <div key={index} className="flexCenter">
+            <div className="r-card flexCenter" onClick={() => handleCardClick(index)}>
               <img src={supplier.image} alt="home" />
-              <p>{supplier.description}</p>
+              {selectedSupplierIndex === index && <p>{supplier.description}</p>}
             </div>
           </div>
         ))}
-        </div>
         <button className="button" onClick={onClose}>
           Close
         </button>

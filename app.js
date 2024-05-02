@@ -78,8 +78,8 @@ app.post("/SignUp",async(req,res)=>{
 const uri = "mongodb+srv://eventify:ibasukkur@backenddb.vx1pj6l.mongodb.net/Eventify-Backend?retryWrites=true&w=majority&appName=Eventify-Backend";
 
 mongoose.connect(uri, {
-    useNewUrlParser:true,
-    useUnifiedTopology:true
+    // useNewUrlParser:true,
+    // useUnifiedTopology:true
 })
 .then(() => {
     console.log("MongoDB connected");
