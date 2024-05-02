@@ -6,12 +6,7 @@ import { useNavigate,Link } from 'react-router-dom'
 import React, {useState} from "react"
 
 
-<<<<<<< HEAD
-export const Login = () => {    
-        
-=======
 export const Login = () => {
-    
     
     const [client_username, setUserName] = useState("")
     const [client_password, setPassword] = useState("")
@@ -43,7 +38,7 @@ export const Login = () => {
         }
     }
 
->>>>>>> backend
+
   return (
         <div className="contain">
             <div className="header shadow-box">

@@ -86,59 +86,8 @@ export const Hero = () => {
           </MDBCarouselCaption>
         </MDBCarouselItem>
       </MDBCarousel>
-      <div className='flexCenter border-gradient box-shadow search-Box'>
-        <div className='margin'>
-          <form className="">
-            <div className="search-container">
-              <input
-                type="text"
-                name=""
-                placeholder="Catagory"
-                className="search-input font"
-                value={value}
-                onChange={onChange}
-              />
-              <div className="suggestions">
-                {suggestions.map(item => (
-                  <div key={item.id} onClick={() => onSearch(item)} className="suggestion-item">
-                    {item.full_name}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </form>
-        </div>
-        <div className='margin'>
-          <form className="">
-            <div className="search-container">
-              <input
-                type="text"
-                name=""
-                placeholder="Location"
-                className="search-input font"
-                value={value1}
-                onChange={onChange1}
-              />
-              <div className="suggestions">
-                {suggestions1.map(item => (
-                  <div key={item.id} onClick={() => onSearch1(item)} className="suggestion-item2">
-                    {item.full_name}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </form>
-        </div>
-        <div className="margin">
-          <button className='button font' value="button">Search</button>
-        </div>
-      </div>
-      <div className='flexColCenter aboutSection font shadow-box'>
-        <h1>ABOUT US</h1>
-        <div className='aboutText'>
-          <p className='font'>What sets Eventify apart is not just our expertise but also our unwavering commitment to integrity, trust, and passion for our craft. With us, you're not just a client; you're a valued partner in creating moments that will be cherished for a lifetime. Let us weave the threads of your imagination into an exquisite tapestry of moments, where each thread represents a memory etched in time. With Eventify by your side, your next event will be nothing short of extraordinary. Let's embark on this journey together and create magic that transcends boundaries.</p>
-        </div>
-      </div>
+      
+     
       <div className='flexColCenter gallerySection font shadow-box'>
         <h1>OUR GALLERY</h1>
         <div className='galleryDes flexenter'>
@@ -156,6 +105,12 @@ export const Hero = () => {
             <p className='font'>Drawing from a rich tapestry of services, Eventify offers a comprehensive suite tailored to meet your unique needs. Our three-tier system, designed for efficiency and efficacy, streamlines the planning process, allowing us to deliver exceptional results within your desired timeframe and budget.</p>
             <button className='button'>View Story</button>
           </div>
+        </div>
+      </div>
+      <div className='flexColCenter aboutSection font'>
+        <h1>ABOUT US</h1>
+        <div className='aboutText'>
+          <p className='font'>What sets Eventify apart is not just our expertise but also our unwavering commitment to integrity, trust, and passion for our craft. With us, you're not just a client; you're a valued partner in creating moments that will be cherished for a lifetime. Let us weave the threads of your imagination into an exquisite tapestry of moments, where each thread represents a memory etched in time. With Eventify by your side, your next event will be nothing short of extraordinary. Let's embark on this journey together and create magic that transcends boundaries.</p>
         </div>
       </div>
       <div className='box'></div>

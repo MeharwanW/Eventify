@@ -10,19 +10,42 @@
     margin-bottom: 20px;
 }
 
+
 .r-card {
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 15px;
+    transition: all 300ms ease-in;
+    margin-bottom: 15px;
+ 
+}
+.r-card1{
     gap: 0.5rem;
     padding: 1rem;
     border-radius: 15px;
     transition: all 300ms ease-in;
     margin-bottom: 15px;
+    width: 25%;
+    height: 40%;
 }
+.r-card1 > img {
+    width: 100%;
+    border-radius: 20px;
+    height: 150px;
+    max-width: 15rem;
+}
+
 
 .r-card > img {
     width: 100%;
     border-radius: 20px;
     height: 150px;
     max-width: 15rem;
+}
+
+.r-card1 > :nth-child(2) {
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .r-card > :nth-child(2) {
@@ -33,8 +56,16 @@
 .r-card > :nth-child(3) {
     font-size: 1.5rem;
 }
+.r-card1 > :nth-child(3) {
+    font-size: 1.5rem;
+}
+
 
 .r-card > :nth-child(4) {
+    font-size: 0.7rem;
+    max-width: 15rem;
+}
+.r-card1:hover > :nth-child(4) {
     font-size: 0.7rem;
     max-width: 15rem;
 }
@@ -44,6 +75,12 @@
     cursor: pointer;
     background-image: linear-gradient(to right, #FFC3B3, #C9EFFF);
 }
+.r-card1:hover {
+    transform: scale(1);
+    cursor: pointer;
+    background-image: linear-gradient(to right, #FFC3B3, #C9EFFF);
+}
+
 
 .r-buttons {
     gap: 1rem;
