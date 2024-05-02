@@ -6,6 +6,7 @@ import email from '../SignIn/envelope.svg'
 import phone from '../SignIn/phone.svg'
 import { Link } from 'react-router-dom'
 
+
 export const SignUp = () => {
   return (
     <>
@@ -26,7 +27,7 @@ export const SignUp = () => {
                 </div>
                 <div className="input1 ">
                     <img src={name} alt="" />
-                    <input className='font' type="text" placeholder='CNIC' />
+                    <input className='font' type="text" placeholder='Select Account Type' />
                 </div>
             
 
@@ -60,7 +61,6 @@ export const SignUp = () => {
                        <span className='font '>Already Registered?
                         </span> <span className='font color-text'>Login</span>
                     </div>
-        
         </Link>
             </div>
         </div>
