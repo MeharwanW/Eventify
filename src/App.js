@@ -33,18 +33,18 @@ function App() {
     {loaded ? <Preloader /> :
         <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Header />}>
+        <Route path="/" element={<Header />} >
           <Route index element={<Home/>}/>
           <Route path="Home" element={<Home />} />
-          <Route path="Login" element={<Login />} />
-          <Route path="SignUp" element={<SignUp />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
           <Route path="Venues" element={<Venue />} />
           <Route path="Media" element={<Media />} />
           <Route path="Contacts" element={<Contacts />} />
           <Route path="Suppliers" element={<Suppliers />} />
           <Route path="About" element={<About />} />
           <Route path="booking" element={<Booking />} />
-          <Route path="Dashboard" element={<AdminHub />} /> 
+          <Route path="/dashboard" element={<AdminHub />} /> 
         </Route>
       </Routes>
       </BrowserRouter>

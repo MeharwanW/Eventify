@@ -21,10 +21,10 @@ export const Login = () => {
                 client_username,client_password
             })
             .then(res=>{
-                if(res.data=="exist"){
-                    navigate('/Home');
+                if(res.data){
+                    navigate('/dashboard');
                 }
-                else if(res.data=="notexist"){
+                else {
                     alert("User have not sign up")
                 }
             })

@@ -43,13 +43,15 @@ const Header = () => {
           <NavItems />
         </div>
         )}
+        
         {!showMenu && windowWidth > 952 &&(<div className="buttons">
+
           <Link to="/Login" className="font"><button className="button" variant="">
             Login
           </button></Link>
-          <Link to="SignUp" className="font link"><button className="button" variant="">
-            Sign Up
-          </button></Link>
+          <Link to="/SignUp" className="font link"><button className="button" variant="">
+            Sign Up 
+          </button></Link> 
         </div>)}
         
       {windowWidth <953 && (<div className={`dropdown-menu ${showMenu ? 'show' : ''}`}>
