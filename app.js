@@ -9,6 +9,8 @@ const jwt = require("jsonwebtoken")
 const client = require("./client.js")
 const venue = require("./venue.js")
 
+const SECRET_KEY ='secretkey'
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -30,6 +32,7 @@ app.post("/Login",async(req,res)=>{
         if(!validUser){
             res.status(404).json({"message":"User not Exist"})
         }
+         
         const hashPassword = bcryptjs.compareSync(client_password,validUser.client_password)
         console.log("Password comparison result:", hashPassword);
 
@@ -39,6 +42,9 @@ app.post("/Login",async(req,res)=>{
         else{
             res.status(201).json({"message":"exist"})
         }
+
+        const token = jwt.sign({client_id: client._id},SECRET_KEY,{expiresIn:'1hr'})
+        res.json({message:"Login Succesfull"})
     
     }
     catch(e){
