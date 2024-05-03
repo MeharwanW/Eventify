@@ -1,26 +1,27 @@
-.search-container {
+.search-container{
   position: relative;
-
 }
 
-.search-input {
+.search-input{
   width: 200px;
 }
 
 .suggestions {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 5px); /* Position suggestions below input */
   left: 0;
-  width: 100%;
+  width: 100%; /* Set suggestions width to match input width */
+  max-height: 200px; /* Set maximum height for suggestions */
+  overflow-y: auto; /* Enable vertical scrolling for overflow */
   background-color: #fff;
   border: 1px solid #ccc;
   border-top: none;
-  border-radius:20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 2;
 }
 
-.suggestion-item {
+.suggestion-item{
   padding: 10px;
   cursor: pointer;
 }

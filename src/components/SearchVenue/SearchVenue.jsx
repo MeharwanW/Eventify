@@ -1,175 +1,192 @@
 import React, { useState } from 'react';
-import data from "../Header/full_names.json";
+import data1 from "./venue.json";
+import "./../Header/SearchBar.css"
 
-export default function SearchVenue() {
-  const [value, setValue] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  
-  const [value1, setValue1] = useState("");
-  const [suggestions1, setSuggestions1] = useState([]);
-  
-  const [value2, setValue2] = useState("");
-  const [suggestions2, setSuggestions2] = useState([]);
-  
-  const [value3, setValue3] = useState("");
-  const [suggestions3, setSuggestions3] = useState([]);
-  
+export default function SearchVenue({ onSearch }) {
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
+  const [venueType, setVenueType] = useState("");
+  const [guests, setGuests] = useState("");
 
-  const onChange = (event) => {
-    const { value } = event.target;
-    setValue(value);
-    if (value) {
-      const searchTerm = value.toLowerCase();
-      const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
-      setSuggestions(filteredSuggestions);
-    } else {
-      setSuggestions([]);
-    }
-  };
-  const onChange1 = (event) => {
-    const { value } = event.target;
-    setValue1(value);
-    if (value) {
-      const searchTerm = value.toLowerCase();
-      const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
-      setSuggestions1(filteredSuggestions);
-    } else {
-      setSuggestions1([]);
-    }
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
+  const [categorySuggestions, setCategorySuggestions] = useState([]);
+  const [venueTypeSuggestions, setVenueTypeSuggestions] = useState([]);
+  const [guestsSuggestions, setGuestsSuggestions] = useState([]);
+
+  const [showLocationSuggestions, setShowLocationSuggestions] = useState(true);
+  const [showCategorySuggestions, setShowCategorySuggestions] = useState(true);
+  const [showVenueTypeSuggestions, setShowVenueTypeSuggestions] = useState(true);
+  const [showGuestsSuggestions, setShowGuestsSuggestions] = useState(true);
+
+  const resetFields = () => {
+    setLocation("");
+    setCategory("");
+    setVenueType("");
+    setGuests("");
   };
 
-  const onChange2 = (event) => {
-    const { value } = event.target;
-    setValue2(value);
-    if (value) {
-      const searchTerm = value.toLowerCase();
-      const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
-      setSuggestions2(filteredSuggestions);
-    } else {
-      setSuggestions2([]);
-    }
-  };
-  const onChange3 = (event) => {
-    const { value } = event.target;
-    setValue3(value);
-    if (value) {
-      const searchTerm = value.toLowerCase();
-      const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
-      setSuggestions3(filteredSuggestions);
-    } else {
-      setSuggestions3([]);
-    }
+  const handleSearch = () => {
+    const filteredData = data1.filter(venue => {
+      return (
+        (location === "" || venue.location.toLowerCase() === location.toLowerCase()) &&
+        (category === "" || venue.category.toLowerCase() === category.toLowerCase()) &&
+        (venueType === "" || venue.venuetype.toLowerCase() === venueType.toLowerCase()) &&
+        (guests === "" || (venue.guests >= parseInt(guests, 10)))
+      );
+    });
+    console.log(filteredData);
+    onSearch(filteredData);
+    resetFields(); // Reset fields after search
   };
 
-  const onSearch = (item) => {
-    setValue(item.full_name);
-    setSuggestions([]);
+  const onChangeLocation = (event) => {
+    const { value } = event.target;
+    setLocation(value);
+    const searchTerm = value.toLowerCase();
+    const filteredSuggestions = data1.filter(venue => venue.location.toLowerCase().startsWith(searchTerm));
+    const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.location)));
+    setLocationSuggestions(uniqueSuggestions);
+    setShowLocationSuggestions(true);
   };
-  const onSearch1 = (item) => {
-    setValue1(item.full_name);
-    setSuggestions1([]);
+
+  const onChangeCategory = (event) => {
+    const { value } = event.target;
+    setCategory(value);
+    const searchTerm = value.toLowerCase();
+    const filteredSuggestions = data1.filter(venue => venue.category.toLowerCase().startsWith(searchTerm));
+    const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.category)));
+    setCategorySuggestions(uniqueSuggestions);
+    setShowCategorySuggestions(true);
   };
-  const onSearch2 = (item) => {
-    setValue2(item.full_name);
-    setSuggestions2([]);
+
+  const onChangeVenueType = (event) => {
+    const { value } = event.target;
+    setVenueType(value);
+    // Find the venue in the data array that matches the selected venue type
+    const selectedVenue = data1.find(venue => venue.venuetype.toLowerCase() === value.toLowerCase());
+    if (selectedVenue) {
+      setGuests(selectedVenue.guests.toString());
+    }
+    const searchTerm = value.toLowerCase();
+    const filteredSuggestions = data1.filter(venue => venue.venuetype.toLowerCase().startsWith(searchTerm));
+    const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.venuetype)));
+    setVenueTypeSuggestions(uniqueSuggestions);
+    setShowVenueTypeSuggestions(true);
   };
-  const onSearch3 = (item) => {
-    setValue3(item.full_name);
-    setSuggestions3([]);
+
+  const onChangeGuests = (event) => {
+    const { value } = event.target;
+    // Set the value only if it's a valid guest number from the data
+    const validGuests = data1.map(venue => venue.guests.toString());
+    if (validGuests.includes(value)) {
+      setGuests(value);
+    }
+    setShowGuestsSuggestions(true);
   };
+
+  const handleSuggestionClick = (setter) => {
+    setter(false);
+  };
+
   return (
     <div>
-    <div className='flexCenter border-gradient box-shadow search'>
+      <div className='flexCenter border-gradient box-shadow search'>
         <div className='margin'>
-          <form className="">
-            <div className="search-container">
+          <form action="">
+            <div className='search-container'>
               <input
                 type="text"
-                name=""
-                placeholder="No. of Guests"
+                name=''
+                placeholder="Location e.g Karachi"
                 className="search-input font"
-                value={value}
-                onChange={onChange}
+                value={location}
+                onChange={onChangeLocation}
               />
-              <div className="suggestions">
-                {suggestions.map(item => (
-                  <div key={item.id} onClick={() => onSearch(item)} className="suggestion-item">
-                    {item.full_name}
-                  </div>
-                ))}
-              </div>
+              {showLocationSuggestions && (
+                <div className="suggestions">
+                  {locationSuggestions.map((item, index) => (
+                    <div key={index} onClick={() => { setLocation(item); handleSuggestionClick(setShowLocationSuggestions); }} className="suggestion-item">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </form>
         </div>
         <div className='margin'>
-          <form className="">
-            <div className="search-container">
+          <form action="" method="get">
+            <div className='search-container'>
               <input
                 type="text"
-                name=""
-                placeholder="Venue Type"
+                placeholder="Category e.g Meeting"
                 className="search-input font"
-                value={value1}
-                onChange={onChange1}
-              />
-              <div className="suggestions">
-                {suggestions1.map(item => (
-                  <div key={item.id} onClick={() => onSearch1(item)} className="suggestion-item2">
-                    {item.full_name}
-                  </div>
-                ))}
-              </div>
+                value={category}
+                onChange={onChangeCategory}
+              />  
+              {showCategorySuggestions && (
+                <div className="suggestions">
+                  {categorySuggestions.map((item, index) => (
+                    <div className="suggestion-item">
+                    <div key={index} onClick={() => { setCategory(item); handleSuggestionClick(setShowCategorySuggestions); }} >
+                      {item}
+                    </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </form>
         </div>
         <div className='margin'>
-          <form className="">
-            <div className="search-container">
+          <form action="" method="get">
+            <div className='search-container'>
               <input
                 type="text"
-                name=""
-                placeholder="Space Preference"
+                placeholder="Venue Type e.g Banquet"
                 className="search-input font"
-                value={value2}
-                onChange={onChange2}
+                value={venueType}
+                onChange={onChangeVenueType}
               />
-              <div className="suggestions">
-                {suggestions2.map(item => (
-                  <div key={item.id} onClick={() => onSearch2(item)} className="suggestion-item2">
-                    {item.full_name}
-                  </div>
-                ))}
-              </div>
+              {showVenueTypeSuggestions && (
+                <div className="suggestions">
+                  {venueTypeSuggestions.map((item, index) => (
+                    <div key={index} onClick={() => { setVenueType(item); handleSuggestionClick(setShowVenueTypeSuggestions); }} className="suggestion-item2">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </form>
         </div>
         <div className='margin'>
-          <form className="">
-            <div className="search-container">
+          <form action="" method="get">
+            <div className='search-container'>
               <input
                 type="text"
-                name=""
-                placeholder="Rating"
+                placeholder="No. Of Guests e.g 200"
                 className="search-input font"
-                value={value3}
-                onChange={onChange3}
+                value={guests}
+                onChange={onChangeGuests}
+                disabled // Disable manual editing of the guests input field
               />
-              <div className="suggestions">
-                {suggestions3.map(item => (
-                  <div key={item.id} onClick={() => onSearch3(item)} className="suggestion-item">
-                    {item.full_name}
-                  </div>
-                ))}
-              </div>
+              {showGuestsSuggestions && (
+                <div className="suggestions">
+                  {guestsSuggestions.map((item, index) => (
+                    <div key={index} onClick={() => { setGuests(item); handleSuggestionClick(setShowGuestsSuggestions); }} className="suggestion-item">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </form>
         </div>
         <div className="margin">
-          <button className='button font' value="button">Search</button>
+          <button className='button font' onClick={handleSearch}>Search</button>
         </div>
       </div>
-
-
     </div>
   )
 }
