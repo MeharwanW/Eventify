@@ -6,6 +6,7 @@ import data1 from "../../utils/slider1.json";
 import data2 from "../../utils/slider2.json";
 import { sliderSettings } from "../../utils/common.js";
 import data4 from "../../utils/reception.json";
+import { Link } from "react-router-dom";
 
 const Residencies = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -67,7 +68,12 @@ const Residencies = () => {
           ))}
         </Swiper>
       </div>
+      <Link to="/booking">
+        <div className="flexCenter margin">
 
+                        <button className="button button1 font btn-lg">Book Now</button>
+        </div>
+                    </Link>
       {selectedSuppliers.length > 0 && (
         <SupplierInfo selectedSuppliers={selectedSuppliers} onClose={() => setSelectedSuppliers([])} />
       )}

@@ -9,6 +9,7 @@ import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-k
 import data from "../Header/full_names.json";
 import galleryimg from "../../assets/wedding5.jpg"
 import galleryimg1 from "../../assets/party3.jpg"
+import data1 from "./../../utils/wedding.json"
 
 export const Hero = () => {
   const [value, setValue] = useState("");

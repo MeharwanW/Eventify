@@ -1,6 +1,6 @@
 [
     {
-        "name":"reception",
+      "name":"reception",
       "description":"The ceremony takes place under a majestic floral arch, surrounded by loved ones.",
       "image": "./1/reception1.jpg"
     },
@@ -65,6 +65,7 @@
         "image": "./1/wedding1.jpg"
       },
       {
+
         "name":"wedding",
         "description": "Imagine walking into a sun-drenched garden with a gentle breeze carrying the scent of flowers. Soft music plays as the bride, adorned in a flowing gown, walks down an aisle lined with blooming roses",
         "image": "./1/wedding2.jpg"

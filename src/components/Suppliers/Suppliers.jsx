@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import Footer from '../Footer/Footer';
 import myImg from "../../assets/supplier.jpg";
 import "./Supplier.css";
-import data1 from "../../utils/slider1.json";
+import data1 from "../../utils/suppliercatagory.json";
 
 export default function Suppliers() {
-  const [selectedSupplier, setSelectedSupplier] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const handleSupplierClick = (supplier) => {
-    setSelectedSupplier(supplier);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
   };
 
   return (
     <div className='suppliersDisplay'>
       <div className='suppliersScreen'>
-        {selectedSupplier && (
-          <SupplierInfo supplier={selectedSupplier} onClose={() => setSelectedSupplier(null)} />
+        {selectedCategory && (
+          <CategoryInfo category={selectedCategory} onClose={() => setSelectedCategory(null)} />
         )}
-        {!selectedSupplier && (
+        {!selectedCategory && (
           <img src={myImg} alt="" srcSet="" />
         )}
       </div>
@@ -27,10 +27,12 @@ export default function Suppliers() {
           <span className="heading">Suppliers Categories</span>
         </div>
         <div className='supplierVanue'>
-          {data1.map((card, index) => (
-            <div key={index} className="flexColCenter r-card" onClick={() => handleSupplierClick(card)}>
-              <img src={card.image} alt="home" />
-              <span className="flexCenter heading">{card.name}</span>
+            {data1.map((category, i) => (
+            <div key={i}>
+              <div onClick={() => handleCategoryClick(category)} className="flexCenter r-card">
+                <img src={category.image} alt="home" />
+                <span className="flexCenter heading">{category.name}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -40,12 +42,15 @@ export default function Suppliers() {
   );
 }
 
-function SupplierInfo({ supplier, onClose }) {
+function CategoryInfo({ category, onClose }) {
   return (
     <div className="supplierInfoOverlay" onClick={onClose}>
-      <div className="supplierInfoContainer" onClick={(e) => e.stopPropagation()}>
-        <h2>{supplier.name}</h2>
-        <p>{supplier.description}</p>
+      <div className="supplierInfoContainer flexColCenter" onClick={(e) => e.stopPropagation()}>
+        <div className='r-card flexCenter'>
+        <img src={category.image} alt="" srcset="" />
+        <p>{category.name}</p>
+        
+        </div>
         <button className='button' onClick={onClose}>Close</button>
       </div>
     </div>

@@ -94,6 +94,11 @@
     width: 100%;
     height: auto;
 }
+.button1
+{
+    width: 20%;
+    height: auto;
+}
 
 @media only screen and (max-width: 768px) {
     .r-card > :nth-child(4) {
