@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import data from "../Header/full_names.json";
+import { useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 export default function SearchVenue() {
   const [value, setValue] = useState("");
@@ -13,6 +15,34 @@ export default function SearchVenue() {
   
   const [value3, setValue3] = useState("");
   const [suggestions3, setSuggestions3] = useState([]);
+  const navigate = useNavigate();
+
+  async function submit(e) {
+    e.preventDefault();
+
+    try {
+        await axios.post('http://localhost:3000/SignUp', {
+          value, 
+          value1,
+          value2,
+          value3
+               
+        })
+            .then(res => {
+              if (res.data) {
+                alert('User already exists');
+              } else{
+                navigate('/Home');
+              }
+            })
+            .catch(e => {
+                alert('Wrong details');
+                console.log(e);
+            });
+    } catch (error) {
+        console.log(error);
+    }
+}
   
 
   const onChange = (event) => {

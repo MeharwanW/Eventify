@@ -26,9 +26,9 @@ const clientSchema=new mongoose.Schema({
         
     },
     client_cnic:{
-        type: "string",
-        required:true,
-        unique:true
+        type: "string"
+        
+        
     },
     client_username:{
         type: "string",
