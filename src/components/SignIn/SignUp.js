@@ -24,23 +24,22 @@ export const SignUp = () => {
         try {
             await axios.post('http://localhost:3000/SignUp', {
                 name,
-                password,
                 email,
-                CNIC,
                 userName,
-                number
+                password,
+                number,
+                CNIC
             })
-                .then(res => {
-                    if (res.data === 'exist') {
-                        alert('User already exists');
-                    } else if (res.data === 'notexist') {
-                        navigate('/Home');
-                    }
-                })
-                .catch(e => {
-                    alert('Wrong details');
-                    console.log(e);
-                });
+            .then(res => {
+                if (res.data) {
+                    alert('User already exists');
+                } else{
+                    navigate('/Home');
+                }
+            }).catch(e => {
+                alert('Wrong details');
+                console.log(e);
+            });
         } catch (error) {
             console.log(error);
         }
