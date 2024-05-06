@@ -11,6 +11,7 @@ const mongoose = require("mongoose")
 
 
 const clientSchema=new mongoose.Schema({
+
     client_name: {
         type: "string",
         required: [true,"Please enter your name"]
@@ -20,26 +21,27 @@ const clientSchema=new mongoose.Schema({
         required: true,
         unique:true
     },
-    client_password:{
-        type: "string",
-        required: true
-        
-    },
-    client_cnic:{
-        type: "string"
-        
-        
-    },
     client_username:{
         type: "string",
         required: [true,"Please enter user name"],
         unique:true
 
     },
+    client_password:{
+        type: "string",
+        required: true
+        
+    },
     client_phone:{
         type:"string",
         required: true,
-        unique:true
+       
+        
+    },
+    client_cnic:{
+        type: "string",
+        required:true
+        
         
     }
 },
@@ -47,6 +49,6 @@ const clientSchema=new mongoose.Schema({
     timestamps:true
 })
 
-const client  = mongoose.model("clients",clientSchema)
+const client  = mongoose.model("client",clientSchema)
 
 module.exports=client

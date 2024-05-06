@@ -35,7 +35,7 @@ const AdminHub = () => {
                 <Link to="/" className="brand">
                     <BiSmile className='bx bxs-smile'/>
 
-                    <span className="color-text">AdminHub</span>
+                    <span className="color-text">Eventify</span>
                 </Link>
                 <ul className="side-menu top font">
                     <li className={activeMenuItem === 'Dashboard' ? 'active' : ''}>

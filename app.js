@@ -1,13 +1,18 @@
 
-const bcryptjs = require("bcryptjs")
+const bcrypt = require("bcryptjs")
 const mongoose = require("mongoose")
 const express = require("express")
-//const bodyParser = require("body-parser")
+const bodyParser = require("body-parser")
 const cors = require("cors")
 //const jwt = require("jsonwebtoken")
 
+const dotenv = require("dotenv")
+dotenv.config()
+
+
 const client = require("./client.js")
 const venue = require("./venue.js")
+const organizer = require("./organizers.js")
 
 //const SECRET_KEY ='secretkey'
 
@@ -15,7 +20,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-//app.use(bodyParser.json)
+app.use(bodyParser.json());
 
 
 app.get("/",cors(),(req,res)=>{
@@ -45,20 +50,23 @@ app.post("/Venues", async(req,res)=>{
 })
 
 app.post("/Login",async(req,res)=>{
+
     const{client_username,client_password}=req.body
 
     try{
 
         const validUser=await client.findOne({client_username})
-        console.log(validUser);
+        console.log("valid USer: ",validUser);
+
         if(!validUser){
             res.status(404).json({"message":"User not Exist"})
         }
          
-        const hashPassword = bcryptjs.compareSync(client_password,validUser.client_password)
+        const hashPassword = bcrypt.compareSync(client_password,validUser.client_password)
         console.log("Password comparison result:", hashPassword);
 
         if(!hashPassword){
+            
             res.status(404).json({"message":"Wrong password!"})
         }
         else{
@@ -75,46 +83,81 @@ app.post("/Login",async(req,res)=>{
 
 })
 
-app.post("/SignUp",async(req,res)=>{
-    try{
 
-        const{client_name, client_email, client_username, client_password, client_phone, client_cnic}=req.body
+app.post("/SignUp", async (req, res) => {
+
+    const { name, email, userName, password, phone, accountType } = req.body;
+        
+    // console.log("user-type: ",userType)
+
+    // if (!name || !email || !userName || !password || !phone || !accountType) {
+    //     console.log("Missing fields:");
+    //     console.log("name: ",name);
+    //     console.log("email: ",email);
+    //     console.log("usernam: ",userName);
+    //     console.log("password: ",password);
+    //     console.log("phone: ",phone);
+    //     console.log("typpe: ",accountType);   
+    // }
+
+    const saltRounds = 10;
+    const hashPassword = bcrypt.hashSync(password, saltRounds);
+
     
-        console.log("Hello World: ",req.body);
-        
-        const hashPassword = bcryptjs.hashSync(client_password,10)
+    //if(userType=="client"){
 
-        
         const newClient = new client({
-            client_name,
-            client_email,
-            client_username,
-            client_password : hashPassword,
-            client_phone,
-            client_cnic})
-    
-        await newClient.save();
-        console.log("Got the data");
-        res.status(201).json({"message":"User created successfully"});
+            client_name:name,
+            client_email:email,
+            client_username:userName,
+            client_password: hashPassword,
+            client_phone:phone,
+            client_cnic:accountType
+        });
+    //}
+    // else if(userType=="organizer"){
 
+    //     const newOrganizer = new organizer({
+    //         organizer_name:name,
+    //         organizer_email:email,
+    //         organizer_username:userName,
+    //         organizer_password:password,
+    //         organizer_phone:phone,
+    //         user_type:userType
+
+    //     });
+    // }
+    try {
+       
+            await newClient.save();
+            console.log("client created successfully:", newClient);
+            res.json({ status:true,"message": "Client created successfully" });
+        
+       
+            
+            // await newOrganizer.save();
+            // console.log("Organizer created successfully:", newOrganizer);
+            // res.status(201).json({ "message": "Organizer created successfully" });
+        
+        
     } catch (e) {
-        console.error(e); // Log the error details
-        res.status(404).json({"message":"Failed to create client"});
-    } 
-})
+        console.error("Error during user creation:", e);
+        res.status(404).json({ "message": "Internal server error" });
+    }
+});
 
 
 const uri = "mongodb+srv://eventify:ibasukkur@backenddb.vx1pj6l.mongodb.net/Eventify-Backend?retryWrites=true&w=majority&appName=Eventify-Backend";
 
 //const mongoURI = process.env.MONGODB_URI
 mongoose.connect(uri, {
-    // useNewUrlParser:true,
-    // useUnifiedTopology:true
+    useNewUrlParser:true,
+    useUnifiedTopology:true
 })
 .then(() => {
     console.log("MongoDB connected");
-    //const PORT = process.env.PORT || 3000;
-    app.listen(3000,()=>{
+    const PORT = process.env.PORT || 3000;
+    app.listen(3000, () =>{
         console.log("port connected");
     })
 })
