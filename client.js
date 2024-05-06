@@ -38,7 +38,7 @@ const clientSchema=new mongoose.Schema({
        
         
     },
-    client_cnic:{
+    user_type:{
         type: "string",
         required:true
         

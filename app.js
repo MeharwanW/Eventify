@@ -112,7 +112,7 @@ app.post("/SignUp", async (req, res) => {
             client_username:userName,
             client_password: hashPassword,
             client_phone:phone,
-            client_cnic:accountType
+            user_type:accountType
         });
     //}
     // else if(userType=="organizer"){
