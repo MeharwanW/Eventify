@@ -1,0 +1,43 @@
+.bookingscreen{
+    background-color: #FF6B6B;
+    width: 100%;
+    height: 100%;
+}
+.bookingagreement
+{
+    overflow: hidden;
+    margin: 10% 0% 10% 0%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 60%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: white;
+    border-radius: 1%;
+}
+.Signature
+{
+   
+    border: 1px solid rgb(100, 97, 97);
+}
+.SignatureButtons
+{
+
+    padding: 3%;
+    margin: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.budgetEvent
+{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
