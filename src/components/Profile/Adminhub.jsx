@@ -1,32 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { BiSmile, BiStore, BiAnalyse, BiMessageDots,BiSolidCalendar, BiGroup, BiCog, BiLogOut, BiCalendarCheck, BiDollarCircle, BiSearch, BiBell, BiPlus, BiDotsVerticalRounded, BiChevronRight, BiCloud, BiSolidDashboard } from 'react-icons/bi';
+import { BiSolidDashboard,BiSmile, BiStore, BiAnalyse, BiMessageDots, BiSolidCalendar, BiGroup, BiCog, BiLogOut, BiCalendarCheck, BiDollarCircle, BiSearch, BiBell, BiPlus, BiDotsVerticalRounded, BiChevronRight } from 'react-icons/bi';
+
 import { Link } from 'react-router-dom';
 import './adminhub.css';
 
 const AdminHub = () => {
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
+    const [showAddEventForm, setShowAddEventForm] = useState(false);
+    const [description, setDescription] = useState('');
+    const [venue, setVenue] = useState('');
+    const [category, setCategory] = useState('');
+    const [image, setImage] = useState(null);
+
+
+
 
     useEffect(() => {
-        const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
-
-        const handleClick = (e) => {
-            const li = e.target.parentElement;
-            setActiveMenuItem(li.textContent.trim());
-        };
-
-        allSideMenu.forEach(item => {
-            item.addEventListener('click', handleClick);
-        });
-
-        return () => {
-            allSideMenu.forEach(item => {
-                item.removeEventListener('click', handleClick);
-            });
-        };
+        // Effect code here
     }, []);
 
     const handleSearchFormToggle = () => {
         // Implement search form toggle logic here
+    };
+
+    const handleAddEventClick = () => {
+        setShowAddEventForm(true);
+    };
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        // Here you can handle form submission (e.g., save data to database)
+        // Reset form fields and close the form
+        setDescription('');
+        setVenue('');
+        setCategory('');
+        setImage(null);
+        setShowAddEventForm(false);
     };
 
     return (
@@ -55,19 +65,19 @@ const AdminHub = () => {
                             <BiMessageDots className='bx '/>
                             <span className="">Messages</span>
                         </Link>
-			</li>
-			<li>
-            <Link to="/analytics">
+                    </li>
+                    <li>
+                        <Link to="/analytics">
                             <BiAnalyse className='bx '/>
                             <span className="">Analytics</span>
                         </Link>
-			</li>
-			<li>
-            <Link to="/team">
+                    </li>
+                    <li>
+                        <Link to="/team">
                             <BiCalendarCheck className='bx '/>
                             <span className="">Team</span>
                         </Link>
-			</li>
+                    </li>
                 </ul>
                 <ul className="side-menu font">
                     <li>
@@ -108,91 +118,104 @@ const AdminHub = () => {
                     </Link>
                 </nav>
                 <main>
-            <div className="head-title font">
-                <div className="left">
-                    <h1 className='font'>Dashboard</h1>
-                    <ul className="breadcrumb">
-                        <li>
-                            <Link to="#">Dashboard</Link >
+                    <div className="head-title font">
+                        <div className="left">
+                            <h1 className='font'>Dashboard</h1>
+                            <ul className="breadcrumb">
+                                <li>
+                                    <Link to="#">Dashboard</Link >
+                                </li>
+                                <li><BiChevronRight /></li>
+                                <li>
+                                    <Link className="active" to="#">Home</Link >
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="button" onClick={handleAddEventClick}>
+                        <Link to="#" >
+                        <span className="">Add Event</span>
+                         </Link>
+                        </div>
+                    </div>
+                    <ul className="box-info font">
+                        <li >
+                            <BiSolidCalendar className='bx' />
+                            <span className="text">
+                                <h3>1020</h3>
+                                <p>New Order</p>
+                            </span>
                         </li>
-                        <li><BiChevronRight /></li>
+                        <li >
+                            <BiGroup className='bx' />
+                            <span className="text">
+                                <h3>2834</h3>
+                                <p>Visitors</p>
+                            </span>
+                        </li>
                         <li>
-                            <Link className="active" to="#">Home</Link >
+                            <BiDollarCircle className='bx' />
+                            <span className="text">
+                                <h3>$2543</h3>
+                                <p>Total Sales</p>
+                            </span>
                         </li>
                     </ul>
-                </div>
-                <Link to="#" className="button">
-                    <BiCloud />
-                    <span className="">Download PDF</span>
-                </Link >
-            </div>
-            <ul className="box-info font">
-                <li >
-                    <BiSolidCalendar className='bx' />
-                    <span className="text">
-                        <h3>1020</h3>
-                        <p>New Order</p>
-                    </span>
-                </li>
-                <li >
-                    <BiGroup className='bx' />
-                    <span className="text">
-                        <h3>2834</h3>
-                        <p>Visitors</p>
-                    </span>
-                </li>
-                <li>
-                    <BiDollarCircle className='bx' />
-                    <span className="text">
-                        <h3>$2543</h3>
-                        <p>Total Sales</p>
-                    </span>
-                </li>
-            </ul>
-            <div className="table-data font">
-                <div className="order">
-                    <div className="head">
-                        <h3>Recent Orders</h3>
-                        <BiSearch />
-                        <BiDotsVerticalRounded />
+                    <div className="table-data font">
+                        <div className="order">
+                            <div className="head">
+                                <h3>Recent Orders</h3>
+                                <BiSearch />
+                                <BiDotsVerticalRounded />
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Date Order</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="img/people.png" alt="User" />
+                                            <p>John Doe</p>
+                                        </td>
+                                        <td>01-10-2021</td>
+                                        <td><span className="status completed">Completed</span></td>
+                                    </tr>
+                                    {/* Additional table rows */}
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Date Order</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="img/people.png" alt="User" />
-                                    <p>John Doe</p>
-                                </td>
-                                <td>01-10-2021</td>
-                                <td><span className="status completed">Completed</span></td>
-                            </tr>
-                            {/* Additional table rows */}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="todo">
-                    <div className="head">
-                        <h3>Todos</h3>
-                        <BiPlus />
-                        <BiDotsVerticalRounded />
-                    </div>
-                    <ul className="todo-list">
-                        <li className="completed">
-                            <p>Todo List</p>
-                            <BiDotsVerticalRounded />
-                        </li>
-                        {/* Additional todo items */}
-                    </ul>
-                </div>
-            </div>
-        </main>
+                    {showAddEventForm && (
+                        <div className="supplierInfoOverlay flexCenter add-event-form font">
+                           <div  className="supplierInfoContainer flexCenter"> 
+                            <form onSubmit={handleFormSubmit} className='flexColCenter'>
+                                <div className="form-group inputs1">
+                                    <label className='text' htmlFor="description">Description:</label>
+                                    <textarea className='input1' id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                                </div>
+                                <div className="form-group inputs1">
+                                    <label className='text' htmlFor="venue">Venue:</label>
+                                    <input className='input1' type="text" id="venue" value={venue} onChange={(e) => setVenue(e.target.value)} />
+                                </div>
+                                <div className="form-group inputs1">
+                                    <label className='text' htmlFor="category">Category:</label>
+                                    <input className='input1' type="text" id="category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                                </div>
+                                <div className="form-group inputs1 flexCenter">
+                                    <label className='text' htmlFor="image">Image:</label>
+                                    <input className='' type="file" id="image" onChange={(e) => setImage(e.target.files[0])} />
+                                </div>
+                                <button className='button' type="submit">Submit</button>
+                            </form>
+                           </div>
+                        </div>
+                    )}
+                </main>
             </section>
         </div>
     );
