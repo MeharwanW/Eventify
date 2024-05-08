@@ -551,3 +551,8 @@ ol, ul {
 	}
 }
 
+.form_option
+{
+	margin: 5%;
+	width: 70%;
+}

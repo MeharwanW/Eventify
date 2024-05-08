@@ -19,10 +19,12 @@ import { VscSignIn } from "react-icons/vsc";
 import React from 'react';
 
 
-const Header = () => {
+const Header = ({isLoggedIn}) => {
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  
+  
   window.addEventListener('resize', () => {
     setWindowWidth(window.innerWidth);
   });
@@ -45,7 +47,6 @@ const Header = () => {
         )}
         
         {!showMenu && windowWidth > 952 &&(<div className="buttons">
-
           <Link to="/Login" className="font"><button className="button" variant="">
             Login
           </button></Link>
@@ -67,22 +68,22 @@ const Header = () => {
   );
 }
 
-function NavItems() {
+function NavItems({isLoggedIn}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  console.log("NavItemsssss",isLoggedIn)
   window.addEventListener('resize', () => {
     setWindowWidth(window.innerWidth);
   });
+
   return (
     <>
-    
       <Nav.Item>
         <Nav.Link className="links" eventKey="/Home">
           <Link to="Home">
-          <div className="flexColCenter">
-                  <img className="svgImg flexColCenter" src={homeSvg1} alt="" srcset="" />
-                  <div className="LinksInfo font">Home</div>
-                </div>
+            <div className="flexColCenter">
+              <img className="svgImg flexColCenter" src={homeSvg1} alt="" srcSet="" />
+              <div className="LinksInfo font">Home</div>
+            </div>
           </Link>
         </Nav.Link>
       </Nav.Item>
@@ -136,30 +137,47 @@ function NavItems() {
               </Link>
             </Nav.Link>
           </Nav.Item>
-          {windowWidth <953 &&( <Nav.Item>
-            <Nav.Link className="links" to="/SignUp">
-              <Link to="SignUp">
-                <div className="flexColCenter">
-                <BiLogInCircle/>
-                  <div className="LinksInfo font">SignUp</div>
-                </div>
-              </Link>
-            </Nav.Link>
-          </Nav.Item>)}
-          {windowWidth <953 &&( <Nav.Item>
-            <Nav.Link className="links" to="/login">
-              <Link to="login">
-                <div className="flexColCenter">
-                  
-                  <VscSignIn/>
-                  <div className="LinksInfo font">Login</div>
-                </div>
-              </Link>
-            </Nav.Link>
-          </Nav.Item>)}
-        
+      {windowWidth < 953 && !isLoggedIn && (
+        <Nav.Item>
+          <Nav.Link className="links" to="/SignUp">
+            <Link to="SignUp">
+              <div className="flexColCenter">
+                <BiLogInCircle />
+                <div className="LinksInfo font">SignUp</div>
+              </div>
+            </Link>
+          </Nav.Link>
+        </Nav.Item>
+      )}
+      {windowWidth < 953 && !isLoggedIn && (
+        <Nav.Item>
+          <Nav.Link className="links" to="/login">
+            <Link to="Login">
+              <div className="flexColCenter">
+                <VscSignIn />
+                <div className="LinksInfo font">Login</div>
+              </div>
+            </Link>
+          </Nav.Link>
+        </Nav.Item>
+      )}
+
+      {/* Logout button */}
+      {windowWidth < 953 && isLoggedIn && (
+        <Nav.Item>
+          <Nav.Link className="links" to="/logout">
+            <Link to="logout">
+              <div className="flexColCenter">
+                <button className="button">Logout</button>
+                <div className="LinksInfo font">Logout</div>
+              </div>
+            </Link>
+          </Nav.Link>
+        </Nav.Item>
+      )}
     </>
   );
 }
+
 export default Header;
 

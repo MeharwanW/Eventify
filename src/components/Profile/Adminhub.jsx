@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BiSolidDashboard,BiSmile, BiStore, BiAnalyse, BiMessageDots, BiSolidCalendar, BiGroup, BiCog, BiLogOut, BiCalendarCheck, BiDollarCircle, BiSearch, BiBell, BiPlus, BiDotsVerticalRounded, BiChevronRight } from 'react-icons/bi';
-
+import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import './adminhub.css';
 
@@ -11,10 +11,11 @@ const AdminHub = () => {
     const [description, setDescription] = useState('');
     const [venue, setVenue] = useState('');
     const [category, setCategory] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
     const [image, setImage] = useState(null);
-
-
-
+    const [accountRole,setAccountRole] = useState("")
+    
 
     useEffect(() => {
         // Effect code here
@@ -30,13 +31,22 @@ const AdminHub = () => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        // Here you can handle form submission (e.g., save data to database)
-        // Reset form fields and close the form
+          const formData = {
+            description,
+            venue,
+            category,
+            city,
+            state,
+            image
+        };
+        
         setDescription('');
         setVenue('');
         setCategory('');
         setImage(null);
         setShowAddEventForm(false);
+
+        console.log(formData);
     };
 
     return (
@@ -101,7 +111,7 @@ const AdminHub = () => {
                     <Link to="/" className="nav-link font">Categories</Link>
                     <form action="#">
                         <div className="form-input">
-                            <input type="search" placeholder="Search..." />
+                         <input type="search" placeholder="Search..." />
                             <button type="submit" className="search-btn" onClick={handleSearchFormToggle}>
                                 <BiSearch />
                             </button>
@@ -192,13 +202,18 @@ const AdminHub = () => {
                     </div>
                     {showAddEventForm && (
                         <div className="supplierInfoOverlay flexCenter add-event-form font">
-                           <div  className="supplierInfoContainer flexCenter"> 
+                        <div className="supplierInfoContainer flexCenter">
                             <form onSubmit={handleFormSubmit} className='flexColCenter'>
-                                <div className="form-group inputs1">
-                                    <label className='text' htmlFor="description">Description:</label>
-                                    <textarea className='input1' id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                                </div>
-                                <div className="form-group inputs1">
+                            <Form.Select onChange={(e) => setAccountRole(e.target.value)} className="font form_option input1">
+                                <option value="">Select Your Role</option>
+                                <option value="Makeup_artist">Makeup Artist</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Wedding_Planner">Wedding Planner/Coordinator</option>
+                                <option value="Transport_Supplier">Transport Supplier</option>
+                                <option value="Decoration Supplier">Decoration Supplier</option>
+                                <option value="Cameraman">Cameraman/Photographer</option>
+                            </Form.Select>
+                            <div className="form-group inputs1">
                                     <label className='text' htmlFor="venue">Venue:</label>
                                     <input className='input1' type="text" id="venue" value={venue} onChange={(e) => setVenue(e.target.value)} />
                                 </div>
@@ -206,14 +221,29 @@ const AdminHub = () => {
                                     <label className='text' htmlFor="category">Category:</label>
                                     <input className='input1' type="text" id="category" value={category} onChange={(e) => setCategory(e.target.value)} />
                                 </div>
+                                <div className="form-group inputs1">
+                                    <label className='text' htmlFor="city">City:</label>
+                                    <input className='input1' type="text" id="city" value={city} onChange={(e) => setCity(e.target.value)} />
+                                </div>
+                                <div className="form-group inputs1">
+                                    <label className='text' htmlFor="state">State:</label>
+                                    <input className='input1' type="text" id="state" value={state} onChange={(e) => setState(e.target.value)} />
+                                </div>
+                                <div className="form-group inputs1">
+                                    <label className='text' htmlFor="description">Description:</label>
+                                    <textarea className='input1' id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                                </div>
                                 <div className="form-group inputs1 flexCenter">
                                     <label className='text' htmlFor="image">Image:</label>
                                     <input className='' type="file" id="image" onChange={(e) => setImage(e.target.files[0])} />
                                 </div>
+                                <div className="imageSet">
+                                    {image}
+                                </div>
                                 <button className='button' type="submit">Submit</button>
                             </form>
-                           </div>
                         </div>
+                    </div>
                     )}
                 </main>
             </section>
