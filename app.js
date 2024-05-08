@@ -4,22 +4,30 @@ const mongoose = require("mongoose")
 const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
-//const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
+const cookieParser = require("cookie-parser")
+//var nodemailer = require('nodemailer');
 
 const dotenv = require("dotenv")
 dotenv.config()
 
+//const userRouter = require("./routes/client.js")
 
-const client = require("./client.js")
-const venue = require("./venue.js")
-const organizer = require("./organizers.js")
+const client = require("./models/client.js")
+const venue = require("./models/venue.js")
+const organizer = require("./models/organizers.js")
 
 //const SECRET_KEY ='secretkey'
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+//app.use('/auth',userRouter)
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    credentials:true
+}))
+app.use(cookieParser())
 app.use(bodyParser.json());
 
 
@@ -49,33 +57,95 @@ app.post("/Venues", async(req,res)=>{
 
 })
 
+// // LOGGING ORGANIZER CONTROLLER
+// app.post("/login/organizer",async(req,res)=>{
+
+//     const{organizer_username,organizer_password}=req.body
+
+//     try{
+
+//     let validUser=await organizer.findOne({organizer_username})
+
+//     if(!validUser){
+//         res.json({status:false,"message":"User not Exist"})
+//     }
+        
+//     const hashPassword = bcrypt.compareSync(organizer_password,validUser.organizer_password)
+
+//     console.log("Password comparison result:", hashPassword);
+
+//     if(!hashPassword){
+            
+//         return res.json({status:false,"message":"Wrong password!"})
+//     }
+//     else{
+//        return  res.json({status:true,"message":"exist"})
+//     }
+//     //return res.json({status:true, message:"Login Succesfull" })
+// }
+// catch(e){
+//     res.json(e.message)
+// }
+
+// })
+
+// CLIENT
 app.post("/Login",async(req,res)=>{
 
     const{client_username,client_password}=req.body
 
     try{
 
-        const validUser=await client.findOne({client_username})
-        console.log("valid USer: ",validUser);
+        let validUser=await client.findOne({client_username})
+        
+        // console.log("valid USer: ",validUser);
+        
+        // console.log("valid USer Type: ",validUser.user_type);
 
-        if(!validUser){
-            res.status(404).json({"message":"User not Exist"})
+        let hashPassword;
+        if(validUser){
+            hashPassword = bcrypt.compareSync(client_password,validUser.client_password)
+            console.log("Password comparison result:", hashPassword);
         }
-         
-        const hashPassword = bcrypt.compareSync(client_password,validUser.client_password)
-        console.log("Password comparison result:", hashPassword);
 
+
+        if (!validUser) {
+            validUser = await organizer.findOne({ organizer_username: client_username})
+            if(validUser){
+                hashPassword = bcrypt.compareSync(client_password,validUser.organizer_password)
+                console.log("Password comparison result:", hashPassword);
+            }
+            else{
+                res.json({status:false,"message":"User not Exist"})
+            }
+        }
+        console.log("valid USer: ",validUser);
         if(!hashPassword){
             
-            res.status(404).json({"message":"Wrong password!"})
+            return res.json({status:false,"message":"Wrong password!"})
         }
         else{
-            res.status(201).json({"message":"exist"})
+            return res.json({status:true,"message":"exist"})
         }
 
-        // const token = jwt.sign({client_id: client._id},SECRET_KEY,{expiresIn:'1hr'})
-        // res.json({"message":"Login Succesfull"})
-    
+        
+       
+        
+        // let token;
+        // if(validUser.user_type==='organizer'){
+        //     token = jwt.sign({organizer_username: validUser.organizer_username}, process.env.KEY, {expiresIn:'1hr'})   
+        // }
+        // if(validUser.user_type==='client'){
+        //     token = jwt.sign({client_username: validUser.client_username}, process.env.KEY, {expiresIn:'1hr'})
+        // }
+
+        // res.cookie('token',token, {httpOnly:true, maxAge:3600000})
+        // return res.json({ status: true, message: "Login Successful", redirect: "/home" });
+        // return res.json({ status: true, message: "Login Successful", redirect: "/dashboard", user: validUser });
+        
+        //return res.json({status:true, message:"Login Succesfull" })
+        
+     
     }
     catch(e){
         res.json(e.message)
@@ -83,30 +153,41 @@ app.post("/Login",async(req,res)=>{
 
 })
 
+// GETTIG ALL CLIENTS DATA
+app.get('/getAllClientData', async (req,res)=>{
+    try{
+        const allCustomers = await client.find({},{client_password:0})
+        res.status(200).json(allCustomers);
+    }catch(err){
+        res.status(404).json({message:err.message})
+    }
+
+})
+
+// GETING ALL ORGANIZERS DATA
+app.get('/getAllOrganizerData', async (req,res)=>{
+    try{
+        const allOrganizers = await organizer.find({},{organizer_password:0})
+        res.status(200).json(allOrganizers);
+    }catch(err){
+        res.status(404).json({message:err.message})
+    }
+
+})
+
+
 
 app.post("/SignUp", async (req, res) => {
 
     const { name, email, userName, password, phone, accountType } = req.body;
         
-    // console.log("user-type: ",userType)
-
-    // if (!name || !email || !userName || !password || !phone || !accountType) {
-    //     console.log("Missing fields:");
-    //     console.log("name: ",name);
-    //     console.log("email: ",email);
-    //     console.log("usernam: ",userName);
-    //     console.log("password: ",password);
-    //     console.log("phone: ",phone);
-    //     console.log("typpe: ",accountType);   
-    // }
-
     const saltRounds = 10;
     const hashPassword = bcrypt.hashSync(password, saltRounds);
 
-    
-    //if(userType=="client"){
+    try {
+        if(accountType=="client"){
 
-        const newClient = new client({
+            const newClient = new client({
             client_name:name,
             client_email:email,
             client_username:userName,
@@ -114,32 +195,27 @@ app.post("/SignUp", async (req, res) => {
             client_phone:phone,
             user_type:accountType
         });
-    //}
-    // else if(userType=="organizer"){
 
-    //     const newOrganizer = new organizer({
-    //         organizer_name:name,
-    //         organizer_email:email,
-    //         organizer_username:userName,
-    //         organizer_password:password,
-    //         organizer_phone:phone,
-    //         user_type:userType
+        await newClient.save();
+        console.log("client created successfully:", newClient);
+        res.json({ status:true,"message": "Client created successfully" });
+        
+        }
+        else if(accountType=="organizer"){
 
-    //     });
-    // }
-    try {
-       
-            await newClient.save();
-            console.log("client created successfully:", newClient);
-            res.json({ status:true,"message": "Client created successfully" });
-        
-       
-            
-            // await newOrganizer.save();
-            // console.log("Organizer created successfully:", newOrganizer);
-            // res.status(201).json({ "message": "Organizer created successfully" });
-        
-        
+            const newOrganizer = new organizer({
+                organizer_name:name,
+                organizer_email:email,
+                organizer_username:userName,
+                organizer_password:hashPassword,
+                organizer_phone:phone,
+                user_type:accountType
+            });
+
+            await newOrganizer.save();
+            console.log("Organizer created successfully:", newOrganizer);
+            res.json({ status:true,"message": "Organizer created successfully" });
+        } 
     } catch (e) {
         console.error("Error during user creation:", e);
         res.status(404).json({ "message": "Internal server error" });
@@ -156,7 +232,7 @@ mongoose.connect(uri, {
 })
 .then(() => {
     console.log("MongoDB connected");
-    const PORT = process.env.PORT || 3000;
+   // const PORT = process.env.PORT || 3000;
     app.listen(3000, () =>{
         console.log("port connected");
     })

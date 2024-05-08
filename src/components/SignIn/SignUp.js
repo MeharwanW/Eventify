@@ -22,33 +22,7 @@ export const SignUp = () => {
 
     async function handleSubmit(event) {
         event.preventDefault();
-
-        // if (!name || !password || !email || !accountType || !userName || !number) {
-        //     alert("Please fill all fields");
-        //     return;
-        // }
-
         setIsLoading(true);
-
-        // try{
-        //     await axios.post("http://localhost:3000/SignUp",{
-        //         name,email,userName,password,phone,accountType
-        //     }).then(res => {
-        //         if(res.data.status){
-        //             alert("User already exists")
-        //         }
-        //         else{
-        //             navigate("/Login")
-        //         }
-        //     }).catch(e=>{
-        //         alert("wrong details")
-        //         console.log(e);
-        //     })
-
-
-        // }catch(e){
-        //     console.log(e);
-        // }
 
         try {
                 await axios.post("http://localhost:3000/SignUp", {
@@ -63,13 +37,14 @@ export const SignUp = () => {
                 console.log("response form then signup ",res)
 
                 if (res.data.status) {
-                    navigate('/Login');   
-                   alert("User created")
+                    alert("User created")
+                    navigate('/Login');
+                    
                    
                 } else {
                     alert('User already exists or there was an error creating your account.');            
-                    
-                    
+                   
+                   
                 }
             }).catch(err =>{
                 console.log("Error inside await post post signup",err)

@@ -13,6 +13,8 @@ export const Login = () => {
 
     const navigate = useNavigate(); 
 
+    axios.defaults.withCredentials = true; 
+
     async function submit(e){
         e.preventDefault();
 
@@ -22,8 +24,31 @@ export const Login = () => {
             })
             .then(res=>{
                 
-                if(res.data){
-                    navigate('/dashboard');
+                if(res.data.status){
+
+                    navigate('/home')
+                    const {organizer_username, organizer_phone} = res.data;
+                    console.log(organizer_username, organizer_phone)
+                    
+                    //const user = res.data.user;
+
+                    // if (user.user_type === 'organizer') {
+                    //     // RedirectSS to organizer dashboard
+                    //     navigate('/Dashboard', { state: { user } });
+                    // } else if (user.user_type === 'client') {
+                    //     // Redirect to client home
+                    //     navigate('/home', { state: { user } });
+                    // }
+                    // if (res.data.user.user_type === 'organizer') {
+
+                    //     console.log("user from org login",res.data.user)
+                    //     // navigate('/Dashboard', { state: { user: res.data.user } });
+                    //     navigate('/dashboard')
+                         
+                    // } else {
+                    //     console.log("user from client login",res.data.user)
+                    //     navigate('/home');
+                    // }
                 }
                 else {
                     alert("User have not sign up")
