@@ -2,7 +2,8 @@
       {
         "id": 1,
         "role": "Cameraman/Photographer",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Capture Moments Photography",
         "description": "Capture the precious moments of your special day by hiring a professional photographer and/or videographer. Look for someone with experience in wedding photography and whose style aligns with your preferences.",
         "image": "./1/photo1.jpg"
@@ -10,7 +11,8 @@
       {
         "id": 2,
         "role": "Cameraman/Photographer",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Eternal Memories Studios",
         "description": "Preserve the memories of your wedding day with the expertise of Eternal Memories Studios. Our photographers and videographers are dedicated to capturing every moment with precision and creativity.",
         "image": "./1/photo2.jpg"
@@ -18,7 +20,8 @@
       {
         "id": 3,
         "role": "Makeup Artist",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Glamourize Studios",
         "description": "Glamourize Studios specializes in enhancing your natural beauty for your wedding day. Our makeup artists will create the perfect look for you, ensuring you feel confident and radiant.",
         "image": "./1/photo3.jpg"
@@ -26,7 +29,8 @@
       {
         "id": 4,
         "role": "Makeup Artist",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Beauty Bliss Makeup",
         "description": "Beauty Bliss Makeup offers professional makeup services for your wedding day. Let us enhance your natural beauty and create a flawless look that will last throughout your celebration.",
         "image": "./1/studio.jpg"
@@ -34,7 +38,8 @@
       {
         "id": 5,
         "role": "Entertainment",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Harmony Entertainment",
         "description": "Harmony Entertainment provides top-quality entertainment services for weddings. From live bands to DJs, we'll keep your guests entertained and ensure your wedding is an unforgettable celebration.",
         "image": "./1/team1.jpg"
@@ -42,7 +47,8 @@
       {
         "id": 6,
         "role": "Entertainment",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Rhythm Beats",
         "description": "Rhythm Beats offers dynamic and energetic entertainment for weddings. Our talented performers will keep the dance floor alive and create an electrifying atmosphere for your special day.",
         "image": "./1/team2.jpg"
@@ -50,7 +56,8 @@
       {
         "id": 7,
         "role": "Wedding Planner/Coordinator",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Dreamy Events",
         "description": "Dreamy Events specializes in creating unforgettable weddings. Let our experienced planners and coordinators take care of every detail, so you can relax and enjoy your special day.",
         "image": "./1/team.jpg"
@@ -58,7 +65,8 @@
       {
         "id": 8,
         "role": "Transport Supplier",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Royal Carriages",
         "description": "Royal Carriages provides luxurious transportation services for weddings. Arrive in style with our fleet of elegant cars and professional chauffeurs.",
         "image": "./1/studios1.jpg"
@@ -66,7 +74,8 @@
       {
         "id": 9,
         "role": "Decoration Supplier",
-        "type": "Vendor",
+        "city":"Karachi",
+        "state":"Sindhi",
         "name": "Elegant Events Decor",
         "description": "Elegant Events Decor offers a wide range of chairs and other decoration materials to enhance the ambiance of your wedding venue. Let us bring your vision to life with our exquisite decor.",
         "image": "./1/team2.jpg"

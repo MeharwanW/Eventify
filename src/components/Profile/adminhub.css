@@ -550,4 +550,8 @@ ol, ul {
 		min-width: 420px;
 	}
 }
-
+.form_option
+{
+	margin: 5%;
+	width: 70%;
+}
