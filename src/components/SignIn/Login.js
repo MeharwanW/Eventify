@@ -15,28 +15,24 @@ export const Login = () => {
   
     async function submit(e) {
         e.preventDefault();
-
+    
         try {
-            await axios.post("http://localhost:3000/Login", {
-                client_username, client_password
-            })
-                .then(res => {
-                    if (res.data) {
-                        navigate('/dashboard');
-                        setIsLoggedIn(true);
-                    }
-                    else {
-                        alert("User have not signed up")
-                        setIsLoggedIn(false);
-                    }
-                })
-                .catch(e => {
-                    alert("Wrong details")
-                    console.log(e);
-                })
-        }
-        catch (error) {
-            console.log(error)
+            const response = await axios.post("http://localhost:3000/Login", {
+                client_username,
+                client_password
+            });
+    
+            if (response.data) {
+                // Pass userData to the dashboard component
+                navigate('/dashboard', { state: { userData: response.data } });
+                setIsLoggedIn(true);
+            } else {
+                alert("User does not exist or wrong password");
+                setIsLoggedIn(false);
+            }
+        } catch (error) {
+            alert("Failed to login. Please try again later.");
+            console.error("Error logging in:", error);
         }
     }
 

@@ -41,17 +41,22 @@ const Header = ({isLoggedIn}) => {
             </div>
           </Link>
         </div>
-        {!showMenu && windowWidth >= 953 && (<div className={`d-flex linkSection justify-content-around ${showMenu ? 'hide' : ''}`}>
+        {!showMenu && windowWidth >= 953 &&  (<div className={`d-flex linkSection justify-content-around ${showMenu ? 'hide' : ''}`}>
           <NavItems />
         </div>
         )}
         
-        {!showMenu && windowWidth > 952 &&(<div className="buttons">
+        {!isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
           <Link to="/Login" className="font"><button className="button" variant="">
             Login
           </button></Link>
           <Link to="/SignUp" className="font link"><button className="button" variant="">
             Sign Up 
+          </button></Link> 
+        </div>)}
+        {isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
+          <Link to="/Login" className="font"><button className="button" variant="">
+            logout
           </button></Link> 
         </div>)}
         
@@ -70,7 +75,7 @@ const Header = ({isLoggedIn}) => {
 
 function NavItems({isLoggedIn}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  console.log("NavItemsssss",isLoggedIn)
+  
   window.addEventListener('resize', () => {
     setWindowWidth(window.innerWidth);
   });

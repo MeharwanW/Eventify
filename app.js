@@ -49,39 +49,29 @@ app.post("/Venues", async(req,res)=>{
 
 })
 
-app.post("/Login",async(req,res)=>{
+app.post("/Login", async (req, res) => {
+    const { client_username, client_password } = req.body;
 
-    const{client_username,client_password}=req.body
+    try {
+        const validUser = await client.findOne({ client_username });
+        console.log("valid User:", validUser);
 
-    try{
-
-        const validUser=await client.findOne({client_username})
-        console.log("valid USer: ",validUser);
-
-        if(!validUser){
-            res.status(404).json({"message":"User not Exist"})
+        if (!validUser) {
+            res.status(404).json({ "message": "User does not exist" });
+        } else {
+            const isPasswordValid = bcrypt.compareSync(client_password, validUser.client_password);
+            if (isPasswordValid) {
+                // If login is successful, return the validUser object
+                res.status(200).json({ "userData": validUser });
+            } else {
+                res.status(401).json({ "message": "Invalid password" });
+            }
         }
-         
-        const hashPassword = bcrypt.compareSync(client_password,validUser.client_password)
-        console.log("Password comparison result:", hashPassword);
-
-        if(!hashPassword){
-            
-            res.status(404).json({"message":"Wrong password!"})
-        }
-        else{
-            res.status(201).json({"message":"exist"})
-        }
-
-        // const token = jwt.sign({client_id: client._id},SECRET_KEY,{expiresIn:'1hr'})
-        // res.json({"message":"Login Succesfull"})
-    
+    } catch (error) {
+        console.error("Error during login:", error);
+        res.status(500).json({ "message": "Internal server error" });
     }
-    catch(e){
-        res.json(e.message)
-    }
-
-})
+});
 
 
 app.post("/SignUp", async (req, res) => {

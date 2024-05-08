@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BiSolidDashboard,BiSmile, BiStore, BiAnalyse, BiMessageDots, BiSolidCalendar, BiGroup, BiCog, BiLogOut, BiCalendarCheck, BiDollarCircle, BiSearch, BiBell, BiPlus, BiDotsVerticalRounded, BiChevronRight } from 'react-icons/bi';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link , useLocation } from 'react-router-dom';
 import './adminhub.css';
 
 const AdminHub = () => {
+    const { state } = useLocation();
+    const userData = state?.userData;
+    const client = userData.userData.client_username;
+    console.log("Userdata in dashboard",userData)
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
     const [showAddEventForm, setShowAddEventForm] = useState(false);
@@ -12,7 +16,7 @@ const AdminHub = () => {
     const [venue, setVenue] = useState('');
     const [category, setCategory] = useState('');
     const [city, setCity] = useState('');
-    const [state, setState] = useState('');
+    const [state1, setState] = useState('');
     const [image, setImage] = useState(null);
     const [accountRole,setAccountRole] = useState("")
     
@@ -55,13 +59,13 @@ const AdminHub = () => {
                 <Link to="/" className="brand">
                     <BiSmile className='bx bxs-smile'/>
 
-                    <span className="color-text">Eventify</span>
+                    <span className="color-text">{client}</span>
                 </Link>
                 <ul className="side-menu top font">
                     <li className={activeMenuItem === 'Dashboard' ? 'active' : ''}>
                         <Link to="/">
                             <BiSolidDashboard className='bx bxs-dashboard'/>
-                            <span className="">Dashboard</span>
+                            <span className="">{userData.userData.client_name}</span>
                         </Link>
                     </li>
                     <li className={activeMenuItem === 'My Store' ? 'active' : ''}>
