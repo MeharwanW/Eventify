@@ -7,19 +7,19 @@ import React, { useState } from "react"
 import Header from "./../Header/Header";
 
 export const Login = () => {
+
     const [client_username, setUserName] = useState("")
     const [client_password, setPassword] = useState("")
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const navigate = useNavigate();
+    
     
   
-    async function submit(e) {
 
-    const navigate = useNavigate(); 
+    //axios.defaults.withCredentials = true; 
 
-    axios.defaults.withCredentials = true; 
+    async function submit(e)
+    {
 
-    async function submit(e){
         e.preventDefault();
     
         try {
@@ -39,51 +39,52 @@ export const Login = () => {
         } catch (error) {
             alert("Failed to login. Please try again later.");
             console.error("Error logging in:", error);
+        }
 
-        try{
-            await axios.post("http://localhost:3000/Login",{
-                client_username,client_password
-            })
-            .then(res=>{
+        // try{
+        //     await axios.post("http://localhost:3000/Login",{
+        //         client_username,client_password
+        //     })
+        //     .then(res=>{
                 
-                if(res.data.status){
+        //         if(res.data.status){
 
-                    navigate('/home')
-                    const {organizer_username, organizer_phone} = res.data;
-                    console.log(organizer_username, organizer_phone)
+        //             navigate('/home')
+        //             const {organizer_username, organizer_phone} = res.data;
+        //             console.log(organizer_username, organizer_phone)
                     
-                    //const user = res.data.user;
+        //             //const user = res.data.user;
 
-                    // if (user.user_type === 'organizer') {
-                    //     // RedirectSS to organizer dashboard
-                    //     navigate('/Dashboard', { state: { user } });
-                    // } else if (user.user_type === 'client') {
-                    //     // Redirect to client home
-                    //     navigate('/home', { state: { user } });
-                    // }
-                    // if (res.data.user.user_type === 'organizer') {
+        //             // if (user.user_type === 'organizer') {
+        //             //     // RedirectSS to organizer dashboard
+        //             //     navigate('/Dashboard', { state: { user } });
+        //             // } else if (user.user_type === 'client') {
+        //             //     // Redirect to client home
+        //             //     navigate('/home', { state: { user } });
+        //             // }
+        //             // if (res.data.user.user_type === 'organizer') {
 
-                    //     console.log("user from org login",res.data.user)
-                    //     // navigate('/Dashboard', { state: { user: res.data.user } });
-                    //     navigate('/dashboard')
+        //             //     console.log("user from org login",res.data.user)
+        //             //     // navigate('/Dashboard', { state: { user: res.data.user } });
+        //             //     navigate('/dashboard')
                          
-                    // } else {
-                    //     console.log("user from client login",res.data.user)
-                    //     navigate('/home');
-                    // }
-                }
-                else {
-                    alert("User have not sign up")
-                }
-            })
-            .catch(e=>{
-                alert("wrong details")
-                console.log(e);
-            })
-        }
-        catch{
-            console.log(e)
-        }
+        //             // } else {
+        //             //     console.log("user from client login",res.data.user)
+        //             //     navigate('/home');
+        //             // }
+        //         }
+        //         else {
+        //             alert("User have not sign up")
+        //         }
+        //     })
+        //     .catch(e=>{
+        //         alert("wrong details")
+        //         console.log(e);
+        //     })
+        // }
+        // catch{
+        //     console.log(e)
+        // }
     }
 
     return (
@@ -123,4 +124,6 @@ export const Login = () => {
             <Header isLoggedIn={isLoggedIn} />
         </div>
     )
+
 }
+

@@ -57,6 +57,39 @@ app.post("/Venues", async(req,res)=>{
 
 })
 
+app.post("/Login",async(req,res)=>{
+
+    const{client_username,client_password}=req.body
+
+    try{
+
+        const validUser=await client.findOne({client_username})
+        console.log("valid USer: ",validUser);
+
+        if(!validUser){
+            res.status(404).json({"message":"User not Exist"})
+        }
+         
+        const hashPassword = bcrypt.compareSync(client_password,validUser.client_password)
+        console.log("Password comparison result:", hashPassword);
+
+        if(!hashPassword){
+            
+            res.status(404).json({"message":"Wrong password!"})
+        }
+        else{
+            res.status(201).json({"message":"exist"})
+        }
+
+        // const token = jwt.sign({client_id: client._id},SECRET_KEY,{expiresIn:'1hr'})
+        // res.json({"message":"Login Succesfull"})
+    
+    }
+    catch(e){
+        res.json(e.message)
+    }
+
+})
 // // LOGGING ORGANIZER CONTROLLER
 // app.post("/login/organizer",async(req,res)=>{
 
@@ -174,6 +207,7 @@ app.get('/getAllOrganizerData', async (req,res)=>{
     }
 
 })
+
 
 
 
