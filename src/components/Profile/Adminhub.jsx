@@ -30,15 +30,13 @@ const AdminHub = () => {
    // const [image, setImage] = useState(null);
     const [accountRole,setAccountRole] = useState("")
     const [isLoading, setIsLoading] = useState(false);
-    const [organizer,setOrganizer]=useState("")
+    //const [organizer,setOrganizer]=useState("")
 
     //const navigate = useNavigate();
-    setOrganizer(userData.userData._id)
+    //setOrganizer(userData.userData._id)
+    //console.log(organizer)
 
-    useEffect(() => {
-        // Effect code here
-    }, []);
-
+   
     const handleSearchFormToggle = () => {
         // Implement search form toggle logic here
     };
@@ -58,7 +56,6 @@ const AdminHub = () => {
         try {
             await axios.post("http://localhost:3000/addGig", {
 
-            organnizer_id:organizer,
             //selectedCategory,
             description,
             venue,
@@ -69,25 +66,15 @@ const AdminHub = () => {
             accountRole
 
 
-            },
-        // {
-        //     // headers: {
-        //     //     Authorization: `Bearer ${authToken}`,
-        //     //     "Content-Type": "application/json",
-        //     //   },
-
-        // }
-    ).then(res =>{
+            }).then(res =>{
 
             console.log("response form then addminHub ",res)
-
             console.log(res.data.status)
             if (res.status) {
 
                 alert("Gig created")
                 //navigate('/Login');
-                
-               
+                 
             } else {
                 alert('Gig already exist');            
                

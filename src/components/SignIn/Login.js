@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from "react"
 
-let authToken;
+// let authToken;
 
 export const Login = (props) => {
 
@@ -138,4 +138,4 @@ export const Login = (props) => {
         // catch{
         //     console.log(e)
         // }
-export default authToken;
+// export default authToken;
