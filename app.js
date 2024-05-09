@@ -239,8 +239,30 @@ app.post("/Login",async(req,res)=>{
 
 })
 
+app.get('/getAllGigs', async (req, res) => {
+    const { city, category, venue } = req.body;
+    try {
+        let query = {};
+
+        if (city) {
+            query.city = city;
+        }
+        if (category) {
+            query.category = category;
+        }
+        if (venue) {
+            query.venue = venue;
+        }
+
+        const allGigs = await gig.find(query);
+        res.json(allGigs);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 // GETTIG ALL CLIENTS DATA
 app.get('/getAllClientData', async (req,res)=>{
+
     try{
         const allCustomers = await client.find({},{client_password:0})
         res.status(200).json(allCustomers);

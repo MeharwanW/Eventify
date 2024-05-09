@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import data1 from "./venue.json";
+import React, { useState , useEffect } from 'react';
+
 import "./../Header/SearchBar.css"
+
+const axios = require("axios");
+
+
 
 export default function SearchVenue({ onSearch }) {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
   const [venueType, setVenueType] = useState("");
   const [guests, setGuests] = useState("");
+  const [gig, setGig] = useState([])
 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [categorySuggestions, setCategorySuggestions] = useState([]);
@@ -24,17 +29,20 @@ export default function SearchVenue({ onSearch }) {
     setVenueType("");
     setGuests("");
   };
-
+  
   const handleSearch = () => {
-    const filteredData = data1.filter(venue => {
+
+    const filteredData = gig.filter(venue => {
+
       return (
-        (location === "" || venue.location.toLowerCase() === location.toLowerCase()) &&
-        (category === "" || venue.category.toLowerCase() === category.toLowerCase()) &&
-        (venueType === "" || venue.venuetype.toLowerCase() === venueType.toLowerCase()) &&
+        (location === "" || venue.location === location) &&
+        (category === "" || venue.category === category) &&
+        (venueType === "" || venue.venuetype === venueType) &&
         (guests === "" || (venue.guests >= parseInt(guests, 10)))
       );
+
     });
-    console.log(filteredData);
+   // console.log(filteredData);
     onSearch(filteredData);
     resetFields(); // Reset fields after search
   };
@@ -43,17 +51,18 @@ export default function SearchVenue({ onSearch }) {
     const { value } = event.target;
     setLocation(value);
     const searchTerm = value.toLowerCase();
-    const filteredSuggestions = data1.filter(venue => venue.location.toLowerCase().startsWith(searchTerm));
+    const filteredSuggestions = gig.filter(venue => venue.location && venue.location.toLowerCase().startsWith(searchTerm));
     const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.location)));
     setLocationSuggestions(uniqueSuggestions);
     setShowLocationSuggestions(true);
   };
+  
 
   const onChangeCategory = (event) => {
     const { value } = event.target;
     setCategory(value);
     const searchTerm = value.toLowerCase();
-    const filteredSuggestions = data1.filter(venue => venue.category.toLowerCase().startsWith(searchTerm));
+    const filteredSuggestions = gig.filter(venue => venue.category && venue.category.toLowerCase().startsWith(searchTerm));
     const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.category)));
     setCategorySuggestions(uniqueSuggestions);
     setShowCategorySuggestions(true);
@@ -63,12 +72,12 @@ export default function SearchVenue({ onSearch }) {
     const { value } = event.target;
     setVenueType(value);
     // Find the venue in the data array that matches the selected venue type
-    const selectedVenue = data1.find(venue => venue.venuetype.toLowerCase() === value.toLowerCase());
+    const selectedVenue = gig.find(venue => venue.venueType && venue.venuetype.toLowerCase() === value.toLowerCase());
     if (selectedVenue) {
       setGuests(selectedVenue.guests.toString());
     }
     const searchTerm = value.toLowerCase();
-    const filteredSuggestions = data1.filter(venue => venue.venuetype.toLowerCase().startsWith(searchTerm));
+    const filteredSuggestions = gig.filter(venue => venue.venueType && venue.venuetype.toLowerCase().startsWith(searchTerm));
     const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.venuetype)));
     setVenueTypeSuggestions(uniqueSuggestions);
     setShowVenueTypeSuggestions(true);
@@ -77,7 +86,7 @@ export default function SearchVenue({ onSearch }) {
   const onChangeGuests = (event) => {
     const { value } = event.target;
     // Set the value only if it's a valid guest number from the data
-    const validGuests = data1.map(venue => venue.guests.toString());
+    const validGuests = gig.map(venue => venue.guests.toString());
     if (validGuests.includes(value)) {
       setGuests(value);
     }
@@ -87,6 +96,15 @@ export default function SearchVenue({ onSearch }) {
   const handleSuggestionClick = (setter) => {
     setter(false);
   };
+
+  useEffect(() => {
+    fetch('http://localhost:3000/getAllGigs')
+    .then(response => response.json())
+    .then(data => setGig(data))
+    .catch(error => console.error('Error:', error));
+    
+}, []);
+console.log("Hello gog",gig);
 
   return (
     <div>
