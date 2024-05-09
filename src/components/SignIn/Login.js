@@ -16,8 +16,7 @@ export const Login = (props) => {
     const navigate = useNavigate();
     
   
-    async function submit(e) {
-
+    
 
     //axios.defaults.withCredentials = true; 
 
@@ -33,9 +32,9 @@ export const Login = (props) => {
             });
     
             if (response.data) {
-                console.log("returned token ",response.data.token)
+                // console.log("returned token ",response.data.token)
 
-                authToken=response.data.token;
+                // authToken=response.data.token;
                 // Pass userData to the dashboard component
                 props.login()
                 navigate('/dashboard', { state: { userData: response.data } });
@@ -53,7 +52,49 @@ export const Login = (props) => {
         }
     }
 
-        // try{
+
+    return (
+        <div className="contain">
+           
+            <div className="header shadow-box">
+                <h2 className="text font">Log In</h2>
+                <div className="underline"></div>
+
+                <form onSubmit={submit}>
+                    <div className="inputs flexColCenter">
+                        <div className="input">
+                            <img src={user} alt="" />
+                            <input className='font' type="text" onChange={(e) => { setUserName(e.target.value) }} placeholder='Username' />
+                        </div>
+                        <div className="input">
+                            <img src={pass} alt="" />
+                            <input className='font' type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder='Password' />
+                        </div>
+
+                        <div className="submit-container">
+                            <button type='submit' className="button">Login</button>
+                        </div>
+                        <div className="forget-password">
+                            <span className='font'>Forget Password?
+                            </span> <span className='font color-text'>Click Here</span>
+                        </div>
+                        <div className='CreateAcc'>
+                            <Link to="/signup">
+                                <div className="flexCenter">
+                                    <button className="button font">Create new account</button>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                </form>
+            </div>
+           
+        </div>
+    )
+}
+
+
+// try{
         //     await axios.post("http://localhost:3000/Login",{
         //         client_username,client_password
         //     })
@@ -97,47 +138,4 @@ export const Login = (props) => {
         // catch{
         //     console.log(e)
         // }
-    }
-
-    return (
-        <div className="contain">
-           
-            <div className="header shadow-box">
-                <h2 className="text font">Log In</h2>
-                <div className="underline"></div>
-
-                <form onSubmit={submit}>
-                    <div className="inputs flexColCenter">
-                        <div className="input">
-                            <img src={user} alt="" />
-                            <input className='font' type="text" onChange={(e) => { setUserName(e.target.value) }} placeholder='Username' />
-                        </div>
-                        <div className="input">
-                            <img src={pass} alt="" />
-                            <input className='font' type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder='Password' />
-                        </div>
-
-                        <div className="submit-container">
-                            <button type='submit' className="button">Login</button>
-                        </div>
-                        <div className="forget-password">
-                            <span className='font'>Forget Password?
-                            </span> <span className='font color-text'>Click Here</span>
-                        </div>
-                        <div className='CreateAcc'>
-                            <Link to="/signup">
-                                <div className="flexCenter">
-                                    <button className="button font">Create new account</button>
-                                </div>
-                            </Link>
-                        </div>
-                    </div>
-                </form>
-            </div>
-           
-        </div>
-    )
-
-}
-
 export default authToken;

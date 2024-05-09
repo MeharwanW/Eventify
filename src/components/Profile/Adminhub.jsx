@@ -5,9 +5,9 @@ import { Link , useLocation} from 'react-router-dom';
 import './adminhub.css';
 import axios from 'axios';
 
-import authToken from '../SignIn/Login.js';
+// import authToken from '../SignIn/Login.js';
 
-console.log("authToken: ", authToken);
+// console.log("authToken: ", authToken);
 
 const AdminHub = () => {
     
@@ -51,7 +51,7 @@ const AdminHub = () => {
 
         event.preventDefault();
         setIsLoading(true);
-        console.log("Auth Token from AdminHub", authToken)
+       // console.log("Auth Token from AdminHub", authToken)
         //console.log("Organizer Id in Dashboard: ", userData.userData._id)
        // console.log("Organizer Name in Dashboard: ",userData.userData.organizer_name)
 
@@ -70,13 +70,14 @@ const AdminHub = () => {
 
 
             },
-        {
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-                "Content-Type": "application/json",
-              },
+        // {
+        //     // headers: {
+        //     //     Authorization: `Bearer ${authToken}`,
+        //     //     "Content-Type": "application/json",
+        //     //   },
 
-        }).then(res =>{
+        // }
+    ).then(res =>{
 
             console.log("response form then addminHub ",res)
 
