@@ -5,15 +5,24 @@ import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from "react"
 
+// let authToken;
+
 export const Login = (props) => {
-    const [client_username, setUserName] = useState("")
+
+    const [client_username, setUserName] = useState("") 
     const [client_password, setPassword] = useState("")
     
 
     const navigate = useNavigate();
     
   
-    async function submit(e) {
+    
+
+    //axios.defaults.withCredentials = true; 
+
+    async function submit(e)
+    {
+
         e.preventDefault();
     
         try {
@@ -23,6 +32,10 @@ export const Login = (props) => {
             });
     
             if (response.data) {
+                // console.log("returned token ",response.data.token)
+
+                // authToken=response.data.token;
+                // Pass userData to the dashboard component
                 props.login()
                 navigate('/dashboard', { state: { userData: response.data } });
             
@@ -31,12 +44,14 @@ export const Login = (props) => {
                 
                
             }
+
         } catch (error) {
             alert("Failed to login. Please try again later.");
             console.error("Error logging in:", error);
             
         }
     }
+
 
     return (
         <div className="contain">
@@ -77,3 +92,50 @@ export const Login = (props) => {
         </div>
     )
 }
+
+
+// try{
+        //     await axios.post("http://localhost:3000/Login",{
+        //         client_username,client_password
+        //     })
+        //     .then(res=>{
+                
+        //         if(res.data.status){
+
+        //             navigate('/home')
+        //             const {organizer_username, organizer_phone} = res.data;
+        //             console.log(organizer_username, organizer_phone)
+                    
+        //             //const user = res.data.user;
+
+        //             // if (user.user_type === 'organizer') {
+        //             //     // RedirectSS to organizer dashboard
+        //             //     navigate('/Dashboard', { state: { user } });
+        //             // } else if (user.user_type === 'client') {
+        //             //     // Redirect to client home
+        //             //     navigate('/home', { state: { user } });
+        //             // }
+        //             // if (res.data.user.user_type === 'organizer') {
+
+        //             //     console.log("user from org login",res.data.user)
+        //             //     // navigate('/Dashboard', { state: { user: res.data.user } });
+        //             //     navigate('/dashboard')
+                         
+        //             // } else {
+        //             //     console.log("user from client login",res.data.user)
+        //             //     navigate('/home');
+        //             // }
+        //         }
+        //         else {
+        //             alert("User have not sign up")
+        //         }
+        //     })
+        //     .catch(e=>{
+        //         alert("wrong details")
+        //         console.log(e);
+        //     })
+        // }
+        // catch{
+        //     console.log(e)
+        // }
+// export default authToken;
