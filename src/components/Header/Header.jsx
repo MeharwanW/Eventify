@@ -19,12 +19,11 @@ import { VscSignIn } from "react-icons/vsc";
 import React from 'react';
 
 
-const Header = ({isLoggedIn}) => {
+const Header = (props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  
-  
+
   window.addEventListener('resize', () => {
     setWindowWidth(window.innerWidth);
   });
@@ -35,33 +34,34 @@ const Header = ({isLoggedIn}) => {
     
       <div className="justify-content-between navbar fixed-top" activeKey="/home">
         <div className="Logo1">
-          <Link to="Home" >
+          <Link to="home" >
             <div className="Logo">
               <img className="svgImg" src={Logo} alt="" srcSet="" />
             </div>
           </Link>
         </div>
         {!showMenu && windowWidth >= 953 &&  (<div className={`d-flex linkSection justify-content-around ${showMenu ? 'hide' : ''}`}>
-          <NavItems />
+          <NavItems props={props}/>
         </div>
         )}
         
-        {!isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
-          <Link to="/Login" className="font"><button className="button" variant="">
+        {!props.isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
+          <Link to="/login" className="font"><button className="button" variant="">
             Login
           </button></Link>
-          <Link to="/SignUp" className="font link"><button className="button" variant="">
+          <Link to="/signup" className="font link"><button className="button" variant="">
             Sign Up 
           </button></Link> 
         </div>)}
-        {isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
-          <Link to="/Login" className="font"><button className="button" variant="">
+
+        {props.isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
+          <button onClick={()=>{ props.login() }} className="button logout" variant="">
             logout
-          </button></Link> 
+          </button> 
         </div>)}
         
       {windowWidth <953 && (<div className={`dropdown-menu ${showMenu ? 'show' : ''}`}>
-          <div onClick={() => setShowMenu(!showMenu)}><NavItems /></div>
+          <div onClick={() => setShowMenu(!showMenu)}><NavItems props={props}/></div>
         </div>)}
         {windowWidth <953 &&(<div className="icon font" onClick={() => setShowMenu(!showMenu)}>&#9776;Menu</div>)}
       </div>
@@ -73,7 +73,7 @@ const Header = ({isLoggedIn}) => {
   );
 }
 
-function NavItems({isLoggedIn}) {
+function NavItems(props) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   
   window.addEventListener('resize', () => {
@@ -84,7 +84,7 @@ function NavItems({isLoggedIn}) {
     <>
       <Nav.Item>
         <Nav.Link className="links" eventKey="/Home">
-          <Link to="Home">
+          <Link to="home">
             <div className="flexColCenter">
               <img className="svgImg flexColCenter" src={homeSvg1} alt="" srcSet="" />
               <div className="LinksInfo font">Home</div>
@@ -94,7 +94,7 @@ function NavItems({isLoggedIn}) {
       </Nav.Item>
       <Nav.Item>
             <Nav.Link className="links" eventKey="/Venue">
-              <Link to="Venues">
+              <Link to="venues">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={venueSvg1} alt="" srcset="" />
                   <div className="LinksInfo font">Venue</div>
@@ -104,7 +104,7 @@ function NavItems({isLoggedIn}) {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/Suppliers">
-              <Link to="Suppliers">
+              <Link to="suppliers">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={supplierSvg1} alt="" srcset="" />
                   <div className="LinksInfo font">Supplier</div>
@@ -114,7 +114,7 @@ function NavItems({isLoggedIn}) {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/Social Media">
-              <Link to="Media">
+              <Link to="media">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={mediaSvg1} alt="" srcset="" />
                   <div className="LinksInfo font">Media</div>
@@ -124,7 +124,7 @@ function NavItems({isLoggedIn}) {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/About">
-              <Link to="About">
+              <Link to="about">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={aboutSvg1} alt="" srcset="" />
                   <div className="LinksInfo font">About</div>
@@ -134,7 +134,7 @@ function NavItems({isLoggedIn}) {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="links" to="/Contact">
-              <Link to="Contacts">
+              <Link to="contacts">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={contactSvg1} alt="" srcset="" />
                   <div className="LinksInfo font">Contact</div>
@@ -142,10 +142,10 @@ function NavItems({isLoggedIn}) {
               </Link>
             </Nav.Link>
           </Nav.Item>
-      {windowWidth < 953 && !isLoggedIn && (
+      {windowWidth < 953 && !props.isLoggedIn && (
         <Nav.Item>
           <Nav.Link className="links" to="/SignUp">
-            <Link to="SignUp">
+            <Link to="signup">
               <div className="flexColCenter">
                 <BiLogInCircle />
                 <div className="LinksInfo font">SignUp</div>
@@ -154,10 +154,10 @@ function NavItems({isLoggedIn}) {
           </Nav.Link>
         </Nav.Item>
       )}
-      {windowWidth < 953 && !isLoggedIn && (
+      {windowWidth < 953 && !props.isLoggedIn && (
         <Nav.Item>
           <Nav.Link className="links" to="/login">
-            <Link to="Login">
+            <Link to="login">
               <div className="flexColCenter">
                 <VscSignIn />
                 <div className="LinksInfo font">Login</div>
@@ -168,7 +168,7 @@ function NavItems({isLoggedIn}) {
       )}
 
       {/* Logout button */}
-      {windowWidth < 953 && isLoggedIn && (
+      {windowWidth < 953 && props.isLoggedIn && (
         <Nav.Item>
           <Nav.Link className="links" to="/logout">
             <Link to="logout">

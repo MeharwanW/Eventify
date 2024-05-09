@@ -3,15 +3,22 @@ import user from '../SignIn/user.svg'
 import pass from '../SignIn/lock.svg'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
-import React, { useState } from "react"
-import Header from "./../Header/Header";
+import { useState } from "react"
 
 let authToken;
 
+export const Login = (props) => {
+    const [client_username, setUserName] = useState("")
 export const Login = () => {
 
     const [client_username, setUserName] = useState("") 
     const [client_password, setPassword] = useState("")
+    
+
+    const navigate = useNavigate();
+    
+  
+    async function submit(e) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     
     
@@ -27,7 +34,7 @@ export const Login = () => {
         e.preventDefault();
     
         try {
-            const response = await axios.post("http://localhost:3000/Login", {
+            const response = await axios.post("http://localhost:3000/login", {
                 client_username,
                 client_password
             });
@@ -37,15 +44,18 @@ export const Login = () => {
 
                 authToken=response.data.token;
                 // Pass userData to the dashboard component
+                props.login()
                 navigate('/dashboard', { state: { userData: response.data } });
-                setIsLoggedIn(true);
+            
             } else {
                 alert("User does not exist or wrong password");
-                setIsLoggedIn(false);
+                
+               
             }
         } catch (error) {
             alert("Failed to login. Please try again later.");
             console.error("Error logging in:", error);
+            
         }
 
         // try{
@@ -96,6 +106,7 @@ export const Login = () => {
 
     return (
         <div className="contain">
+           
             <div className="header shadow-box">
                 <h2 className="text font">Log In</h2>
                 <div className="underline"></div>
@@ -119,7 +130,7 @@ export const Login = () => {
                             </span> <span className='font color-text'>Click Here</span>
                         </div>
                         <div className='CreateAcc'>
-                            <Link to="/SignUp">
+                            <Link to="/signup">
                                 <div className="flexCenter">
                                     <button className="button font">Create new account</button>
                                 </div>
@@ -128,7 +139,7 @@ export const Login = () => {
                     </div>
                 </form>
             </div>
-            <Header isLoggedIn={isLoggedIn} />
+           
         </div>
     )
 

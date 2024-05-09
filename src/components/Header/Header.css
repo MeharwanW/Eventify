@@ -6,7 +6,7 @@
 }
 
 .linkSection {
-    width: 60%;
+    width: 45%;
 }
 a
 {
@@ -62,11 +62,6 @@ a:hover
 .link:hover {
     text-decoration: none;
 }
-
-
-
-
-
 .svgImg
 {
     width: 25px;
@@ -76,6 +71,10 @@ a:hover
 {
     transform: scale(1.3);
     fill: #FF6B6B;
+}
+.logout
+{
+    margin: 0% 3% 0 0%;
 }
 .links
 {
