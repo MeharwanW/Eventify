@@ -6,6 +6,12 @@ const bodyParser = require("body-parser")
 const cors = require("cors")
 const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
+
+// Multer importss
+// const multer = require("multer");
+// const path = require("path");
+// const { v4: uuidv4 } = require("uuid");
+
 //var nodemailer = require('nodemailer');
 
 const dotenv = require("dotenv")
@@ -14,8 +20,9 @@ dotenv.config()
 //const userRouter = require("./routes/client.js")
 
 const client = require("./models/client.js")
-const venue = require("./models/venue.js")
+//const venue = require("./models/venue.js")
 const organizer = require("./models/organizers.js")
+const gig = require("./models/gig.js")
 
 //const SECRET_KEY ='secretkey'
 
@@ -35,61 +42,61 @@ app.get("/",cors(),(req,res)=>{
 
 })
 
-app.post("/Venues", async(req,res)=>{
-    try{
-        const {venue_id,venue_category,venue_location,venue_type,no_of_guests}=req.body
+// app.post("/addGig", async(req,res)=>{
+//     try{
+//         const {venue_id,venue_category,venue_location,venue_type,no_of_guests}=req.body
 
-        const newVenue = new venue({
-            venue_id,
-            venue_category,
-            venue_location,
-            venue_type,
-            no_of_guests  
-        })
+//         const newVenue = new venue({
+//             venue_id,
+//             venue_category,
+//             venue_location,
+//             venue_type,
+//             no_of_guests  
+//         })
 
-        await newVenue.save()
-        console.log("Got the data");
-        res.status(201).json({"message":"Venue created successfully"});
-    } catch (e) {
-        console.error(e); // Log the error details
-        res.status(404).json({"message":"Failed to create venue"});
-    } 
+//         await newVenue.save()
+//         console.log("Got the data");
+//         res.status(201).json({"message":"Venue created successfully"});
+//     } catch (e) {
+//         console.error(e); // Log the error details
+//         res.status(404).json({"message":"Failed to create venue"});
+//     } 
 
-})
+// })
 
-app.post("/Login",async(req,res)=>{
+// app.post("/Login",async(req,res)=>{
 
-    const{client_username,client_password}=req.body
+//     const{client_username,client_password}=req.body
 
-    try{
+//     try{
 
-        const validUser=await client.findOne({client_username})
-        console.log("valid USer: ",validUser);
+//         const validUser=await client.findOne({client_username})
+//         console.log("valid USer: ",validUser);
 
-        if(!validUser){
-            res.status(404).json({"message":"User not Exist"})
-        }
+//         if(!validUser){
+//             res.status(404).json({"message":"User not Exist"})
+//         }
          
-        const hashPassword = bcrypt.compareSync(client_password,validUser.client_password)
-        console.log("Password comparison result:", hashPassword);
+//         const hashPassword = bcrypt.compareSync(client_password,validUser.client_password)
+//         console.log("Password comparison result:", hashPassword);
 
-        if(!hashPassword){
+//         if(!hashPassword){
             
-            res.status(404).json({"message":"Wrong password!"})
-        }
-        else{
-            res.status(201).json({"message":"exist"})
-        }
+//             res.status(404).json({"message":"Wrong password!"})
+//         }
+//         else{
+//             res.status(201).json({"message":"exist"})
+//         }
 
-        // const token = jwt.sign({client_id: client._id},SECRET_KEY,{expiresIn:'1hr'})
-        // res.json({"message":"Login Succesfull"})
+//         // const token = jwt.sign({client_id: client._id},SECRET_KEY,{expiresIn:'1hr'})
+//         // res.json({"message":"Login Succesfull"})
     
-    }
-    catch(e){
-        res.json(e.message)
-    }
+//     }
+//     catch(e){
+//         res.json(e.message)
+//     }
 
-})
+// })
 // // LOGGING ORGANIZER CONTROLLER
 // app.post("/login/organizer",async(req,res)=>{
 
@@ -121,6 +128,51 @@ app.post("/Login",async(req,res)=>{
 // }
 
 // })
+
+//     const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, "uploads/");
+//     },
+//     filename: function (req, file, cb) {
+//       const extension = path.extname(file.originalname);
+//       const fileName = `${uuidv4()}${extension}`;
+//       cb(null, fileName);
+//     },
+// });
+
+// const upload = multer({ storage: storage });
+
+//app.post("/addGig", upload.single("image"), async (req, res) => {
+app.post("/addGig", async (req, res) => {
+    try {
+        // if (!req.file) {
+        //     return res.status(400).json({ message: "No file uploaded" });
+        // }
+
+        const {description, venue, category, city, state1, accountRole } = req.body;
+        console.log("reqbody",req.body)
+
+        const newGig = new gig({
+            organizer_id:"meharwan",
+            description,
+            venue,
+            category,
+            city,
+            state1,
+            role:accountRole,
+            
+            //image: req.file.path, // Store the file path in the image field
+        });
+
+        await newGig.save();
+
+        res.status(201).json({ message: "Gig created successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 
 // CLIENT
 app.post("/Login",async(req,res)=>{
@@ -155,28 +207,29 @@ app.post("/Login",async(req,res)=>{
         console.log("valid USer: ",validUser);
         if(!hashPassword){
             
-            return res.json({status:false,"message":"Wrong password!"})
+             res.json({status:false,"message":"Wrong password!"})
         }
-        else{
-            return res.json({status:true,"message":"exist"})
-        }
+        // else{
+        //      res.json({status:true,"message":"exist", "userData":validUser})
+        // }
 
         
        
         
-        // let token;
-        // if(validUser.user_type==='organizer'){
-        //     token = jwt.sign({organizer_username: validUser.organizer_username}, process.env.KEY, {expiresIn:'1hr'})   
-        // }
-        // if(validUser.user_type==='client'){
-        //     token = jwt.sign({client_username: validUser.client_username}, process.env.KEY, {expiresIn:'1hr'})
-        // }
+     
+    
+        const token = jwt.sign({id: validUser._id}, process.env.KEY, {expiresIn:'1hr'})   
+        console.log("token from api ", token)
+       
+        return res.status(200).json({token , message:"Login Succesfull","userData":validUser })
 
-        // res.cookie('token',token, {httpOnly:true, maxAge:3600000})
+
+        //res.cookie('token',token, {httpOnly:true, maxAge:3600000})
+
         // return res.json({ status: true, message: "Login Successful", redirect: "/home" });
         // return res.json({ status: true, message: "Login Successful", redirect: "/dashboard", user: validUser });
         
-        //return res.json({status:true, message:"Login Succesfull" })
+        
         
      
     }

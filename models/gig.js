@@ -2,14 +2,13 @@ const mongoose = require("mongoose");
 
 const gigSchema = new mongoose.Schema({
   organizer_id: {
-    type: Schema.Types.ObjectId,
-    ref: "organizer",
-    required: true,
-  },
-  title: {
     type: String,
     required: true,
   },
+  // title: {
+  //   type: String,
+  //   required: true,
+  // },
   description: {
     type: String,
   },
@@ -25,13 +24,17 @@ const gigSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  state: {
+  state1: {
     type: String,
     required: true,
   },
-  zipcode: {
-    type: String,
-    required: true,
+  image: {
+    type: String, // File path where the image will be saved
+    //required:true
+  },
+  role:{
+    type:String,
+    required:true
   },
   service_provider: {
     type: String,
@@ -39,10 +42,11 @@ const gigSchema = new mongoose.Schema({
   date_created: {
     type: Date,
     default: Date.now,
-  },
+  }
 
   // Other gig fields can be added here
 },
+
 {
     timestamps:true
 });

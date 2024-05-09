@@ -6,14 +6,18 @@ import { useNavigate, Link } from 'react-router-dom'
 import React, { useState } from "react"
 import Header from "./../Header/Header";
 
+let authToken;
+
 export const Login = () => {
 
-    const [client_username, setUserName] = useState("")
+    const [client_username, setUserName] = useState("") 
     const [client_password, setPassword] = useState("")
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     
     
-  
+    const navigate = useNavigate(
+        
+    )
 
     //axios.defaults.withCredentials = true; 
 
@@ -29,6 +33,9 @@ export const Login = () => {
             });
     
             if (response.data) {
+                console.log("returned token ",response.data.token)
+
+                authToken=response.data.token;
                 // Pass userData to the dashboard component
                 navigate('/dashboard', { state: { userData: response.data } });
                 setIsLoggedIn(true);
@@ -127,3 +134,4 @@ export const Login = () => {
 
 }
 
+export default authToken;

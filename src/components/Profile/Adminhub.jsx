@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { BiSolidDashboard,BiSmile, BiStore, BiAnalyse, BiMessageDots, BiSolidCalendar, BiGroup, BiCog, BiLogOut, BiCalendarCheck, BiDollarCircle, BiSearch, BiBell, BiPlus, BiDotsVerticalRounded, BiChevronRight } from 'react-icons/bi';
 import Form from 'react-bootstrap/Form';
-import { Link , useLocation } from 'react-router-dom';
+import { Link , useLocation} from 'react-router-dom';
 import './adminhub.css';
+import axios from 'axios';
+
+import authToken from '../SignIn/Login.js';
+
+console.log("authToken: ", authToken);
 
 const AdminHub = () => {
+    
     const { state } = useLocation();
+
     const userData = state?.userData;
-    const client = userData.userData.client_username;
-    console.log("Userdata in dashboard",userData)
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    //const client = userData.userData
+
+    //console.log("Userdata in dashboard",userData)
+    //console.log(userData.userData.organizer_name)
+
+    //const [selectedCategory, setSelectedCategory] = useState(null);
     const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
     const [showAddEventForm, setShowAddEventForm] = useState(false);
     const [description, setDescription] = useState('');
@@ -17,8 +27,11 @@ const AdminHub = () => {
     const [category, setCategory] = useState('');
     const [city, setCity] = useState('');
     const [state1, setState] = useState('');
-    const [image, setImage] = useState(null);
+   // const [image, setImage] = useState(null);
     const [accountRole,setAccountRole] = useState("")
+    const [isLoading, setIsLoading] = useState(false);
+
+    //const navigate = useNavigate();
     
 
     useEffect(() => {
@@ -33,25 +46,77 @@ const AdminHub = () => {
         setShowAddEventForm(true);
     };
 
-    const handleFormSubmit = (event) => {
+    async function handleFormSubmit(event){
+
         event.preventDefault();
-          const formData = {
+        setIsLoading(true);
+        console.log("Auth Token from AdminHub", authToken)
+        //console.log("Organizer Id in Dashboard: ", userData.userData._id)
+       // console.log("Organizer Name in Dashboard: ",userData.userData.organizer_name)
+
+        try {
+            await axios.post("http://localhost:3000/addGig", {
+
+            organnizer_id:"meharwan",
+            //selectedCategory,
             description,
             venue,
             category,
             city,
-            state,
-            image
-        };
-        
-        setDescription('');
-        setVenue('');
-        setCategory('');
-        setImage(null);
-        setShowAddEventForm(false);
+            state1,
+            //image,
+            accountRole
 
-        console.log(formData);
-    };
+
+        }).then(res =>{
+
+            console.log("response form then addminHub ",res)
+
+            console.log(res.data.status)
+            if (res.status) {
+
+                alert("Gig created")
+                //navigate('/Login');
+                
+               
+            } else {
+                alert('Gig already exist');            
+               
+               
+            }
+        }).catch(err =>{
+            console.log("Error inside catch await post adminHub",err)
+        })
+    } 
+    catch (error) {
+        alert('Failed to add. Please try again.');
+        console.error('Registration error:', error);
+    } finally {
+        setIsLoading(false);
+    }
+
+
+    }
+
+    // const handleFormSubmit = (event) => {
+    //     event.preventDefault();
+    //       const formData = {
+    //         description,
+    //         venue,
+    //         category,
+    //         city,
+    //         state,
+    //         image
+    //     };
+        
+    //     setDescription('');
+    //     setVenue('');
+    //     setCategory('');
+    //     setImage(null);
+    //     setShowAddEventForm(false);
+
+    //     console.log(formData);
+    // };
 
     return (
         <div>
@@ -59,13 +124,13 @@ const AdminHub = () => {
                 <Link to="/" className="brand">
                     <BiSmile className='bx bxs-smile'/>
 
-                    <span className="color-text">{client}</span>
+                    <span className="color-text">Dashboard</span>
                 </Link>
                 <ul className="side-menu top font">
                     <li className={activeMenuItem === 'Dashboard' ? 'active' : ''}>
                         <Link to="/">
                             <BiSolidDashboard className='bx bxs-dashboard'/>
-                            <span className="">{userData.userData.client_name}</span>
+                            <span className="">Dashboard</span>
                         </Link>
                     </li>
                     <li className={activeMenuItem === 'My Store' ? 'active' : ''}>
@@ -231,19 +296,19 @@ const AdminHub = () => {
                                 </div>
                                 <div className="form-group inputs1">
                                     <label className='text' htmlFor="state">State:</label>
-                                    <input className='input1' type="text" id="state" value={state} onChange={(e) => setState(e.target.value)} />
+                                    <input className='input1' type="text" id="state" value={state1} onChange={(e) => setState(e.target.value)} />
                                 </div>
                                 <div className="form-group inputs1">
                                     <label className='text' htmlFor="description">Description:</label>
                                     <textarea className='input1' id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                                 </div>
-                                <div className="form-group inputs1 flexCenter">
+                                {/* <div className="form-group inputs1 flexCenter">
                                     <label className='text' htmlFor="image">Image:</label>
                                     <input className='' type="file" id="image" onChange={(e) => setImage(e.target.files[0])} />
-                                </div>
-                                <div className="imageSet">
+                                </div> */}
+                                {/* <div className="imageSet">
                                     {image}
-                                </div>
+                                </div> */}
                                 <button className='button' type="submit">Submit</button>
                             </form>
                         </div>
