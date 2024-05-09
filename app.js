@@ -51,13 +51,14 @@ app.get("/", (req, res) => {
 
 
 
-app.post("/addGig",  verifyToken, async (req, res) => {
+app.post("/addGig", async (req, res) => {
+
     try {
         // if (!req.file) {
         //     return res.status(400).json({ message: "No file uploaded" });
         // }
 
-        const {description, venue, category, city, state1, accountRole } = req.body;
+        const {description, venue, category, city, state1, role } = req.body;
         console.log("reqbody",req.body)
 
         const newGig = new gig({
@@ -67,7 +68,7 @@ app.post("/addGig",  verifyToken, async (req, res) => {
             category,
             city,
             state1,
-            role:accountRole,
+            role
             
             //image: req.file.path, // Store the file path in the image field
         });

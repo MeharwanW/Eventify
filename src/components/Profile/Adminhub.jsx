@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { Link , useLocation} from 'react-router-dom';
 import './adminhub.css';
 import axios from 'axios';
+//import organizer from '../models/organizers';
 
 // import authToken from '../SignIn/Login.js';
 
@@ -55,7 +56,7 @@ const AdminHub = () => {
 
         try {
             await axios.post("http://localhost:3000/addGig", {
-
+            organizer_id:"meharwan",
             //selectedCategory,
             description,
             venue,
@@ -63,7 +64,7 @@ const AdminHub = () => {
             city,
             state1,
             //image,
-            accountRole
+            role:accountRole
 
 
             }).then(res =>{
