@@ -24,6 +24,7 @@ const AdminHub = () => {
     useEffect(() => {
         // Effect code here
     }, []);
+    console.log(image);
 
     const handleSearchFormToggle = () => {
         // Implement search form toggle logic here
@@ -52,7 +53,7 @@ const AdminHub = () => {
 
         console.log(formData);
     };
-
+    
     return (
         <div>
             <section id="sidebar">
@@ -146,9 +147,9 @@ const AdminHub = () => {
                             </ul>
                         </div>
                         <div className="button" onClick={handleAddEventClick}>
-                        <Link to="#" >
+                        
                         <span className="">Add Event</span>
-                         </Link>
+                        
                         </div>
                     </div>
                     <ul className="box-info font">
@@ -242,7 +243,7 @@ const AdminHub = () => {
                                     <input className='' type="file" id="image" onChange={(e) => setImage(e.target.files[0])} />
                                 </div>
                                 <div className="imageSet">
-                                    {image}
+                                    
                                 </div>
                                 <button className='button' type="submit">Submit</button>
                             </form>
