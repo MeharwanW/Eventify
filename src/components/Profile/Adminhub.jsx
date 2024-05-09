@@ -30,9 +30,10 @@ const AdminHub = () => {
    // const [image, setImage] = useState(null);
     const [accountRole,setAccountRole] = useState("")
     const [isLoading, setIsLoading] = useState(false);
+    const [organizer,setOrganizer]=useState("")
 
     //const navigate = useNavigate();
-    
+    setOrganizer(userData.userData._id)
 
     useEffect(() => {
         // Effect code here
@@ -57,7 +58,7 @@ const AdminHub = () => {
         try {
             await axios.post("http://localhost:3000/addGig", {
 
-            organnizer_id:"meharwan",
+            organnizer_id:organizer,
             //selectedCategory,
             description,
             venue,
@@ -67,6 +68,13 @@ const AdminHub = () => {
             //image,
             accountRole
 
+
+            },
+        {
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                "Content-Type": "application/json",
+              },
 
         }).then(res =>{
 

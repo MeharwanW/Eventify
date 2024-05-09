@@ -8,8 +8,6 @@ import { useState } from "react"
 let authToken;
 
 export const Login = (props) => {
-    const [client_username, setUserName] = useState("")
-export const Login = () => {
 
     const [client_username, setUserName] = useState("") 
     const [client_password, setPassword] = useState("")
@@ -19,12 +17,7 @@ export const Login = () => {
     
   
     async function submit(e) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    
-    
-    const navigate = useNavigate(
-        
-    )
+
 
     //axios.defaults.withCredentials = true; 
 
@@ -52,11 +45,13 @@ export const Login = () => {
                 
                
             }
+
         } catch (error) {
             alert("Failed to login. Please try again later.");
             console.error("Error logging in:", error);
             
         }
+    }
 
         // try{
         //     await axios.post("http://localhost:3000/Login",{
