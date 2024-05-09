@@ -51,7 +51,7 @@ export const SignUp = () => {
         // }
 
         try {
-                await axios.post("http://localhost:3000/SignUp", {
+                await axios.post("http://localhost:3000/signup", {
                 name,
                 email,
                 userName,

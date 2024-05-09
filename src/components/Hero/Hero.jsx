@@ -1,64 +1,18 @@
-import React, { useState } from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../App.css";
 import "./Hero.css";
-import myImage from '../../assets/wedding5.jpg';
-import myImage1 from '../../assets/Meeting1.jpg';
-import myImage2 from '../../assets//Party1.jpg';
 import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
-import data from "../Header/full_names.json";
-import galleryimg from "../../assets/wedding5.jpg"
-import galleryimg1 from "../../assets/party3.jpg"
-import data1 from "./../../utils/wedding.json"
+import assets from '../../assets/assets';
 
 export const Hero = () => {
-  const [value, setValue] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-
-  const [value1, setValue1] = useState("");
-  const [suggestions1, setSuggestions1] = useState([]);
-
-
-  const onChange = (event) => {
-    const { value } = event.target;
-    setValue(value);
-    if (value) {
-      const searchTerm = value.toLowerCase();
-      const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
-      setSuggestions(filteredSuggestions);
-    } else {
-      setSuggestions([]);
-    }
-  };
-  const onChange1 = (event) => {
-    const { value } = event.target;
-    setValue1(value);
-    if (value) {
-      const searchTerm = value.toLowerCase();
-      const filteredSuggestions = data.data.filter(item => item.full_name.toLowerCase().startsWith(searchTerm) && item.full_name.toLowerCase() !== searchTerm);
-      setSuggestions1(filteredSuggestions);
-    } else {
-      setSuggestions1([]);
-    }
-  };
-
-
-  const onSearch = (item) => {
-    setValue(item.full_name);
-    setSuggestions([]);
-  };
-  const onSearch1 = (item) => {
-    setValue1(item.full_name);
-    setSuggestions1([]);
-  };
-
 
 
   return (
     <div className='hero-section'>
       <MDBCarousel fade interval={3000}>
         <MDBCarouselItem itemId={1}>
-          <img src={myImage} className='d-block w-100' alt='...' />
+          <img src={assets.wedding} className='d-block w-100' alt='...' />
           <MDBCarouselCaption>
             <div className="carousal-text font font-size bold-text">
               <h1 className='bold-text'>WELCOME TO</h1>
@@ -68,7 +22,7 @@ export const Hero = () => {
         </MDBCarouselItem>
 
         <MDBCarouselItem itemId={2}>
-          <img src={myImage1} className='d-block w-100' alt='...' />
+          <img src={assets.meeting1} className='d-block w-100' alt='...' />
           <MDBCarouselCaption>
             <div className="carousal-text font font-size bold-text">
               <h1 className='bold-text'>WELCOME TO</h1>
@@ -78,7 +32,7 @@ export const Hero = () => {
         </MDBCarouselItem>
 
         <MDBCarouselItem itemId={3}>
-          <img src={myImage2} className='d-block w-100' alt='...' />
+          <img src={assets.party1} className='d-block w-100' alt='...' />
           <MDBCarouselCaption>
             <div className="carousal-text font font-size bold-text">
               <h1 className='bold-text'>WELCOME TO</h1>
@@ -97,11 +51,11 @@ export const Hero = () => {
             <button className='button'>View Story</button>
           </div>
           
-          <div className='galleryImg'> <img src={galleryimg} alt="" /></div>
+          <div className='galleryImg'> <img src={assets.wedding} alt="" /></div>
           </div>
         
         <div className='galleryDes flexenter'>
-          <div className='galleryImg'> <img src={galleryimg1} alt="" /></div>
+          <div className='galleryImg'> <img src={assets.party3} alt="" /></div>
           <div className='galleryText '>
             <p className='font'>Drawing from a rich tapestry of services, Eventify offers a comprehensive suite tailored to meet your unique needs. Our three-tier system, designed for efficiency and efficacy, streamlines the planning process, allowing us to deliver exceptional results within your desired timeframe and budget.</p>
             <button className='button'>View Story</button>
