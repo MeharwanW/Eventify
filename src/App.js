@@ -50,7 +50,7 @@ function App() {
               }
             >
               <Route index element={<Home />} />
-              <Route path="home" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login login={authHandler} />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="venues" element={<Venue />} />

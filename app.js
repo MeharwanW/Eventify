@@ -4,13 +4,17 @@ const mongoose = require("mongoose")
 const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
-const jwt = require("jsonwebtoken")
+
 const path = require("path");
+
 const cookieParser = require("cookie-parser")
+
+const jwt = require("jsonwebtoken")
 const {verifyToken} = require("./middleWare/auth.js")
 
 // Multer importss
-// const multer = require("multer");
+ const multer = require("multer");
+
 // const path = require("path");
 // const { v4: uuidv4 } = require("uuid");
 
@@ -23,6 +27,7 @@ dotenv.config()
 const client = require("./models/client.js")
 const gig = require("./models/gig.js")
 const organizer = require("./models/organizers.js")
+const order = require("./models/order.js")
 
 
 const app = express()
@@ -46,37 +51,125 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html")); // Serve the React app's HTML file
 });
 
+app.get("/all/orders", async (req,res) => {
+    
+        try{
+            let organizer_id="788"
+            const allOrganizers = await order.find({organizer_id},)
+            if (allOrganizers) {
+                resjson({status:true,allOrganizers});
+            }
+            else{
+               res.json({status:false,"message":"User not Exist"})
+                
+            }
+
+            
+        }catch(err){
+            res.status(404).json({message:err.message})
+        }
+    
+    
+})
+
+app.post("/book/event", async (req, res) => {
+  try { //no_ofguests
+    const { client_id, category, venue, city, state1, services,no_of_guest } = req.body;
+
+    console.log("req.body: ",req.body)
+    //
+
+    // Check if the client has already placed an order for the same category
+    // const existingOrder = await order.findOne({ client_id, category });
+    // if (existingOrder) {
+    //   return res.status(400).json({ message: "Client already placed an order for this category" });
+    // }
+    
+    const findGig = await gig.findOne({category:"Wedding", venue:"Dolphin", city:"Sukkur", no_of_guest:{ $gte: no_of_guest }})
+    
+    console.log("Gig Object from app,js ",findGig)
+
+    if(!findGig){
+        return res.status(400).json({ message: "No Organizer provide this service" });
+    }
+
+    console.log("Gig Id of Order",findGig._id)
+   console.log("Orgaanizer Id of Order",findGig.organizer_id)
+
+    const newOrder = new order({
+      client_id:"663a7e97b5098afc83e15903",
+      category,
+      // event_date,
+      venue,
+      city,
+      state1,
+      services:[services],
+      no_of_guest:180,
+      total_cost:150000,
+      total_cost:findGig.total_cost,
+      payment_status:"cash on delivery",
+      gig_id:"738632082",
+      organizer_id:"dsjdn",
+      gig_id:findGig._id,
+      organizer_id:findGig.organizer_id,
+    });
 
 
+    console.log("newOrder : ",newOrder)
+
+    await newOrder.save();
+    //console.log("Order created: Wait for organizer response", newOrder);
+    res.json({ status: true, message: "Order placed successfully" });
+
+  } catch (e) {
+    console.error("Error during order creation:", e);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "./src/gigImages/");
+    },
+    filename: function (req, file, cb) {
+      
+      cb(null, file.originalname);
+    },
+  });
+
+  const upload = multer({ storage: storage });
 
 
-
-app.post("/addGig", async (req, res) => {
+app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
 
     try {
         // if (!req.file) {
         //     return res.status(400).json({ message: "No file uploaded" });
         // }
 
-        const {description, venue, category, city, state1, role } = req.body;
+        const {organizer_id, description, venue, category, city, state1, role } = req.body;
         console.log("reqbody",req.body)
 
         const newGig = new gig({
-            organizer_id:"meharwan",
+            organizer_id,
             description,
             venue,
             category,
+            services_list:["Banquet"],
+            no_of_guest:200,
+            total_cost:1500000,
             city,
             state1,
-            role
-            
-            //image: req.file.path, // Store the file path in the image field
+            image: req.file.filename, // Store the file path in the image field
         });
+
         console.log(newGig)
         await newGig.save();
 
         res.status(201).json({ message: "Gig created successfully" });
-    } catch (error) {
+
+    } 
+    catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server error" });
     }
@@ -178,18 +271,19 @@ app.post("/login",async(req,res)=>{
                 res.json({status:false,"message":"User not Exist"})
             }
         }
-        console.log("valid USer: ",validUser);
+        console.log("valid USer login: ",validUser);
         if(!hashPassword){
             
              res.json({status:false,"message":"Wrong password!"})
         }
       
 
-        // const token = jwt.sign({id: validUser._id}, process.env.KEY, {expiresIn:'1hr'})   
-        // console.log("token from api ", token)
-       
-        return res.status(200).json({token , message:"Login Succesfull","userData":validUser })
-
+        const token = jwt.sign({id: validUser._id}, process.env.KEY, {expiresIn:'1hr'})   
+        console.log("token from login api ", token)
+        if(validUser.user_type=='organizer'){
+            return res.status(200).json({token , message:"Login Succesfull","userData":validUser, userType:"organizer" })
+        }
+        return res.status(200).json({token , message:"Login Succesfull","userData":validUser, userType:"client" })
 
     }
     catch(e){

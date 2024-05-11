@@ -104,6 +104,7 @@ export default function SearchVenue({ onSearch }) {
     .catch(error => console.error('Error:', error));
     
 }, []);
+
 console.log("Hello gog",gig);
 
   return (

@@ -5,12 +5,9 @@ const gigSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // title: {
-  //   type: String,
-  //   required: true,
-  // },
   description: {
     type: String,
+    required:true
   },
   category: {
     type: String,
@@ -18,6 +15,18 @@ const gigSchema = new mongoose.Schema({
   },
   venue: {
     type: String,
+    required: true,
+  },
+  services_list: {
+    type: [String], // Assuming services are represented as strings
+    required: true,
+  }, 
+  no_of_guest:{
+    type: Number,
+    required:true
+  },
+  total_cost: {
+    type: Number,
     required: true,
   },
   city: {
@@ -32,12 +41,8 @@ const gigSchema = new mongoose.Schema({
     type: String, // File path where the image will be saved
     //required:true
   },
-  role:{
-    type:String,
-    required:true
-  },
-  service_provider: {
-    type: String,
+  clicks:{
+    type:Number
   },
   date_created: {
     type: Date,

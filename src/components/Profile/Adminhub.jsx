@@ -28,7 +28,7 @@ const AdminHub = () => {
     const [category, setCategory] = useState('');
     const [city, setCity] = useState('');
     const [state1, setState] = useState('');
-   // const [image, setImage] = useState(null);
+    const [image, setImage] = useState(null);
     const [accountRole,setAccountRole] = useState("")
     const [isLoading, setIsLoading] = useState(false);
     //const [organizer,setOrganizer]=useState("")
@@ -48,52 +48,60 @@ const AdminHub = () => {
 
     async function handleFormSubmit(event){
 
+
         event.preventDefault();
         setIsLoading(true);
+
+        const authToken = localStorage.getItem("adminToken");
+        console.log("authTOken from AdminHub ; ",authToken )
+        const organizerId = localStorage.getItem("currentOrganizer");
+        console.log("orgnaizerId from AdminHub ; ",organizerId )
+
+
+        const formData = new FormData();
+        formData.append("organizer_id", organizerId);
+        formData.append("image", image);
+        formData.append("description", description);
+        formData.append("venue", venue);
+        formData.append("category", category);
+        formData.append("city", city);
+        formData.append("state1", state1);
+        formData.append("role", accountRole);
+
        // console.log("Auth Token from AdminHub", authToken)
         //console.log("Organizer Id in Dashboard: ", userData.userData._id)
        // console.log("Organizer Name in Dashboard: ",userData.userData.organizer_name)
 
         try {
-            await axios.post("http://localhost:3000/addGig", {
-            organizer_id:"meharwan",
-            //selectedCategory,
-            description,
-            venue,
-            category,
-            city,
-            state1,
-            //image,
-            role:accountRole
+            console.log("Inside try befor axios")
 
+            const result = await axios.post("http://localhost:3000/addGig", formData, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    "Content-Type": "multipart/form-data",
+                },
+                //selectedCategory,
+             });
+           
+            console.log("Inside try after axios")
 
-            }).then(res =>{
-
-            console.log("response form then addminHub ",res)
-            console.log(res.data.status)
-            if (res.status) {
-
+            console.log("response form then addminHub ",result)
+            //console.log(res.data.status)
+            if (result.status) {
                 alert("Gig created")
                 //navigate('/Login');
-                 
             } else {
-                alert('Gig already exist');            
-               
-               
+                alert('Gig already exist');              
             }
-        }).catch(err =>{
-            console.log("Error inside catch await post adminHub",err)
-        })
-    } 
-    catch (error) {
-        alert('Failed to add. Please try again.');
-        console.error('Registration error:', error);
-    } finally {
-        setIsLoading(false);
+        }catch (error) {
+            alert('Failed to add. Please try again.');
+            console.error('Registration error:', error);
+        } finally {
+            setIsLoading(false);
     }
 
 
-    }
+}
 
     // const handleFormSubmit = (event) => {
     //     event.preventDefault();
@@ -299,13 +307,14 @@ const AdminHub = () => {
                                     <label className='text' htmlFor="description">Description:</label>
                                     <textarea className='input1' id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                                 </div>
-                                {/* <div className="form-group inputs1 flexCenter">
+                                <div className="form-group inputs1 flexCenter">
                                     <label className='text' htmlFor="image">Image:</label>
-                                    <input className='' type="file" id="image" onChange={(e) => setImage(e.target.files[0])} />
-                                </div> */}
-                                {/* <div className="imageSet">
-                                    {image}
-                                </div> */}
+                                    <input className='' type="file" id="image" accept='image/*' onChange={(e) => setImage(e.target.files[0])} />
+                                </div>
+                                <div className="imageSet">
+                                    {image && <img src={URL.createObjectURL(image)} alt="Uploaded Image" />}
+                                </div>
+
                                 <button className='button' type="submit">Submit</button>
                             </form>
                         </div>
