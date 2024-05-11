@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../Footer/Footer';
 import SearchVenue from '../SearchVenue/SearchVenue';
 import "./venue.css";
 import "swiper/css";
-import data1 from "../../utils/slider1.json";
 
 export default function Venue() {
   const [selectedCard, setSelectedCard] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
+  const [gig, setGig] = useState([]);
+
+  useEffect(() => {
+    // Fetch gig data here
+    fetch('http://localhost:3000/getAllGigs')
+      .then(response => response.json())
+      .then(data => {
+        setGig(data);
+        setFilteredData([]); // Reset filtered data to display all gig data initially
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
+
+  const filter = gig.filter(venue => {
+    if (filteredData.length === 0) {
+      return true;
+    } else {
+      return (
+        (filteredData[0] === "" || venue.city === filteredData[0]) &&
+        (filteredData[1] === "" || venue.category === filteredData[1]) &&
+        (filteredData[2] === "" || venue.venue === filteredData[2])
+      );
+    }
+  });
   
   const handleSearch = (filteredData) => {
-    // Update the selectedCard state based on the filtered data
-    if (filteredData.length > 0) {
-      // For simplicity, let's assume the filteredData contains only one item
-      setSelectedCard(filteredData[0]);
-    } else {
-      setSelectedCard(null); // If no data matches the search, reset selectedCard
-    }
+    setFilteredData(filteredData);
   };
   
   const handleCardClick = (card) => {
@@ -38,7 +56,7 @@ export default function Venue() {
           <h1 className='font'>Our EVENT Venues</h1>
         </div>
         <div className='venueSearch'></div>
-        <SearchVenue onSearch={handleSearch} />
+        <SearchVenue onSearch={handleSearch} onGig={setGig}/>
       </div>
       <div className='venueList'>
         <div className="paddings innerWidth r-container ">
@@ -46,21 +64,23 @@ export default function Venue() {
             <span className="heading">Event Venues</span>
           </div>
           <div className='eventVenue'>
-            {data1.map((card) => (
+            {filter.map((card) => (
               <div className="flexColCenter r-card" key={card.id} onClick={() => handleCardClick(card)}>
                 <img src={card.image} alt="home" />
-                <span className="flexCenter heading">{card.name}</span>
-                <span className="flexCenter font">{card.detail}</span>
+                <span className="flexCenter heading">{card.city}</span>
+                <span className="flexCenter font">{card.category}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
       {selectedCard && (
-        <div className="selectedCard">
-          <h2>{selectedCard.name}</h2>
-          <p>{selectedCard.description}</p>
-          <button onClick={() => setSelectedCard(null)}>Close</button>
+        <div className="selectedCard supplierInfoOverlay">
+          <div className='supplierInfoContainer flexColCenter'>
+            <h2>{selectedCard.venue}</h2>
+            <p>{selectedCard.description}</p>
+            <button className="button" onClick={() => setSelectedCard(null)}>Close</button>
+          </div>
         </div>
       )}
       <Footer />

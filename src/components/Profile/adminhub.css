@@ -257,6 +257,31 @@ ol, ul {
 #content nav #switch-mode:checked + .switch-mode::before {
 	left: calc(100% - (25px - 4px) - 2px);
 }
+
+.addEvent
+{
+	background-color: #314455;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.form-group .des
+{
+	width: 70%;
+	height: 100%;
+}
+.form-group{
+	margin: 0 2% 0 2%;
+}
+
+.eventFormField
+{
+	margin: 2%;
+}
+
 /* NAVBAR */
 
 

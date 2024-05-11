@@ -61,7 +61,7 @@ function App() {
               <Route
                 path="booking"
                 element={
-                  isLoggedIn ? <Booking /> : <Navigate to="/login" />
+                  isLoggedIn ? <Navigate to="/login" /> :  <Booking />
                 }
               />
               <Route

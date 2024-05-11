@@ -1,12 +1,10 @@
 import React, { useState , useEffect } from 'react';
-
 import "./../Header/SearchBar.css"
 
-const axios = require("axios");
 
 
 
-export default function SearchVenue({ onSearch }) {
+export default function SearchVenue({ onSearch , onGig }) {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
   const [venueType, setVenueType] = useState("");
@@ -16,7 +14,7 @@ export default function SearchVenue({ onSearch }) {
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [categorySuggestions, setCategorySuggestions] = useState([]);
   const [venueTypeSuggestions, setVenueTypeSuggestions] = useState([]);
-  const [guestsSuggestions, setGuestsSuggestions] = useState([]);
+const [guestsSuggestions, setGuestsSuggestions] = useState([]);
 
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(true);
   const [showCategorySuggestions, setShowCategorySuggestions] = useState(true);
@@ -29,69 +27,85 @@ export default function SearchVenue({ onSearch }) {
     setVenueType("");
     setGuests("");
   };
-  
+ 
+
   const handleSearch = () => {
-
-    const filteredData = gig.filter(venue => {
-
-      return (
-        (location === "" || venue.location === location) &&
-        (category === "" || venue.category === category) &&
-        (venueType === "" || venue.venuetype === venueType) &&
-        (guests === "" || (venue.guests >= parseInt(guests, 10)))
-      );
-
-    });
-   // console.log(filteredData);
-    onSearch(filteredData);
+    console.log("location",location);
+    console.log("category",category);
+    console.log("venueType",venueType);
+    const filteredData1 = [location,category,venueType]
+   
+    onSearch(filteredData1); // Pass filtered data
+    onGig(gig);
     resetFields(); // Reset fields after search
   };
-
+  
   const onChangeLocation = (event) => {
     const { value } = event.target;
     setLocation(value);
-    const searchTerm = value.toLowerCase();
-    const filteredSuggestions = gig.filter(venue => venue.location && venue.location.toLowerCase().startsWith(searchTerm));
-    const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.location)));
-    setLocationSuggestions(uniqueSuggestions);
-    setShowLocationSuggestions(true);
+    
+    // Filter suggestions based on the entered location
+    const filteredSuggestions = gig.filter(venue => 
+      venue.city && venue.city.toLowerCase().startsWith(value.toLowerCase())
+    );
+    
+    const uniqueLocations = Array.from(new Set(filteredSuggestions.map(item => item.city)));
+   const uniqueCategories = Array.from(new Set(filteredSuggestions.map(item => item.category)));
+
+    setLocationSuggestions(uniqueLocations);
+    setCategorySuggestions(uniqueCategories);
+    setShowLocationSuggestions(true); // Show suggestions
   };
+  
+  
   
 
   const onChangeCategory = (event) => {
     const { value } = event.target;
     setCategory(value);
-    const searchTerm = value.toLowerCase();
-    const filteredSuggestions = gig.filter(venue => venue.category && venue.category.toLowerCase().startsWith(searchTerm));
-    const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.category)));
-    setCategorySuggestions(uniqueSuggestions);
+    
+    // Filter suggestions based on the selected category and location
+    const filteredSuggestions = gig.filter(venue => 
+      venue.city && venue.city.toLowerCase() === location.toLowerCase() &&
+      venue.category && venue.category.toLowerCase().startsWith(value.toLowerCase())
+    );
+    const uniqueCategory = Array.from(new Set(filteredSuggestions.map(item => item.category)));
+    const uniqueVenues = Array.from(new Set(filteredSuggestions.map(item => item.venue)));
+    
+    setCategorySuggestions(uniqueCategory);
+    setVenueTypeSuggestions(uniqueVenues);
     setShowCategorySuggestions(true);
   };
+  
 
   const onChangeVenueType = (event) => {
     const { value } = event.target;
     setVenueType(value);
-    // Find the venue in the data array that matches the selected venue type
-    const selectedVenue = gig.find(venue => venue.venueType && venue.venuetype.toLowerCase() === value.toLowerCase());
-    if (selectedVenue) {
-      setGuests(selectedVenue.guests.toString());
-    }
-    const searchTerm = value.toLowerCase();
-    const filteredSuggestions = gig.filter(venue => venue.venueType && venue.venuetype.toLowerCase().startsWith(searchTerm));
-    const uniqueSuggestions = Array.from(new Set(filteredSuggestions.map(item => item.venuetype)));
-    setVenueTypeSuggestions(uniqueSuggestions);
+    
+    // Filter suggestions based on the selected category and location
+    const filteredSuggestions = gig.filter(venue => 
+      venue.category && venue.category.toLowerCase() === category.toLowerCase() &&
+      venue.venue && venue.venue.toLowerCase().startsWith(value.toLowerCase())
+    );
+  
+    const uniqueVenues = Array.from(new Set(filteredSuggestions.map(item => item.venue)));
+    setVenueTypeSuggestions(uniqueVenues);
     setShowVenueTypeSuggestions(true);
   };
 
-  const onChangeGuests = (event) => {
-    const { value } = event.target;
-    // Set the value only if it's a valid guest number from the data
-    const validGuests = gig.map(venue => venue.guests.toString());
-    if (validGuests.includes(value)) {
-      setGuests(value);
-    }
-    setShowGuestsSuggestions(true);
-  };
+   const onChangeGuests = (event) => {
+  //   const { value } = event.target;
+    
+    // Set the value only if it's a valid guest number from the data and based on the selected location, category, and venue type
+  //   const validGuests = gig
+  //     .filter(venue => 
+  //       venue.city && venue.city.toLowerCase() === location.toLowerCase() &&
+  //       venue.category && venue.category.toLowerCase() === category.toLowerCase() &&
+  //       venue.venue && venue.venue.toLowerCase() === venueType.toLowerCase()
+  //     )
+   
+  //   setShowGuestsSuggestions(true);
+   };
 
   const handleSuggestionClick = (setter) => {
     setter(false);

@@ -1,19 +1,11 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import "./Booking.css";
 import SignatureCanvas from 'react-signature-canvas';
 
 export const Booking = () => {
-    const [sign,setSign] = useState()
-    const [url,setUrl] = useState()
-
-    const handleClear= () =>{
-        sign.clear()
-        setUrl('')
-    }
-    const handleGenerate= () =>{
-        setUrl(sign.getTrimmedCanvas().toDataURL('image/png'))
-    }
-
+    const [sign, setSign] = useState();
+    const [url, setUrl] = useState();
     const [totalBudget, setTotalBudget] = useState(0);
     const [formData, setFormData] = useState({
         fullName: "",
@@ -24,61 +16,85 @@ export const Booking = () => {
         city: "",
         state: "",
         zipCode: "",
-        venue:"",
-        cameraman: false,
-        decoration: false,
-        termsAgreed: false,
-        soundDj: false,
-        hall: false,
-        stage: false,
-        floor: false,
+        venue: "",
+        services: [], // Array to hold the selected services
     });
+    const [servicesData, setServicesData] = useState([]); // State variable to hold the services fetched from the database
     const [confirmation, setConfirmation] = useState("");
     const [errors, setErrors] = useState({});
 
+    useEffect(() => {
+        // Fetch services when the component mounts
+        fetchServices();
+    }, []);
+
+    const fetchServices = async () => {
+        try {
+            const response = await axios.get("http://localhost:3000/services");
+            setServicesData(response.data); // Update the services state variable with the fetched data
+        } catch (error) {
+            console.error('Error fetching services:', error);
+        }
+    };
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setFormData({
-            ...formData,
-            [name]: type === "checkbox" ? checked : value,
-        });
+        if (type === "checkbox") {
+            // Handle checkbox selection
+            if (checked) {
+                // Add the selected service to the services array
+                setFormData({
+                    ...formData,
+                    services: [...formData.services, { name, price: parseFloat(value) }],
+                });
+            } else {
+                // Remove the deselected service from the services array
+                const updatedServices = formData.services.filter(service => service.name !== name);
+                setFormData({
+                    ...formData,
+                    services: updatedServices,
+                });
+            }
+        } else {
+            // Handle other input fields
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
     };
-    
+
     useEffect(() => {
+        // Calculate total budget when the services array changes
         let budget = 0;
-        if (formData.cameraman) budget += 25000;
-        if (formData.decoration) budget += 25000;
-        if (formData.soundDj) budget += 25000;
-        if (formData.hall) budget += 25000;
-        if (formData.stage) budget += 25000;
-        if (formData.floor) budget += 25000;
+        formData.services.forEach(service => {
+            budget += service.price;
+        });
         setTotalBudget(budget);
-    }, [formData]);
+    }, [formData.services]);
+
+    const handleClear = () => {
+        sign.clear();
+        setUrl('');
+    };
+
+    const handleGenerate = () => {
+        setUrl(sign.getTrimmedCanvas().toDataURL('image/png'));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formErrors = {};
         Object.keys(formData).forEach((key) => {
-            if (!formData[key] && key !== "termsAgreed") {
+            if (!formData[key] && key !== "termsAgreed" && key !== "services") {
                 formErrors[key] = "This field is required.";
             }
         });
 
         if (Object.keys(formErrors).length === 0) {
-            
-            let budget = 0;
-            if (formData.cameraman) budget += 25000;
-        if (formData.decoration) budget += 25000;
-        if (formData.soundDj) budget += 25000;
-        if (formData.hall) budget += 25000;
-        if (formData.stage) budget += 25000;
-        if (formData.floor) budget += 25000;
-            budget += parseInt(formData.chairsPrize);
-            setTotalBudget(budget);
-
             // Form submission logic here
-            setConfirmation(`Thank you, ${formData.fullName}! Your event on ${formData.eventDate} has been booked. Total prize: ${budget}`);
+            setConfirmation(`Thank you, ${formData.fullName}! Your event on ${formData.eventDate} has been booked. Total prize: ${totalBudget}`);
         } else {
             setErrors(formErrors);
         }
@@ -91,7 +107,7 @@ export const Booking = () => {
                 <p>Complete form below to retain the services of an Event</p>
                 <div>For Direct Inquiries contact Meharwanw@gmail.com or call (03488365045)</div>
                 <br />
-                <label className="text flexCenter" htmlFor="event ">Event:</label>
+                <label className="text flexCenter" htmlFor="event">Event:</label>
                 <select id="event" className="input" name="event" value={formData.event} onChange={handleChange} required>
                     <option value="">Select Event</option>
                     <option value="Wedding">Wedding</option>
@@ -110,9 +126,8 @@ export const Booking = () => {
                 {errors.eventTime && <div className="error">{errors.eventTime}</div>}
                 <br />
                 <div className="inputs flexCenter Address">
-                <label className="text" htmlFor="eventDate">Address</label>
-             
-                <input type="text" id="venue" name="venue" placeholder="Venue" className="font input1" value={formData.venue} onChange={handleChange} required />
+                    <label className="text" htmlFor="eventDate">Address</label>
+                    <input type="text" id="venue" name="venue" placeholder="Venue" className="font input1" value={formData.venue} onChange={handleChange} required />
                     {errors.venue && <div className="error">{errors.venue}</div>}
                     <input type="text" id="city" placeholder="City" className="font input1" name="city" value={formData.city} onChange={handleChange} required />
                     {errors.city && <div className="error">{errors.city}</div>}
@@ -122,102 +137,36 @@ export const Booking = () => {
                     {errors.zipCode && <div className="error">{errors.zipCode}</div>}
                 </div>
                 <br />
-                <div class="flexCenter input1 budgetEvent">
-                    <div class="budgetCheckbox flexCenter">
-                        <input type="checkbox" id="cameraman" name="cameraman" checked={formData.cameraman} onChange={handleChange} />
-                        <span class="checkbox-icon"></span>
-                        Cameraman
+                {/* Dynamically render service checkboxes */}
+                {servicesData.map(service => (
+                    <div className="flexCenter input1 budgetEvent" key={service.id}>
+                        <div className="budgetCheckbox flexCenter">
+                            <input type="checkbox" id={service.name} name={service.name} value={service.price} onChange={handleChange} />
+                            <span className="checkbox-icon"></span>
+                            {service.name} (+{service.price})
+                        </div>
                     </div>
-                    <div class="budgetBox">
-                        <span class="product">(+25,000)</span>
+                ))}
+                <br />
+                <div className="flexColCenter">
+                    <label className="text flexCenter" htmlFor="">Signature</label>
+                    <div className="Signature">
+                        <SignatureCanvas 
+                            canvasProps={{width: 200, height: 200, className: 'sigCanvas'}}
+                            ref={data=>setSign(data)}
+                        />
                     </div>
+                    <br/>
+                    <div className="flexCenter SignatureButtons">
+                        <button className="button" onClick={handleClear}>Clear</button>
+                        <button className="button" onClick={handleGenerate}>Save</button>
+                    </div>
+                    <br/>
                 </div>
-                <div class="flexCenter input1 budgetEvent">
-                    <div class="budgetCheckbox flexCenter">
-                        <input type="checkbox" id="decoration" name="decoration" checked={formData.decoration} onChange={handleChange} />
-                        <span class="checkbox-icon"></span>
-                        Decoration
-                    </div>
-                    <div class="budgetBox">
-                        <span class="product">(+25,000)</span>
-                    </div>
-                </div>
-                <div class="flexCenter input1 budgetEvent">
-                    <div class="budgetCheckbox flexCenter">
-                        <input type="checkbox" id="soundDj" name="soundDj" checked={formData.soundDj} onChange={handleChange} />
-                        <span class="checkbox-icon"></span>
-                        Sound DJ
-                    </div>
-                    <div class="budgetBox">
-                        <span class="product">(+25,000)</span>
-                    </div>
-                </div>
-                <div class="flexCenter input1 budgetEvent">
-                    <div class="budgetCheckbox flexCenter">
-                        <input type="checkbox" id="hall" name="hall" checked={formData.hall} onChange={handleChange} />
-                        <span class="checkbox-icon"></span>
-                        Hall
-                    </div>
-                    <div class="budgetBox">
-                        <span class="product">(+25,000)</span>
-                    </div>
-                </div>
-                <div class="flexCenter input1 budgetEvent">
-                    <div class="budgetCheckbox flexCenter">
-                        <input type="checkbox" id="stage" name="stage" checked={formData.stage} onChange={handleChange} />
-                        <span class="checkbox-icon"></span>
-                        Stage
-                    </div>
-                    <div class="budgetBox">
-                        <span class="product">(+25,000)</span>
-                    </div>
-                </div>
-                <div class="flexCenter input1 budgetEvent">
-                    <div class="budgetCheckbox flexCenter">
-                        <input type="checkbox" id="floor" name="floor" checked={formData.floor} onChange={handleChange} />
-                        <span class="checkbox-icon"></span>
-                        DJ Floor
-                    </div>
-                    <div class="budgetBox">
-                        <span class="product">(+25,000)</span>
-                    </div>
-                </div>
-                <div class="flexCenter input1 budgetEvent">
-                    <div class="budgetCheckbox flexCenter">
-                        <label type="label" id="total" name="total" />
-                        <span class="checkbox-icon"></span>
-                       Total
-                    </div>
-                    <div class="budgetBox">
-                        <span class="product">{totalBudget}</span>
-                    </div>
-                </div>
-
-            <br />
-               
-               <div className="flexColCenter">
-               <label className="text flexCenter" htmlFor="">Signature</label>
-               <div className="Signature">
-
-            
-                <SignatureCanvas 
-                    canvasProps={{width: 200, height: 200, className: 'sigCanvas'}}
-                    ref={data=>setSign(data)}
-                    />
-
-                    </div>
-            <br/>
-            <div className="flexCenter SignatureButtons">
-            <button className="button" onClick={handleClear}>Clear</button>
-            <button className="button" onClick={handleGenerate}>Save</button>
-            </div>
-            <br/>
-                    </div>
-              
                 <br />
                 <button className="button" type="submit">Submit</button>
             </form>
             {confirmation && <div id="confirmation">{confirmation}</div>}
         </div>
     );
-}
+};
