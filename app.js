@@ -140,6 +140,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 
+
 app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
 
     try {
@@ -175,6 +176,8 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
     }
 });
 
+
+
 //GETTIG ALL CLIENTS DATA
 app.get('/getAllClientData', async (req,res)=>{
 
@@ -197,6 +200,28 @@ app.get('/getAllOrganizerData', async (req,res)=>{
     }
 
 })
+
+
+
+app.get('/get/orders', async (req, res) => {
+    try {
+        const organizerId = req.query.organizerId;
+        console.log("organizerId from frontend: ", organizerId);
+
+        // Use the organizerId to find orders in the Order model
+        const allOrders = await order.find({ organizer_id: organizerId });
+
+        if (allOrders) {
+            res.status(201).json({message:"Orders found ",allOrders:allOrders});
+        } else {
+            res.status(404).json({ message: 'No orders found' });
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 app.get('/getAllGigs', async (req, res) => {
     const { city, category, venue } = req.body;
@@ -221,27 +246,7 @@ app.get('/getAllGigs', async (req, res) => {
 });
 
 
-// CLIENT
-// app.post("/login", async (req, res) => {
-//     const { client_username, client_password } = req.body;
-//     try {
-//       const validUser = await client.findOne({ client_username });
-//       if (!validUser) {
-//         res.status(404).json({ "message": "User does not exist" });
-//       } else {
-//         const isPasswordValid = bcrypt.compareSync(client_password, validUser.client_password);
-//         if (isPasswordValid) {
-//           res.status(200).json({ "userData": validUser });
-//         } else {
-//           res.status(401).json({ "message": "Invalid password" });
-//         }
-//       }
-//     } catch (error) {
-//       console.error("Error during login:", error);
-//       res.status(500).json({ "message": "Internal server error" });
-//     }
-//   });
-
+// LOGIN USER 
 app.post("/login",async(req,res)=>{
 
     const{client_username,client_password}=req.body

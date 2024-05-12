@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BiSolidDashboard,BiSmile, BiStore, BiAnalyse, BiMessageDots, BiSolidCalendar, BiGroup, BiCog, BiLogOut, BiCalendarCheck, BiDollarCircle, BiSearch, BiBell, BiPlus, BiDotsVerticalRounded, BiChevronRight } from 'react-icons/bi';
+import { BiSolidDashboard,BiSmile, BiStore, BiAnalyse, BiMessageDots, BiSolidCalendar, BiGroup, BiCog, BiLogOut, BiCalendarCheck, BiDollarCircle, BiSearch, BiBell, BiDotsVerticalRounded, BiChevronRight } from 'react-icons/bi';
 import Form from 'react-bootstrap/Form';
 import { Link , useLocation} from 'react-router-dom';
 import './adminhub.css';
@@ -20,6 +20,8 @@ const AdminHub = () => {
     //console.log("Userdata in dashboard",userData)
     //console.log(userData.userData.organizer_name)
 
+
+
     //const [selectedCategory, setSelectedCategory] = useState(null);
     const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
     const [showAddEventForm, setShowAddEventForm] = useState(false);
@@ -31,6 +33,7 @@ const AdminHub = () => {
     const [image, setImage] = useState(null);
     const [accountRole,setAccountRole] = useState("")
     const [isLoading, setIsLoading] = useState(false);
+    const [clientOrders,setClientOrders] = useState("")
     //const [organizer,setOrganizer]=useState("")
 
     //const navigate = useNavigate();
@@ -102,6 +105,32 @@ const AdminHub = () => {
 
 
 }
+
+ useEffect(() => {
+    getOrders();
+  }, []);
+
+
+const getOrders = async () => {
+
+    const organizerId = localStorage.getItem("currentOrganizer");
+    console.log("organizerId from AdminHub GET: ", organizerId);
+
+    const result = await axios.get("http://localhost:3000/get/orders", {
+        params: {
+            organizerId: organizerId
+        }
+    });
+
+    console.log(result.data);
+
+    if(result.status){
+       // setClientOrders(result.data)
+        console.log("Orders Found")
+
+    }
+    //setAllImage(result.data.data);
+};
 
     // const handleFormSubmit = (event) => {
     //     event.preventDefault();
