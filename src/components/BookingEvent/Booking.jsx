@@ -76,9 +76,130 @@ const Booking = () => {
             }
         } else {
             setErrors(formErrors);
-            console.log(formErrors);
         }
     };
+
+    const clientId = localStorage.getItem("currentClient");
+    console.log("orgnaizerId from AdminHub ; ",clientId )
+
+    async function handleBooking(event) {
+        const data = {
+            client_id:clientId,
+            category:"Party",
+            venue:formData.venue,
+            city:formData.city,
+            state1:formData.state,
+            services:"cameraman",
+            no_of_guest:180,
+            // total_cost:findGig.total_cost,
+            payment_status:"After Event",
+            //gig_id:findGig._id,
+            //organizer_id:findGig.organizer_id,
+        };
+    
+        axios.post('http://localhost:3000/book/event', data)
+            .then(response => {
+                console.log('Response:', response.data);
+                // Handle response data
+                alert("Order Placed")
+            })
+            .catch(error => {
+                if (error.response) {
+                    console.error('Response Error:', error.response.data);
+                } else if (error.request) {
+                    console.error('Request Error:', error.request);
+                } else {
+                    console.error('Error:', error.message);
+                }
+            });
+    }
+    
+
+    // async function handleBooking(event) {
+       
+    //     event.preventDefault();
+    //    // setIsLoading(true);
+
+    //    const data = {
+    //        "client_id": "788",
+    //        "category": "Party",
+    //        "venue": "DolphinHall",
+    //        "city": "Sukkur",
+    //        "state1": "Sukkur",
+    //        //"no_of_guest": "180",
+    //        "services": "camerman"
+    //        //"gig_id": "89210",
+    //        //"organizer_id": "794204"
+    //    };
+       
+    //    axios.post('http://localhost:3000/book/event', data)
+    //        .then(response => {
+    //            console.log('Response:', response.data);
+    //            // Handle response data
+    //        })
+    //        .catch(error => {
+    //            if (error.response) {
+    //                // The request was made and the server responded with a status code that falls out of the range of 2xx
+    //                console.error('Response Error:', error.response.data);
+    //            } else if (error.request) {
+    //                // The request was made but no response was received
+    //                console.error('Request Error:', error.request);
+    //            } else {
+    //                // Something happened in setting up the request that triggered an Error
+    //                console.error('Error:', error.message);
+    //            }
+    //        });
+       
+
+    //     // try {
+    //     //     await axios.post("http://localhost:3000/book/event", {
+
+    //     //     client_id:"788",
+    //     //     category:"Party",
+    //     //     venue:"DolphinHall",
+    //     //     city:"Sukkur",
+    //     //     state1:"Sukkur",
+    //     //     //"no_of_guest":"180",
+    //     //     services:"camerman",
+    //     //     //"gig_id":"89210",
+    //     //     //"organizer_id":"794204"
+    //     //         //client_id:"663a7e97b5098afc83e15903",
+    //     //         //category:"Party",
+    //     //         // venue:formData.venue,
+    //     //         // city:formData.city,
+    //     //         // state1:formData.state,
+    //     //         // services:"cameraman",
+    //     //         // no_of_guest:3000,
+    //     //         // // total_cost:findGig.total_cost,
+    //     //         // payment_status:"After Event",
+    //     //         // gig_id:findGig._id,
+    //     //         // organizer_id:findGig.organizer_id,
+    //     //     }).then(res =>{
+ 
+    //     //         console.log("response form then booking ",res)
+
+    //     //         if (res.data.status) {
+    //     //             alert("Order placed: Wait for the confirmation of organizer")
+    //     //             navigate('/home');
+                    
+                   
+    //     //         } else {
+    //     //             alert("there was an error placing your booking. Try Again!");            
+                   
+                   
+    //     //         }
+    //     //     }).catch(err =>{
+    //     //         console.log("Error inside await post post signup",err)
+    //     //     })
+    //     // } 
+    //     // catch (error) {
+    //     //     console.error('Registration error:', error.message);
+    //     //     alert('Failed to register. Please try again.');
+
+    //     // } finally {
+    //     //    // setIsLoading(false);
+    //     // }
+    // }
 
     return (
         <div className="bookingscreen shadow-box flexCenter font">

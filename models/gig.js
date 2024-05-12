@@ -24,10 +24,7 @@ const gigSchema = new mongoose.Schema({
     }],
     required: true,
 }, 
-  no_of_guest:{
-    type: Number,
-    required:true
-  },
+ 
   total_cost: {
     type: Number,
     required: true,
