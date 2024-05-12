@@ -66,45 +66,39 @@ app.get("/all/orders", async (req, res) => {
 app.post("/book/event", async (req, res) => {
   try {
     //no_ofguests
-    const { client_id, category, venue, city, state1, services, no_of_guest } =
-      req.body;
+    const { client_id, organizer_id, gig_id, event_date,event_time,category, venue, city, state1, services,totalPrice } =req.body;
 
     console.log("req.body: ", req.body);
 
-    const findGig = await gig.findOne({
-      category: "Wedding",
-      venue: "Dolphin",
-      city: "Sukkur",
-      no_of_guest: { $gte: no_of_guest },
-    });
+    // const findGig = await gig.findOne({
+    //   category: category,
+    //   venue: venue,
+    //   city: city,
+    // });
 
-    console.log("Gig Object from app,js ", findGig);
+    // console.log("Gig Object from app,js ", findGig);
 
-    if (!findGig) {
-      return res
-        .status(400)
-        .json({ message: "No Organizer provide this service" });
-    }
+    // if (!findGig) {
+    //   return res.status(400).json({ message: "No Organizer provide this service" });
+    // }
 
-    console.log("Gig Id of Order", findGig._id);
-    console.log("Orgaanizer Id of Order", findGig.organizer_id);
+    // console.log("Gig Id of Order", findGig._id);
+    // console.log("Orgaanizer Id of Order", findGig.organizer_id);
 
     const newOrder = new order({
-      client_id: "663a7e97b5098afc83e15903",
+      client_id,
       category,
-      // event_date,
+      event_date,
+      event_time,
       venue,
       city,
       state1,
-      services: [services],
-      no_of_guest: 180,
-      total_cost: 150000,
-      total_cost: findGig.total_cost,
+      services_list: services,
+      total_cost: totalPrice,
       payment_status: "cash on delivery",
-      gig_id: "738632082",
-      organizer_id: "dsjdn",
-      gig_id: findGig._id,
-      organizer_id: findGig.organizer_id,
+      order_status:"pending",
+      gig_id,
+      organizer_id
     });
 
     console.log("newOrder : ", newOrder);
@@ -128,6 +122,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+
 
 app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
   try {
@@ -166,6 +162,8 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
   }
 });
 
+
+
 //GETTIG ALL CLIENTS DATA
 app.get("/getAllClientData", async (req, res) => {
   try {
@@ -186,10 +184,33 @@ app.get("/getAllOrganizerData", async (req, res) => {
   }
 });
 
-app.get("/getAllGigs", async (req, res) => {
-  const { city, category, venue } = req.body;
-  try {
-    let query = {};
+
+
+
+app.get('/get/orders', async (req, res) => {
+    try {
+        const organizerId = req.query.organizerId;
+        console.log("organizerId from frontend: ", organizerId);
+
+        // Use the organizerId to find orders in the Order model
+        const allOrders = await order.find({ organizer_id: organizerId });
+
+        if (allOrders) {
+            res.status(201).json({message:"Orders found ",allOrders:allOrders});
+        } else {
+            res.status(404).json({ message: 'No orders found' });
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/getAllGigs', async (req, res) => {
+    const { city, category, venue } = req.body;
+    try {
+        let query = {};
 
     if (city) {
       query.city = city;
@@ -208,11 +229,19 @@ app.get("/getAllGigs", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
-  const { client_username, client_password } = req.body;
 
-  try {
-    let validUser = await client.findOne({ client_username });
+// LOGIN USER 
+app.post("/login",async(req,res)=>{
+
+    const{client_username,client_password}=req.body
+
+    try{
+
+        let validUser=await client.findOne({client_username})
+        
+        // console.log("valid USer: ",validUser);
+        
+        // console.log("valid USer Type: ",validUser.user_type);
 
     let hashPassword;
     if (validUser) {

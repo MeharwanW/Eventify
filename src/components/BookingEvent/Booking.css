@@ -41,3 +41,16 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.budgetCheckbox {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.budgetCheckbox input{
+    width: 10%;
+}
+.budgetCheckbox .checkbox-icon
+{
+    margin-right: 61%;
+}

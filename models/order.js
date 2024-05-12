@@ -11,7 +11,10 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
     event_date:{
-        type:Date
+        type:String
+    },
+    event_time:{
+      type:String
     },
     venue: {
       type: String,
@@ -28,10 +31,13 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    services: {
-      type: [String], // Assuming services are represented as strings
+    services_list: {
+      type: [{
+          name: String,
+          price: Number
+      }],
       required: true,
-    },
+  }, 
     total_cost: {
       type: Number,
       required: true,
@@ -47,7 +53,11 @@ const orderSchema = new mongoose.Schema(
     organizer_id:{
         type: String,
         required: true,
-    }
+    },
+    order_status:{
+      type:String,
+      required:true
+    },
     
     
     

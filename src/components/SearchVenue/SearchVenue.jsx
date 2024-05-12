@@ -8,31 +8,25 @@ export default function SearchVenue({ onSearch , onGig }) {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
   const [venueType, setVenueType] = useState("");
-  const [guests, setGuests] = useState("");
   const [gig, setGig] = useState([])
 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [categorySuggestions, setCategorySuggestions] = useState([]);
   const [venueTypeSuggestions, setVenueTypeSuggestions] = useState([]);
-const [guestsSuggestions, setGuestsSuggestions] = useState([]);
 
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(true);
   const [showCategorySuggestions, setShowCategorySuggestions] = useState(true);
   const [showVenueTypeSuggestions, setShowVenueTypeSuggestions] = useState(true);
-  const [showGuestsSuggestions, setShowGuestsSuggestions] = useState(true);
 
   const resetFields = () => {
     setLocation("");
     setCategory("");
     setVenueType("");
-    setGuests("");
   };
  
 
   const handleSearch = () => {
-    console.log("location",location);
-    console.log("category",category);
-    console.log("venueType",venueType);
+
     const filteredData1 = [location,category,venueType]
    
     onSearch(filteredData1); // Pass filtered data
@@ -92,20 +86,6 @@ const [guestsSuggestions, setGuestsSuggestions] = useState([]);
     setVenueTypeSuggestions(uniqueVenues);
     setShowVenueTypeSuggestions(true);
   };
-
-   const onChangeGuests = (event) => {
-  //   const { value } = event.target;
-    
-    // Set the value only if it's a valid guest number from the data and based on the selected location, category, and venue type
-  //   const validGuests = gig
-  //     .filter(venue => 
-  //       venue.city && venue.city.toLowerCase() === location.toLowerCase() &&
-  //       venue.category && venue.category.toLowerCase() === category.toLowerCase() &&
-  //       venue.venue && venue.venue.toLowerCase() === venueType.toLowerCase()
-  //     )
-   
-  //   setShowGuestsSuggestions(true);
-   };
 
   const handleSuggestionClick = (setter) => {
     setter(false);
@@ -193,29 +173,7 @@ console.log("Hello gog",gig);
             </div>
           </form>
         </div>
-        <div className='margin'>
-          <form action="" method="get">
-            <div className='search-container'>
-              <input
-                type="text"
-                placeholder="No. Of Guests e.g 200"
-                className="search-input font"
-                value={guests}
-                onChange={onChangeGuests}
-                disabled // Disable manual editing of the guests input field
-              />
-              {showGuestsSuggestions && (
-                <div className="suggestions">
-                  {guestsSuggestions.map((item, index) => (
-                    <div key={index} onClick={() => { setGuests(item); handleSuggestionClick(setShowGuestsSuggestions); }} className="suggestion-item">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </form>
-        </div>
+       
         <div className="margin">
           <button className='button font' onClick={handleSearch}>Search</button>
         </div>

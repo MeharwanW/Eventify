@@ -68,12 +68,6 @@ const Residencies = () => {
           ))}
         </Swiper>
       </div>
-      <Link to="/booking">
-        <div className="flexCenter margin">
-
-                        <button className="button button1 font btn-lg">Book Now</button>
-        </div>
-                    </Link>
       {selectedSuppliers.length > 0 && (
         <SupplierInfo selectedSuppliers={selectedSuppliers} onClose={() => setSelectedSuppliers([])} />
       )}

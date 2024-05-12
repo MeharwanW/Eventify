@@ -12,7 +12,7 @@ import About from "./components/About/About";
 import AdminHub from "./components/Profile/Adminhub";
 import { useState, useEffect } from "react";
 import Preloader from "./components/Preloader";
-import { Booking } from "./components/BookingEvent/Booking";
+import  Booking  from "./components/BookingEvent/Booking";
 
 function App() {
   const [loaded, setLoaded] = useState(true);

@@ -3,10 +3,12 @@ import Footer from '../Footer/Footer';
 import SearchVenue from '../SearchVenue/SearchVenue';
 import "./venue.css";
 import "swiper/css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 export default function Venue() {
-
+  const navigate = useNavigate();
+    
   const [selectedCard, setSelectedCard] = useState(null);
   const [filteredData, setFilteredData] = useState([]);
   const [gig, setGig] = useState([]);
@@ -84,11 +86,10 @@ export default function Venue() {
           <div className='supplierInfoContainer flexColCenter'>
             <h2>{selectedCard.venue}</h2>
             
-            <div className='button'>
-            <Link to={{
-                pathname: '/booking',
-                 state: { selectedCard } 
-               }}>Book Now</Link>
+            <div  onClick={()=>{
+               navigate('/booking', { state: { userData:selectedCard} });
+            }} className='button'>
+                Book Now
               </div>
             
             <button className="button" onClick={() => setSelectedCard(null)}>Close</button>
