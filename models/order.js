@@ -40,6 +40,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    order_status:{
+      type: String,
+      required: true,
+    },
     gig_id: {
         type: String,
         required: true,

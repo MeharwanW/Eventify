@@ -34,6 +34,7 @@ const AdminHub = () => {
     const [accountRole,setAccountRole] = useState("")
     const [isLoading, setIsLoading] = useState(false);
     const [clientOrders,setClientOrders] = useState("")
+    const [clientUsername,setClientUsername] = useState("")
     //const [organizer,setOrganizer]=useState("")
 
     //const navigate = useNavigate();
@@ -51,7 +52,6 @@ const AdminHub = () => {
 
     async function handleFormSubmit(event){
 
-
         event.preventDefault();
         setIsLoading(true);
 
@@ -59,7 +59,6 @@ const AdminHub = () => {
         console.log("authTOken from AdminHub ; ",authToken )
         const organizerId = localStorage.getItem("currentOrganizer");
         console.log("orgnaizerId from AdminHub ; ",organizerId )
-
 
         const formData = new FormData();
         formData.append("organizer_id", organizerId);
@@ -122,16 +121,56 @@ const getOrders = async () => {
         }
     });
 
-    console.log(result.data);
+    console.log(result.data.allOrders);
 
     if(result.status){
-       // setClientOrders(result.data)
+        setClientOrders(result.data)
         console.log("Orders Found")
-
     }
+
+
+
+    const clientIds=result.data.allOrders.map(order => order.client_id);
+    const clientIdsString = clientIds.join(',');
+
+    const clientResult = await axios.get("http://localhost:3000/get/client/username", {
+        params: {
+            client_id: clientIdsString
+        }
+    });
+    console.log(clientResult.data.clientData);
+
+    if(clientResult.status){
+        setClientUsername(clientResult.data)
+        console.log("Orders Found")
+    }
+
+
     //setAllImage(result.data.data);
 };
 
+
+const handleDecision = async (decision) => {
+    try{
+        const response =  await axios.post('http://localhost:3000/handle/decision', {orderId, decision, client_email });
+
+        if (response.status) {
+            console.log(response.data.message);
+            alert(response.data.message);
+        } else {
+            console.log('Failed to process order');
+            alert('Failed to process order');
+        }
+       // alert(`Order ${decision === 'accepted' ? 'accepted' : 'rejected'}`);
+    } 
+    catch (error) {
+        console.error(`Error ${decision === 'accepted' ? 'accepting' : 'rejecting'} order:`, error);
+            alert(`Error ${decision === 'accepted' ? 'accepting' : 'rejecting'} order`);
+    }
+};
+
+
+ 
     // const handleFormSubmit = (event) => {
     //     event.preventDefault();
     //       const formData = {
@@ -151,6 +190,8 @@ const getOrders = async () => {
 
     //     console.log(formData);
     // };
+
+    console.log("Befir ret client id using clientOders: ", clientOrders.allOrders)
 
     return (
         <div>

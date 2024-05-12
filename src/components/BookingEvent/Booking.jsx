@@ -86,9 +86,12 @@ export const Booking = () => {
         }
     };
 
+    const clientId = localStorage.getItem("currentClient");
+    console.log("orgnaizerId from AdminHub ; ",clientId )
+
     async function handleBooking(event) {
         const data = {
-            client_id:"663a7e97b5098afc83e15903",
+            client_id:clientId,
             category:"Party",
             venue:formData.venue,
             city:formData.city,
