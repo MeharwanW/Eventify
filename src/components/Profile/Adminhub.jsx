@@ -161,9 +161,8 @@ const AdminHub = () => {
                                         
                                         <th className=' recentOrders'>venue</th>
                                         <th className=' recentOrders'>services</th>
-                                        <th className=' recentOrders'></th>
-                                        <th className=' recentOrders'>Payment Status</th>
                                         <th className=' recentOrders'>Status</th>
+                                        <th className=' recentOrders'>Order Status</th>
                                        
                                     </tr>
                                 </thead>
@@ -175,12 +174,10 @@ const AdminHub = () => {
                                     ) : (
                                         clientOrders.allOrders.map((dataItem, index) => (
                                             <tr className='font' key={index}>
-                                               
+                                                <td className=' recentOrders'></td>
                                                 <td className=' recentOrders'>{dataItem.venue}</td>
                                                 <td className=' recentOrders'>{dataItem.services}</td>
-                                                
-                                                <td className=' recentOrders'>{dataItem.}</td>
-                                                <td className=' recentOrders'>{dataItem.payment_status}</td>
+                                                <td className=' recentOrders'>{dataItem.order_status}</td>
                                                 <td className=' recentOrders'><button className='btn btn-sm btn-primary'>Accept</button><button className=' btn btn-danger btn-sm'>Reject</button></td>
                                             </tr>
                                         ))
