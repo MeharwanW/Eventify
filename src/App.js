@@ -50,18 +50,18 @@ function App() {
               }
             >
               <Route index element={<Home />} />
-              <Route path="home" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login login={authHandler} />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="venues" element={<Venue />} />
-              <Route path="media" element={<Media />} />
-              <Route path="contacts" element={<Contacts />} />
-              <Route path="suppliers" element={<Suppliers />} />
-              <Route path="about" element={<About />} />
+              <Route path="/venues" element={<Venue />} />
+              <Route path="/media" element={<Media />} />
+              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/suppliers" element={<Suppliers />} />
+              <Route path="/about" element={<About />} />
               <Route
-                path="booking"
+                path="/booking"
                 element={
-                  isLoggedIn ? <Navigate to="/login" /> :  <Booking />
+                  isLoggedIn ? <Booking />  :  <Navigate to="/login" />
                 }
               />
               <Route

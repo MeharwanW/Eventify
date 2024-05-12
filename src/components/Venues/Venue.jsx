@@ -3,8 +3,10 @@ import Footer from '../Footer/Footer';
 import SearchVenue from '../SearchVenue/SearchVenue';
 import "./venue.css";
 import "swiper/css";
+import { Link } from 'react-router-dom';
 
 export default function Venue() {
+
   const [selectedCard, setSelectedCard] = useState(null);
   const [filteredData, setFilteredData] = useState([]);
   const [gig, setGig] = useState([]);
@@ -31,11 +33,13 @@ export default function Venue() {
       );
     }
   });
-  
+
+  console.log(filter)
+
   const handleSearch = (filteredData) => {
     setFilteredData(filteredData);
   };
-  
+
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
@@ -56,19 +60,20 @@ export default function Venue() {
           <h1 className='font'>Our EVENT Venues</h1>
         </div>
         <div className='venueSearch'></div>
-        <SearchVenue onSearch={handleSearch} onGig={setGig}/>
+        <SearchVenue onSearch={handleSearch} onGig={setGig} />
       </div>
       <div className='venueList'>
         <div className="paddings innerWidth r-container ">
           <div className="r-head flexCenter">
             <span className="heading">Event Venues</span>
+
           </div>
           <div className='eventVenue'>
             {filter.map((card) => (
               <div className="flexColCenter r-card" key={card.id} onClick={() => handleCardClick(card)}>
-                <img src={card.image} alt="home" />
-                <span className="flexCenter heading">{card.city}</span>
-                <span className="flexCenter font">{card.category}</span>
+                <img src={`/1/${card.image}`} alt="home" />
+                <span className="flexCenter heading">{card.category}</span>
+                <span className="flexCenter font">{card.city}</span>
               </div>
             ))}
           </div>
@@ -78,7 +83,14 @@ export default function Venue() {
         <div className="selectedCard supplierInfoOverlay">
           <div className='supplierInfoContainer flexColCenter'>
             <h2>{selectedCard.venue}</h2>
-            <p>{selectedCard.description}</p>
+            
+            <div className='button'>
+            <Link to={{
+                pathname: '/booking',
+                 state: { selectedCard } 
+               }}>Book Now</Link>
+              </div>
+            
             <button className="button" onClick={() => setSelectedCard(null)}>Close</button>
           </div>
         </div>

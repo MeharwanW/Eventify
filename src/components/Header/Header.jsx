@@ -93,7 +93,7 @@ function NavItems(props) {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-            <Nav.Link className="links" eventKey="/Venue">
+            <Nav.Link className="links" eventKey="/venues">
               <Link to="venues">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={venueSvg1} alt="" srcset="" />
@@ -103,7 +103,7 @@ function NavItems(props) {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="links" to="/Suppliers">
+            <Nav.Link className="links" to="/suppliers">
               <Link to="suppliers">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={supplierSvg1} alt="" srcset="" />
@@ -113,7 +113,7 @@ function NavItems(props) {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="links" to="/Social Media">
+            <Nav.Link className="links" to="/media">
               <Link to="media">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={mediaSvg1} alt="" srcset="" />
@@ -123,7 +123,7 @@ function NavItems(props) {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="links" to="/About">
+            <Nav.Link className="links" to="/about">
               <Link to="about">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={aboutSvg1} alt="" srcset="" />
@@ -133,7 +133,7 @@ function NavItems(props) {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="links" to="/Contact">
+            <Nav.Link className="links" to="/contacts">
               <Link to="contacts">
                 <div className="flexColCenter">
                   <img className="svgImg flexColCenter" src={contactSvg1} alt="" srcset="" />
@@ -144,7 +144,7 @@ function NavItems(props) {
           </Nav.Item>
       {windowWidth < 953 && !props.isLoggedIn && (
         <Nav.Item>
-          <Nav.Link className="links" to="/SignUp">
+          <Nav.Link className="links" to="/signup">
             <Link to="signup">
               <div className="flexColCenter">
                 <BiLogInCircle />

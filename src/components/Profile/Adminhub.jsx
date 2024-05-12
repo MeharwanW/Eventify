@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BiSolidDashboard, BiStore, BiMessageDots, BiAnalyse, BiCalendarCheck, BiCog, BiLogOut,  } from 'react-icons/bi';
+import { BiSolidDashboard,BiSolidCalendar,BiGroup,BiDollarCircle, BiStore, BiMessageDots, BiAnalyse, BiCalendarCheck, BiCog, BiLogOut,  } from 'react-icons/bi';
 import axios from 'axios';
 import './adminhub.css';
 
@@ -13,6 +13,7 @@ const AdminHub = () => {
     const [category, setCategory] = useState('');
     const [city, setCity] = useState('');
     const [state1, setState] = useState('');
+    const [image, setImage] = useState(null);
     const [services, setServices] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -20,59 +21,87 @@ const AdminHub = () => {
         setShowAddEventForm(true);
     };
 
-    const handleFormSubmit = async (event) => {
+    async function handleFormSubmit(event){
+
         event.preventDefault();
         setIsLoading(true);
 
+        const authToken = localStorage.getItem("adminToken");
+        console.log("authTOken from AdminHub ; ",authToken )
+        const organizerId = localStorage.getItem("currentOrganizer");
+        console.log("orgnaizerId from AdminHub ; ",organizerId )
+
+
+        const formData = new FormData();
+        formData.append("organizer_id", organizerId);
+        formData.append("image", image);
+        formData.append("description", description);
+        formData.append("venue", venue);
+        formData.append("category", category);
+        formData.append("city", city);
+        formData.append("state1", state1);
+        formData.append("services", JSON.stringify(services));
+
+       // console.log("Auth Token from AdminHub", authToken)
+        //console.log("Organizer Id in Dashboard: ", userData.userData._id)
+       // console.log("Organizer Name in Dashboard: ",userData.userData.organizer_name)
+
         try {
-            const response = await axios.post("http://localhost:3000/addGig", {
-                organizer_id: "meharwan", // Replace with actual organizer ID
-                description,
-                venue,
-                category,
-                city,
-                state1,
-                services
-            });
+            console.log("Inside try befor axios")
 
-            console.log("Response from server:", response.data);
+            const result = await axios.post("http://localhost:3000/addGig", formData, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    "Content-Type": "multipart/form-data",
+                },
+                //selectedCategory,
+             });
+           
+            console.log("Inside try after axios")
 
-            if (response.data) {
-                alert("Gig created successfully");
-                setShowAddEventForm(false);
+            console.log("response form then addminHub ",result)
+            //console.log(res.data.status)
+            if (result.status) {
+                alert("Gig created")
+                //navigate('/Login');
             } else {
-                alert("Failed to create gig");
+                alert('Gig already exist');            
+               
+               
             }
-        } catch (error) {
+        }catch (error) {
             alert('Failed to add. Please try again.');
             console.error('Registration error:', error);
         } finally {
             setIsLoading(false);
-        }
-    };
+    }
 
-    const handleAddService = () => {
-        const newService = { name: '', price: 0 };
-        setServices([...services, newService]);
-    };
 
-    const handleServiceNameChange = (index, value) => {
-        const updatedServices = [...services];
-        updatedServices[index].name = value;
-        setServices(updatedServices);
-    };
+}
 
-    const handleServicePriceChange = (index, value) => {
-        const updatedServices = [...services];
-        updatedServices[index].price = value;
-        setServices(updatedServices);
-    };
 
-    const handleRemoveService = (index) => {
-        const updatedServices = [...services];
-        updatedServices.splice(index, 1);
-        setServices(updatedServices);
-    };
+const handleAddService = () => {
+    const newService = { name: '', price: 0 };
+    setServices([...services, newService]);
+};
+
+const handleServiceNameChange = (index, value) => {
+    const updatedServices = [...services];
+    updatedServices[index].name = value;
+    setServices(updatedServices);
+};
+
+const handleServicePriceChange = (index, value) => {
+    const updatedServices = [...services];
+    updatedServices[index].price = value;
+    setServices(updatedServices);
+};
+
+const handleRemoveService = (index) => {
+    const updatedServices = [...services];
+    updatedServices.splice(index, 1);
+    setServices(updatedServices);
+};
 
     return (
         <div>
@@ -135,6 +164,29 @@ const AdminHub = () => {
                             <span className="">Add Event</span>
                         </div>
                     </div>
+                    <ul className="box-info font">
+                        <li >
+                            <BiSolidCalendar className='bx' />
+                            <span className="text">
+                                <h3>1020</h3>
+                                <p>New Order</p>
+                            </span>
+                        </li>
+                        <li >
+                            <BiGroup className='bx' />
+                            <span className="text">
+                                <h3>2834</h3>
+                                <p>Visitors</p>
+                            </span>
+                        </li>
+                        <li>
+                            <BiDollarCircle className='bx' />
+                            <span className="text">
+                                <h3>$2543</h3>
+                                <p>Total Sales</p>
+                            </span>
+                        </li>
+                    </ul>
                     <div className="table-data font">
                         <div className="order">
                             <div className="head">
@@ -224,6 +276,15 @@ const AdminHub = () => {
                                                 <button className='button' type="button" onClick={() => handleRemoveService(index)}>Remove</button>
                                             </div>
                                         ))}
+                                        <div>
+                                        <div className="form-group inputs1 flexCenter">
+                                    <label className='text' htmlFor="image">Image:</label>
+                                    <input className='' type="file" id="image" accept='image/*' onChange={(e) => setImage(e.target.files[0])} />
+                                </div>
+                                <div className="imageSet">
+                                    {image && <img src={URL.createObjectURL(image)} alt="Uploaded Image" />}
+                                </div>
+                                        </div>
                                         <button className='button' type="button" onClick={handleAddService}>Add Service</button>
                                         </div>
                                         <div className='eventFormField'>

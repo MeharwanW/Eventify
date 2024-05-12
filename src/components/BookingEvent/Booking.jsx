@@ -3,7 +3,13 @@ import axios from 'axios';
 import "./Booking.css";
 import SignatureCanvas from 'react-signature-canvas';
 
-export const Booking = () => {
+
+
+export const Booking = (props) => {
+
+    const  selectedCard  = props.city;
+    console.log(selectedCard)
+     
     const [sign, setSign] = useState();
     const [url, setUrl] = useState();
     const [totalBudget, setTotalBudget] = useState(0);
@@ -100,6 +106,41 @@ export const Booking = () => {
         }
     };
 
+    async function handleBooking(event) {
+        const data = {
+            client_id:"663a7e97b5098afc83e15903",
+            category:"Party",
+            venue:formData.venue,
+            city:formData.city,
+            state1:formData.state,
+            services:"cameraman",
+            no_of_guest:180,
+            // total_cost:findGig.total_cost,
+            payment_status:"After Event",
+            //gig_id:findGig._id,
+            //organizer_id:findGig.organizer_id,
+        };
+    
+        axios.post('http://localhost:3000/book/event', data)
+            .then(response => {
+                console.log('Response:', response.data);
+                // Handle response data
+                alert("Order Placed")
+            })
+            .catch(error => {
+                if (error.response) {
+                    console.error('Response Error:', error.response.data);
+                } else if (error.request) {
+                    console.error('Request Error:', error.request);
+                } else {
+                    console.error('Error:', error.message);
+                }
+            });
+    }
+    
+
+
+
     return (
         <div className="bookingscreen shadow-box flexCenter font">
             <form onSubmit={handleSubmit} className="bookingagreement ">
@@ -164,7 +205,7 @@ export const Booking = () => {
                     <br/>
                 </div>
                 <br />
-                <button className="button" type="submit">Submit</button>
+                <button className="button" type="submit" onClick={handleBooking}>Submit</button>
             </form>
             {confirmation && <div id="confirmation">{confirmation}</div>}
         </div>

@@ -5,7 +5,6 @@ import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from "react"
 
-// let authToken;
 
 export const Login = (props) => {
 
@@ -32,12 +31,25 @@ export const Login = (props) => {
             });
     
             if (response.data) {
+
                 // console.log("returned token ",response.data.token)
 
-                // authToken=response.data.token;
-                // Pass userData to the dashboard component
+                const authToken=response.data.token;
                 props.login()
-                navigate('/dashboard', { state: { userData: response.data } });
+                if(response.data.userType==="organizer"){
+                localStorage.setItem("adminToken",authToken)
+                localStorage.setItem('currentOrganizer', response.data.userData._id);
+                    navigate('/dashboard', { state: { userData: response.data } });
+                }
+                else if(response.data.userType==="client"){
+                    localStorage.setItem("clientToken",authToken)
+                    localStorage.setItem('currentClient', response.data.userData._id);
+                    navigate('/home', { state: { userData: response.data } });
+                }
+                // Pass userData to the dashboard component
+                
+
+                
             
             } else {
                 alert("User does not exist or wrong password");
@@ -138,4 +150,3 @@ export const Login = (props) => {
         // catch{
         //     console.log(e)
         // }
-// export default authToken;

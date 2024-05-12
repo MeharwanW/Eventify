@@ -118,6 +118,7 @@ const [guestsSuggestions, setGuestsSuggestions] = useState([]);
     .catch(error => console.error('Error:', error));
     
 }, []);
+
 console.log("Hello gog",gig);
 
   return (
