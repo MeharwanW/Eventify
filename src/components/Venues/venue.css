@@ -33,6 +33,46 @@
     color: #FFFFFF;
 }
 
+.venueInfoContainer{
+    overflow:scroll;
+    background-color: #fff;
+    padding: 20px;
+    height: 90%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+.venueDetails
+{
+    width: 100%;
+}
+.venueDetailsImg{
+    width: 47%;
+    margin-right: 3%;
+}
+.venueDetailsImg img{
+    width: 100%;
+    border-radius: 10px;
+}
+.service_list{
+    width: 100%;
+    
+    justify-content: space-between;
+}
+.services{
+    width: 100%;
+}
+.service_list div
+{
+    width: 100%;
+    justify-content: space-between;
+}
+.Details{
+    width: 50%;
+}
 @media only screen and (max-width: 868px) {
     .venueContent
 {

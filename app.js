@@ -219,20 +219,26 @@ const sendEmail = async (to, subject, text) => {
 // Route to handle organizer's decision
 app.post('/handle/decision', async (req, res) => {
     try {
-        const { orderId, decision, client_email } = req.body;
+        const { orderId, decision,client_id } = req.body;
+
+        console.log("handleDesiscion : ",req.body)
 
         if (decision === 'accept') {
             // Update order status to 'accepted'
-            await order.findByIdAndUpdate({_id:orderId}, { status: decision });
+            await order.findByIdAndUpdate({_id:orderId}, { order_status: decision });
+
+            const clientEmail = await client.findOne({_id:client_id})
+
+            console.log("Client Email object : ",clientEmail.client_email)
         
             // Send email to client that order is accepted
-            await sendEmail(client_email, 'CONFIRMATION OF BOOKED EVENT', 'Your order has been accepted.');
+            await sendEmail(clientEmail.client_email, 'CONFIRMATION OF BOOKED EVENT', 'Your order has been accepted.');
         
             res.status(201).json({ message: 'Order accepted. Email sent to client.' });
         } 
         else if (decision === 'reject') {
             // Send email to client that order is rejected
-            await sendEmail(client_email, 'CONFIRMATION OF BOOKED EVENT', 'Sorry! But the organizer have another booked event this date. So, your order has been rejected by Organizer.');
+            //await sendEmail(client_email, 'CONFIRMATION OF BOOKED EVENT', 'Sorry! But the organizer have another booked event this date. So, your order has been rejected by Organizer.');
         
             // Delete the order from the database
             await order.findByIdAndDelete(orderId);

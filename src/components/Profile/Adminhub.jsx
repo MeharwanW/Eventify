@@ -18,8 +18,7 @@ const AdminHub = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [clientOrders,setClientOrders] = useState("")
     const [clientUsername,setClientUsername] = useState("")
- 
-   
+	 const [loadingData, setLoadingData] = useState(false);
     const handleSearchFormToggle = () => {
         // Implement search form toggle logic here
     };
@@ -82,79 +81,78 @@ const getOrders = async () => {
             organizerId: organizerId
         }
     });
-
     console.log(result.data.allOrders);
+
+    
 
     if(result.status){
         setClientOrders(result.data)
         console.log("Orders Found")
+	setLoadingData(true);
     }
 
 
 
-    const clientIds=result.data.allOrders.map(order => order.client_id);
-    const clientIdsString = clientIds.join(',');
 
-    const clientResult = await axios.get("http://localhost:3000/get/client/username", {
-        params: {
-            client_id: clientIdsString
-        }
-    });
-    console.log(clientResult.data.clientData);
 
-    if(clientResult.status){
-        setClientUsername(clientResult.data)
-        console.log("Orders Found")
-    }
+    // const clientIds=result.data.allOrders.map(order => order.client_id);
+    // const clientIdsString = clientIds.join(',');
+
+    // const clientResult = await axios.get("http://localhost:3000/get/client/username", {
+    //     params: {
+    //         client_id: clientIdsString
+    //     }
+    // });
+    // console.log(clientResult.data.clientData);
+
+    // if(clientResult.status){
+    //     setClientUsername(clientResult.data)
+    //     console.log("Orders Found")
+    // }
 
 
     //setAllImage(result.data.data);
 };
+console.log("clientOrders",clientOrders)
+	  const handleAddService = () => {
+        const newService = { name: '', price: 0 };
+        setServices([...services, newService]);
+    };
 
+    const handleServiceNameChange = (index, value) => {
+        const updatedServices = [...services];
+        updatedServices[index].name = value;
+        setServices(updatedServices);
+    };
 
-const handleDecision = async (decision) => {
-    try{
-        const response =  await axios.post('http://localhost:3000/handle/decision', {orderId, decision, client_email });
+    const handleServicePriceChange = (index, value) => {
+        const updatedServices = [...services];
+        updatedServices[index].price = value;
+        setServices(updatedServices);
+    };
 
-        if (response.status) {
-            console.log(response.data.message);
-            alert(response.data.message);
-        } else {
-            console.log('Failed to process order');
-            alert('Failed to process order');
+    const handleRemoveService = (index) => {
+        const updatedServices = [...services];
+        updatedServices.splice(index, 1);
+        setServices(updatedServices);
+    };
+
+    const handleDecision = async (decision, orderId, client_id) => {
+        try {
+            const response = await axios.post('http://localhost:3000/handle/decision', { orderId, decision,client_id });
+    
+            if (response.status) {
+                console.log(response.data.message);
+                alert(response.data.message);
+            } else {
+                console.log('Failed to process order');
+                alert('Failed to process order');
+            }
+        } catch (error) {
+            console.error(`Error ${decision === 'accept' ? 'accepting' : 'rejecting'} order:`, error);
+            alert(`Error ${decision === 'accept' ? 'accepting' : 'rejecting'} order`);
         }
-       // alert(`Order ${decision === 'accepted' ? 'accepted' : 'rejected'}`);
-    } 
-    catch (error) {
-        console.error(`Error ${decision === 'accepted' ? 'accepting' : 'rejecting'} order:`, error);
-            alert(`Error ${decision === 'accepted' ? 'accepting' : 'rejecting'} order`);
-    }
-};
-
-
- 
-    // const handleFormSubmit = (event) => {
-    //     event.preventDefault();
-    //       const formData = {
-    //         description,
-    //         venue,
-    //         category,
-    //         city,
-    //         state,
-    //         image
-    //     };
-        
-    //     setDescription('');
-    //     setVenue('');
-    //     setCategory('');
-    //     setImage(null);
-    //     setShowAddEventForm(false);
-
-    //     console.log(formData);
-    // };
-
-    console.log("Befir ret client id using clientOders: ", clientOrders.allOrders)
-
+    };
     return (
         <div>
             <section id="sidebar">
@@ -209,7 +207,7 @@ const handleDecision = async (decision) => {
                             <table>
                                 <thead>
                                     <tr className='text font' >
-                                        
+                                    <th className=' recentOrders'>Client</th>
                                         <th className=' recentOrders'>venue</th>
                                         <th className=' recentOrders'>services</th>
                                         <th className=' recentOrders'>Status</th>
@@ -218,18 +216,19 @@ const handleDecision = async (decision) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {loadingData ? (
+                                        {!loadingData ? (
                                         <tr>
                                             <td colSpan="4">Loading...</td>
                                         </tr>
                                     ) : (
                                         clientOrders.allOrders.map((dataItem, index) => (
                                             <tr className='font' key={index}>
-                                                <td className=' recentOrders'></td>
+                                               <td className=' recentOrders'>{dataItem.client_id}</td>
                                                 <td className=' recentOrders'>{dataItem.venue}</td>
-                                                <td className=' recentOrders'>{dataItem.services}</td>
+                                                <td className=' recentOrders'>{dataItem.services_list.name}</td>       
                                                 <td className=' recentOrders'>{dataItem.order_status}</td>
-                                                <td className=' recentOrders'><button className='btn btn-sm btn-primary'>Accept</button><button className=' btn btn-danger btn-sm'>Reject</button></td>
+                                                <td className=' recentOrders'> <button onClick={() => handleDecision("accept", dataItem._id,dataItem.client_id)} className='btn btn-sm btn-primary'>Accept</button>
+                                               <button onClick={() => handleDecision("reject", dataItem._id,dataItem.client_id)} className='btn btn-danger btn-sm'>Reject</button></td>
                                             </tr>
                                         ))
                                     )}
