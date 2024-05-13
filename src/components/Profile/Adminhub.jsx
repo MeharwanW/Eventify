@@ -50,6 +50,43 @@ const AdminHub = () => {
         setShowAddEventForm(true);
     };
 
+    async function handleOrganizerImage(e){
+        e.preventDefault();
+
+        const organizerId = localStorage.getItem("currentOrganizer");
+
+        const formData = new FormData();
+        formData.append('image', imageFile); // Assuming `imageFile` is the file selected by the organizer
+        formData.append('organizer_id', organizerId);
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${authToken}` // Assuming `accessToken` is the JWT token
+            }
+        };
+
+        axios.post('http://your-api-url/add/organizer/image', 
+            formData, 
+            config).then(response => {
+
+                console.log(response.data);
+                // Handle success
+                if (response.status) {
+                    console.log("Gig upadated")
+                    //navigate('/Login');
+                } else {
+                    alert('Gig not found');              
+                }
+
+            }).catch(error => {
+
+                console.error(error);
+                // Handle error
+        });
+
+    }
+
     async function handleFormSubmit(event){
 
         event.preventDefault();

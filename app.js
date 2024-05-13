@@ -143,6 +143,9 @@ const storage = multer.diskStorage({
 
 
 
+
+
+
 app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
 
     try {
@@ -176,6 +179,32 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
         console.error(error);
         res.status(500).json({ message: "Server error" });
     }
+});
+
+app.post("/add/organizer/image", upload.single("image"), verifyToken, async (req,res) =>{
+
+    try {
+        const { organizerId } = req.body;
+
+        // Find the gig by organizerId
+        const gigs = await gig.findOne({ organizer_id:organizerId });
+
+        if (!gigs) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        // Update the image field with the new image URL
+        gigs.organizer_image = req.file.path;
+
+        // Save the updated gig
+        await gigs.save();
+
+        res.status(200).json({ message: 'Image added successfully', gig });
+    } 
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }   
 });
 
 
@@ -327,7 +356,7 @@ app.get('/getAllGigs', async (req, res) => {
             query.venue = venue;
         }
 
-        const allGigs = await gig.find(query);
+        const allGigs = await gig.find({query});
         res.json(allGigs);
     } catch (error) {
         res.status(500).json({ message: error.message });

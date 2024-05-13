@@ -41,6 +41,9 @@ const gigSchema = new mongoose.Schema({
     type: String, // File path where the image will be saved
     //required:true
   },
+  organizer_image:{
+    type:String
+  },
   clicks:{
     type:Number
   },

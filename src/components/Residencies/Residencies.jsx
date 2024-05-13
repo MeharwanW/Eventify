@@ -11,14 +11,24 @@ import { Link } from "react-router-dom";
 const Residencies = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSuppliers, setSelectedSuppliers] = useState([]);
+  const [gig, setGig]=useState([])
+
+  //console.log(gig)
 
   const handleSupplierClick = (category) => {
     setSelectedCategory(category);
     // Filter supplier data based on the selected category
-    const filteredSuppliers = data4.filter((supplier) => supplier.name === category);
+    const filteredSuppliers = data4.filter((supplier) => supplier.category === category);
     setSelectedSuppliers(filteredSuppliers);
   };
-
+  useEffect(() => {
+    fetch('http://localhost:3000/getAllGigs')
+      .then(response => response.json())
+      .then(data => setGig(data))
+      .catch(error => console.error('Error:', error));
+  }, []);
+  
+  console.log("Gig inside residencies: ", gig)
   return (
     <section className="r-wrapper">
       <div className="paddings innerWidth r-container">
@@ -26,14 +36,13 @@ const Residencies = () => {
           <span className="heading">Browse By Category</span>
         </div>
         <Swiper {...sliderSettings}>
-          {data.map((card, i) => (
-            <SwiperSlide key={i}>
-              <div onClick={() => handleSupplierClick(card.name)} className="r-card">
-                <img src={card.image} alt="home" />
-                <span className="flexCenter heading font">{card.name}</span>
-              </div>
-            </SwiperSlide>
-          ))}
+        {[...new Set(gig.map(card => card.category))].map((category, i) => (
+  <SwiperSlide key={i}>
+    <div onClick={() => handleSupplierClick(category)} className="r-card">
+      <span className="flexCenter heading font">{category}</span>
+    </div>
+  </SwiperSlide>
+))}
         </Swiper>
       </div>
 
@@ -42,12 +51,12 @@ const Residencies = () => {
           <span className="heading">Popular Venues</span>
         </div>
         <Swiper {...sliderSettings}>
-          {data1.map((card, i) => (
+          {gig.map((card, i) => (
             <SwiperSlide key={i}>
-              <div onClick={() => handleSupplierClick(card.name)} className="flexCenter r-card">
+              <div onClick={() => handleSupplierClick(card.venue)} className="flexCenter r-card">
                 <img src={card.image} alt="home" />
-                <span className="flexCenter heading">{card.name}</span>
-                <span className="flexCenter font">{card.detail}</span>
+                <span className="flexCenter heading">{card.venue}</span>
+                {/* <span className="flexCenter font">{card.detail}</span> */}
               </div>
             </SwiperSlide>
           ))}
