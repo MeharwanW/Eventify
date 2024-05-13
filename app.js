@@ -45,6 +45,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
+
 app.get("/all/orders", async (req, res) => {
   try {
     let organizer_id = "788";
@@ -73,6 +74,7 @@ app.post("/book/event", async (req, res) => {
       city,
       state1,
       services,
+      client_username,
       totalPrice,
     } = req.body;
 
@@ -106,6 +108,7 @@ app.post("/book/event", async (req, res) => {
       payment_status: "cash on delivery",
       order_status: "pending",
       gig_id,
+      client_username,
       organizer_id,
     });
 
@@ -151,7 +154,6 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
       venue,
       category,
       services_list: servicesArray,
-      no_of_guest: 200,
       total_cost: 1500000,
       city,
       state1,

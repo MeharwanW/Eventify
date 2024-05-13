@@ -82,43 +82,42 @@ export default function Venue() {
         </div>
       </div>
       {selectedCard && (
-        <div className="selectedCard supplierInfoOverlay">
-          <div className='venueInfoContainer font flexCenter'>
-            <div className='venueDetails flexCenter'>
-              <div className="venueDetailsImg">
-                <img src={`/1/${selectedCard.image}`} alt={selectedCard.venue} />
-              </div>
-              <div className='flexColCenter Details'>
-                <div className="details font">
-                  <p ><strong className='text'>Category:</strong> {selectedCard.category}</p>
-                  <p ><strong className='text'>Venue:</strong> {selectedCard.venue}</p>
-                  <p ><strong className='text'>Location:</strong> {selectedCard.city}, {selectedCard.state1}</p>
-                  <p ><strong className='text'>Description:</strong> {selectedCard.description}</p>
-                </div>
-                <div className="services flexColCenter">
-                  <div className='service_title'>
-                  <h3 className='text'>Services Offered:</h3>
-                  </div>
-                  <div className='service_list flexColCenter'>
-                    {selectedCard.services_list.map(service => (
-                      <div className='flexCenter' key={service.id}>
-                        <span className='font'>{service.name}</span>
-                        <span className="font price">{service.price}</span>
-                      </div>
-                    ))}
-            
-                    </div>
-                </div>
-              </div>
-            </div>
-          <div className='button' onClick={() => navigate('/booking', { state: { userData: selectedCard } })}>
-            Book Now
+  <div className="selectedCard supplierInfoOverlay">
+    <div className='venueInfoContainer font flexCenter'>
+      <div className='venueDetails flexCenter'>
+        <div className="venueDetailsImg">
+          <img src={`/1/${selectedCard.image}`} alt={selectedCard.venue} />
+        </div>
+        <div className='flexColCenter Details'>
+          <div className="details font">
+            <p><strong className='text'>Category:</strong> {selectedCard.category}</p>
+            <p><strong className='text'>Venue:</strong> {selectedCard.venue}</p>
+            <p><strong className='text'>Location:</strong> {selectedCard.city}, {selectedCard.state1}</p>
+            <p><strong className='text'>Description:</strong> {selectedCard.description}</p>
           </div>
-          <button className="button" onClick={() => setSelectedCard(null)}>Close</button>
+          <div className="services flexColCenter">
+            <div className='service_title'>
+              <h3 className='text'>Services Offered:</h3>
+            </div>
+            <div className='service_list flexColCenter'>
+              {selectedCard.services_list && selectedCard.services_list.map(service => (
+                <div className='flexCenter' key={service.id}>
+                  <span className='font'>{service.name}</span>
+                  <span className="font price">{service.price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+      <div className='button' onClick={() => navigate('/booking', { state: { userData: selectedCard } })}>
+        Book Now
+      </div>
+      <button className="button" onClick={() => setSelectedCard(null)}>Close</button>
+    </div>
+  </div>
+)}
 
-      )}
 
       <Footer />
     </div>

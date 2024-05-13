@@ -27,7 +27,6 @@ const gigSchema = new mongoose.Schema({
  
   total_cost: {
     type: Number,
-    required: true,
   },
   city: {
     type: String,

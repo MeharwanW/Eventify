@@ -16,7 +16,7 @@ const AdminHub = () => {
     const [image, setImage] = useState(null);
     const [services, setServices] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [clientOrders,setClientOrders] = useState("")
+    const [clientOrders, setClientOrders] = useState({});
     const [clientUsername,setClientUsername] = useState("")
 	 const [loadingData, setLoadingData] = useState(false);
     const handleSearchFormToggle = () => {
@@ -255,22 +255,25 @@ console.log("clientOrders",clientOrders)
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        {!loadingData ? (
-                                        <tr>
-                                            <td colSpan="4">Loading...</td>
-                                        </tr>
-                                    ) : (
-                                        clientOrders.allOrders.map((dataItem, index) => (
-                                            <tr className='font' key={index}>
-                                               <td className=' recentOrders'>{dataItem.client_username}</td>
-                                                <td className=' recentOrders'>{dataItem.venue}</td>
-                                                <td className=' recentOrders'>{dataItem.services_list.name}</td>       
-                                                <td className=' recentOrders'>{dataItem.order_status}</td>
-                                                <td className=' recentOrders'> <button onClick={() => handleDecision("accept", dataItem._id,dataItem.client_id)} className='btn btn-sm btn-primary'>Accept</button>
-                                               <button onClick={() => handleDecision("reject", dataItem._id,dataItem.client_id)} className='btn btn-danger btn-sm'>Reject</button></td>
-                                            </tr>
-                                        ))
-                                    )}
+                                {!loadingData ? (
+    <tr>
+        <td colSpan="4">Loading...</td>
+    </tr>
+) : (
+    clientOrders.allOrders && clientOrders.allOrders.map((dataItem, index) => (
+        <tr className='font' key={index}>
+            <td className=' recentOrders'>{dataItem.client_username}</td>
+            <td className=' recentOrders'>{dataItem.venue}</td>
+            <td className=' recentOrders'>{dataItem.services_list.name}</td>       
+            <td className=' recentOrders'>{dataItem.order_status}</td>
+            <td className=' recentOrders'>
+                <button onClick={() => handleDecision("accept", dataItem._id, dataItem.client_id)} className='btn btn-sm btn-primary'>Accept</button>
+                <button onClick={() => handleDecision("reject", dataItem._id, dataItem.client_id)} className='btn btn-danger btn-sm'>Reject</button>
+            </td>
+        </tr>
+    ))
+)}
+
                                 </tbody>
                             </table>
                         </div>
