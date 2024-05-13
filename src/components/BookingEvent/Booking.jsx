@@ -7,9 +7,11 @@ import { useLocation } from "react-router-dom";
 const Booking = () => {
     const clientId = localStorage.getItem("currentClient");
     const { state } = useLocation();
+    const clientusername = localStorage.getItem("currentClientUsername");
     const [selectedCard, setSelectedCard] = useState(state?.userData || {});
     const [servicesList, setServicesList] = useState(selectedCard.services_list || []);
     const [formData, setFormData] = useState({
+        client_username:clientusername,
         client_id:clientId,
         organizer_id:selectedCard.organizer_id,
         gig_id:selectedCard._id,
@@ -22,8 +24,10 @@ const Booking = () => {
         services: [],
         totalPrice: 0, 
     });
+
     const [confirmation, setConfirmation] = useState("Order Has Not Been Placed");
-    const [isSubmited , setIsSubmited] = (false);
+    const [isSubmited, setIsSubmited] = useState(false);
+
     const [errors, setErrors] = useState({});
     const [sign, setSign] = useState(null);
     useEffect(() => {

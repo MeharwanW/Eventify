@@ -38,8 +38,11 @@ const gigSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: String, // File path where the image will be saved
-    //required:true
+    type: String, 
+    required:true
+  },
+  organizer_image:{
+    type:String
   },
   clicks:{
     type:Number

@@ -27,6 +27,42 @@ const AdminHub = () => {
         setShowAddEventForm(true);
     };
 
+    // async function handleOrganizerImage(e){
+    //     e.preventDefault();
+
+    //     const authToken = localStorage.getItem("adminToken");
+    //     const organizerId = localStorage.getItem("currentOrganizer");
+        
+
+    //     const formData = new FormData();
+    //     formData.append('image', image); // Assuming `imageFile` is the file selected by the organizer
+    //     formData.append('organizer_id', organizerId);
+
+
+    //     axios.post('http://your-api-url/add/organizer/image', 
+    //         formData, {
+    //         headers: {
+    //             Authorization: `Bearer ${authToken}`,
+    //             "Content-Type": "multipart/form-data",
+    //         }}).then(response => {
+
+    //             console.log(response.data);
+    //             // Handle success
+    //             if (response.status) {
+    //                 console.log("Gig upadated")
+    //                 //navigate('/Login');
+    //             } else {
+    //                 alert('Gig not found');              
+    //             }
+
+    //         }).catch(error => {
+
+    //             console.error(error);
+    //             // Handle error
+    //     });
+
+    // }
+
     async function handleFormSubmit(event){
 
         event.preventDefault();
@@ -34,6 +70,9 @@ const AdminHub = () => {
         const authToken = localStorage.getItem("adminToken");
         const organizerId = localStorage.getItem("currentOrganizer");
         console.log("orgnaizerId from AdminHub ; ",organizerId )
+        const organizerUsername = localStorage.getItem("currentOrganizerUsername");
+        console.log("orgnaizerUsername from AdminHub ; ",organizerUsername )
+
 
         const formData = new FormData();
         formData.append("organizer_id", organizerId);
@@ -208,8 +247,8 @@ console.log("clientOrders",clientOrders)
                                 <thead>
                                     <tr className='text font' >
                                     <th className=' recentOrders'>Client</th>
-                                        <th className=' recentOrders'>venue</th>
-                                        <th className=' recentOrders'>services</th>
+                                        <th className=' recentOrders'>Venue</th>
+                                        <th className=' recentOrders'>Services</th>
                                         <th className=' recentOrders'>Status</th>
                                         <th className=' recentOrders'>Order Status</th>
                                        
@@ -223,7 +262,7 @@ console.log("clientOrders",clientOrders)
                                     ) : (
                                         clientOrders.allOrders.map((dataItem, index) => (
                                             <tr className='font' key={index}>
-                                               <td className=' recentOrders'>{dataItem.client_id}</td>
+                                               <td className=' recentOrders'>{dataItem.client_username}</td>
                                                 <td className=' recentOrders'>{dataItem.venue}</td>
                                                 <td className=' recentOrders'>{dataItem.services_list.name}</td>       
                                                 <td className=' recentOrders'>{dataItem.order_status}</td>
@@ -295,16 +334,18 @@ console.log("clientOrders",clientOrders)
                                                     <button className='button' type="button" onClick={() => handleRemoveService(index)}>Remove</button>
                                                 </div>
                                             ))}
+                                           
+                                            <button className='button' type="button" onClick={handleAddService}>Add Service</button>
+                                            <br />
                                             <div>
                                                 <div className="form-group inputs1 flexCenter">
                                                     <label className='text' htmlFor="image">Image:</label>
-                                                    <input className='' type="file" id="image" accept='image/*' onChange={(e) => setImage(e.target.files[0])} />
+                                                    <input className='input1' type="file" id="image" accept='image/*' onChange={(e) => setImage(e.target.files[0])} />
                                                 </div>
-                                                <div className="imageSet">
+                                                <div className="flexCenter imageSet">
                                                     {image && <img src={URL.createObjectURL(image)} alt="Uploaded Image" />}
                                                 </div>
                                             </div>
-                                            <button className='button' type="button" onClick={handleAddService}>Add Service</button>
                                         </div>
                                         <div className='eventFormField'>
                                             <button className='button' type="submit">Submit</button>

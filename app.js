@@ -17,7 +17,7 @@ const multer = require("multer");
 // const path = require("path");
 // const { v4: uuidv4 } = require("uuid");
 
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -45,10 +45,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-
-
-
-
 app.get("/all/orders", async (req, res) => {
   try {
     let organizer_id = "788";
@@ -63,12 +59,22 @@ app.get("/all/orders", async (req, res) => {
   }
 });
 
-
-
 app.post("/book/event", async (req, res) => {
   try {
     //no_ofguests
-    const { client_id, organizer_id, gig_id, event_date,event_time,category, venue, city, state1, services,totalPrice } =req.body;
+    const {
+      client_id,
+      organizer_id,
+      gig_id,
+      event_date,
+      event_time,
+      category,
+      venue,
+      city,
+      state1,
+      services,
+      totalPrice,
+    } = req.body;
 
     console.log("req.body: ", req.body);
 
@@ -98,9 +104,9 @@ app.post("/book/event", async (req, res) => {
       services_list: services,
       total_cost: totalPrice,
       payment_status: "cash on delivery",
-      order_status:"pending",
+      order_status: "pending",
       gig_id,
-      organizer_id
+      organizer_id,
     });
 
     console.log("newOrder : ", newOrder);
@@ -124,8 +130,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-
 
 app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
   try {
@@ -164,8 +168,6 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
   }
 });
 
-
-
 //GETTIG ALL CLIENTS DATA
 app.get("/getAllClientData", async (req, res) => {
   try {
@@ -186,126 +188,129 @@ app.get("/getAllOrganizerData", async (req, res) => {
   }
 });
 
-
-
 // Route to handle organizer's decision from AdminHub
-
 
 // Create a Nodemailer transporter
 const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: process.env.SEND_MAIL,
-        pass: process.env.MAIL_PASS
-    }
+  service: "Gmail",
+  auth: {
+    user: process.env.SEND_MAIL,
+    pass: process.env.MAIL_PASS,
+  },
 });
 
 // Function to send an email
 const sendEmail = async (to, subject, text) => {
-    try {
-        await transporter.sendMail({
-            from: process.env.SEND_MAIL,
-            to: to,
-            subject: subject,
-            text: text
-        });
-        console.log('Email sent successfully');
-    } catch (error) {
-        console.error('Error sending email:', error);
-    }
+  try {
+    await transporter.sendMail({
+      from: process.env.SEND_MAIL,
+      to: to,
+      subject: subject,
+      text: text,
+    });
+    console.log("Email sent successfully");
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
 };
 
-
 // Route to handle organizer's decision
-app.post('/handle/decision', async (req, res) => {
-    try {
-        const { orderId, decision,client_id } = req.body;
+app.post("/handle/decision", async (req, res) => {
+  try {
+    const { orderId, decision, client_id } = req.body;
 
-        console.log("handleDesiscion : ",req.body)
+    console.log("handleDesiscion : ", req.body);
 
-        if (decision === 'accept') {
-            // Update order status to 'accepted'
-            await order.findByIdAndUpdate({_id:orderId}, { order_status: decision });
+    if (decision === "accept") {
+      // Update order status to 'accepted'
+      await order.findByIdAndUpdate(
+        { _id: orderId },
+        { order_status: decision }
+      );
 
-            const clientEmail = await client.findOne({_id:client_id})
+      const clientEmail = await client.findOne({ _id: client_id });
 
-            console.log("Client Email object : ",clientEmail.client_email)
-        
-            // Send email to client that order is accepted
-            await sendEmail(clientEmail.client_email, 'CONFIRMATION OF BOOKED EVENT', 'Your order has been accepted.');
-        
-            res.status(201).json({ message: 'Order accepted. Email sent to client.' });
-        } 
-        else if (decision === 'reject') {
-            // Send email to client that order is rejected
-            //await sendEmail(client_email, 'CONFIRMATION OF BOOKED EVENT', 'Sorry! But the organizer have another booked event this date. So, your order has been rejected by Organizer.');
-        
-            // Delete the order from the database
-            await order.findByIdAndDelete(orderId);
-        
-            res.status(201).json({ message: 'Order rejected. Email sent to client and order deleted.' });
-        } 
-        else {
-            res.status(400).json({ error: 'Invalid decision' });
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal server error' });
+      console.log("Client Email object : ", clientEmail.client_email);
+
+      // Send email to client that order is accepted
+      await sendEmail(
+        clientEmail.client_email,
+        "CONFIRMATION OF BOOKED EVENT",
+        "Your order has been accepted."
+      );
+
+      res
+        .status(201)
+        .json({ message: "Order accepted. Email sent to client." });
+    } else if (decision === "reject") {
+      // Send email to client that order is rejected
+      //await sendEmail(client_email, 'CONFIRMATION OF BOOKED EVENT', 'Sorry! But the organizer have another booked event this date. So, your order has been rejected by Organizer.');
+
+      // Delete the order from the database
+      await order.findByIdAndDelete(orderId);
+
+      res
+        .status(201)
+        .json({
+          message: "Order rejected. Email sent to client and order deleted.",
+        });
+    } else {
+      res.status(400).json({ error: "Invalid decision" });
     }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // Inside your route handler
 
-
-
-
 //GETTING CLIENT USERNAME IN DASHBOARD FOR SHOWING ORDERS TO ORGANIZER
-app.get('/get/client/username', async (req, res) => {
-    try {
-        const clientIds = req.query.client_id.split(',');
-        console.log("Client IDs:", clientIds);
+app.get("/get/client/username", async (req, res) => {
+  try {
+    const clientIds = req.query.client_id.split(",");
+    console.log("Client IDs:", clientIds);
 
-        // Use the clientIds array to find orders in the Order model
-        const clientData = await client.find({_id: { $in: clientIds } });
+    // Use the clientIds array to find orders in the Order model
+    const clientData = await client.find({ _id: { $in: clientIds } });
 
-        if (clientData) {
-            res.status(201).json({message:"Client found ",clientData:clientData});
-        } else {
-            res.status(404).json({ message: 'No orders found' });
-        }
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal server error' });
+    if (clientData) {
+      res
+        .status(201)
+        .json({ message: "Client found ", clientData: clientData });
+    } else {
+      res.status(404).json({ message: "No orders found" });
     }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
-
 
 //SHOWING ALL ORDERS OF LOGIN ORGANIZER
-app.get('/get/orders', async (req, res) => {
-    try {
-        const organizerId = req.query.organizerId;
-        console.log("organizerId from frontend: ", organizerId);
+app.get("/get/orders", async (req, res) => {
+  try {
+    const organizerId = req.query.organizerId;
+    console.log("organizerId from frontend: ", organizerId);
 
-        // Use the organizerId to find orders in the Order model
-        const allOrders = await order.find({ organizer_id: organizerId });
+    // Use the organizerId to find orders in the Order model
+    const allOrders = await order.find({ organizer_id: organizerId });
 
-        if (allOrders) {
-            res.status(201).json({message:"Orders found ",allOrders:allOrders});
-        } else {
-            res.status(404).json({ message: 'No orders found' });
-        }
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal server error' });
+    if (allOrders) {
+      res.status(201).json({ message: "Orders found ", allOrders: allOrders });
+    } else {
+      res.status(404).json({ message: "No orders found" });
     }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-app.get('/getAllGigs', async (req, res) => {
-    const { city, category, venue } = req.body;
-    try {
-        let query = {};
+app.get("/getAllGigs", async (req, res) => {
+  const { city, category, venue } = req.body;
+  try {
+    let query = {};
 
     if (city) {
       query.city = city;
@@ -324,19 +329,16 @@ app.get('/getAllGigs', async (req, res) => {
   }
 });
 
+// LOGIN USER
+app.post("/login", async (req, res) => {
+  const { client_username, client_password } = req.body;
 
-// LOGIN USER 
-app.post("/login",async(req,res)=>{
+  try {
+    let validUser = await client.findOne({ client_username });
 
-    const{client_username,client_password}=req.body
+    // console.log("valid USer: ",validUser);
 
-    try{
-
-        let validUser=await client.findOne({client_username})
-        
-        // console.log("valid USer: ",validUser);
-        
-        // console.log("valid USer Type: ",validUser.user_type);
+    // console.log("valid USer Type: ",validUser.user_type);
 
     let hashPassword;
     if (validUser) {
@@ -371,23 +373,19 @@ app.post("/login",async(req,res)=>{
     });
     console.log("token from login api ", token);
     if (validUser.user_type == "organizer") {
-      return res
-        .status(200)
-        .json({
-          token,
-          message: "Login Succesfull",
-          userData: validUser,
-          userType: "organizer",
-        });
-    }
-    return res
-      .status(200)
-      .json({
+      return res.status(200).json({
         token,
         message: "Login Succesfull",
         userData: validUser,
-        userType: "client",
+        userType: "organizer",
       });
+    }
+    return res.status(200).json({
+      token,
+      message: "Login Succesfull",
+      userData: validUser,
+      userType: "client",
+    });
   } catch (e) {
     res.json(e.message);
   }
