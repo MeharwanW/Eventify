@@ -53,7 +53,9 @@ const AdminHub = () => {
     async function handleOrganizerImage(e){
         e.preventDefault();
 
+        const authToken = localStorage.getItem("adminToken");
         const organizerId = localStorage.getItem("currentOrganizer");
+        
 
         const formData = new FormData();
         formData.append('image', image); // Assuming `imageFile` is the file selected by the organizer
