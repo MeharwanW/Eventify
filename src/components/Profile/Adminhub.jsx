@@ -56,19 +56,16 @@ const AdminHub = () => {
         const organizerId = localStorage.getItem("currentOrganizer");
 
         const formData = new FormData();
-        formData.append('image', imageFile); // Assuming `imageFile` is the file selected by the organizer
+        formData.append('image', image); // Assuming `imageFile` is the file selected by the organizer
         formData.append('organizer_id', organizerId);
 
-        const config = {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${authToken}` // Assuming `accessToken` is the JWT token
-            }
-        };
 
         axios.post('http://your-api-url/add/organizer/image', 
-            formData, 
-            config).then(response => {
+            formData, {
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                "Content-Type": "multipart/form-data",
+            }}).then(response => {
 
                 console.log(response.data);
                 // Handle success
@@ -96,6 +93,9 @@ const AdminHub = () => {
         console.log("authTOken from AdminHub ; ",authToken )
         const organizerId = localStorage.getItem("currentOrganizer");
         console.log("orgnaizerId from AdminHub ; ",organizerId )
+        const organizerUsername = localStorage.getItem("currentOrganizerUsername");
+        console.log("orgnaizerUsername from AdminHub ; ",organizerUsername )
+
 
         const formData = new FormData();
         formData.append("organizer_id", organizerId);
