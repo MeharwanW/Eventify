@@ -91,7 +91,6 @@ const AdminHub = () => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-
             if (result.status) {
                 alert("Gig created");
             } else {
@@ -191,6 +190,8 @@ console.log("clientOrders",clientOrders)
             console.error(`Error ${decision === 'accept' ? 'accepting' : 'rejecting'} order:`, error);
             alert(`Error ${decision === 'accept' ? 'accepting' : 'rejecting'} order`);
         }
+
+        console.log("ClientOrders",clientOrders)
     };
     return (
         <div>
@@ -262,11 +263,15 @@ console.log("clientOrders",clientOrders)
 ) : (
     clientOrders.allOrders && clientOrders.allOrders.map((dataItem, index) => (
         <tr className='font' key={index}>
-            <td className=' recentOrders'>{dataItem.client_username}</td>
-            <td className=' recentOrders'>{dataItem.venue}</td>
-            <td className=' recentOrders'>{dataItem.services_list.name}</td>       
-            <td className=' recentOrders'>{dataItem.order_status}</td>
-            <td className=' recentOrders'>
+            <td className='recentOrders'>{dataItem.client_username}</td>
+            <td className='recentOrders'>{dataItem.venue}</td>
+            <td className='recentOrders'>
+                {dataItem.services_list.map((service, index) => (
+                    <span className='flexStart' key={index}>{service.name}</span>
+                ))}
+            </td>       
+            <td className='recentOrders'>{dataItem.order_status}</td>
+            <td className='recentOrders'>
                 <button onClick={() => handleDecision("accept", dataItem._id, dataItem.client_id)} className='btn btn-sm btn-primary'>Accept</button>
                 <button onClick={() => handleDecision("reject", dataItem._id, dataItem.client_id)} className='btn btn-danger btn-sm'>Reject</button>
             </td>
