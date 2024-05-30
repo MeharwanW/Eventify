@@ -1,14 +1,11 @@
-import React, { useState , useEffect } from 'react';
-import "./../Header/SearchBar.css"
+import React, { useState, useEffect } from 'react';
+import "./../Header/SearchBar.css";
 
-
-
-
-export default function SearchVenue({ onSearch , onGig }) {
+export default function SearchVenue({ onSearch, onGig }) {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
   const [venueType, setVenueType] = useState("");
-  const [gig, setGig] = useState([])
+  const [gig, setGig] = useState([]);
 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [categorySuggestions, setCategorySuggestions] = useState([]);
@@ -23,41 +20,39 @@ export default function SearchVenue({ onSearch , onGig }) {
     setCategory("");
     setVenueType("");
   };
- 
 
-  const handleSearch = () => {
+  const handleSearch = (event) => {
+    if (event) {
+      event.preventDefault(); // Prevent the default form submission
+    }
 
-    const filteredData1 = [location,category,venueType]
-   
+    const filteredData1 = [location, category, venueType];
     onSearch(filteredData1); // Pass filtered data
     onGig(gig);
     resetFields(); // Reset fields after search
   };
-  
+
   const onChangeLocation = (event) => {
     const { value } = event.target;
     setLocation(value);
-    
+
     // Filter suggestions based on the entered location
     const filteredSuggestions = gig.filter(venue => 
       venue.city && venue.city.toLowerCase().startsWith(value.toLowerCase())
     );
-    
+
     const uniqueLocations = Array.from(new Set(filteredSuggestions.map(item => item.city)));
-   const uniqueCategories = Array.from(new Set(filteredSuggestions.map(item => item.category)));
+    const uniqueCategories = Array.from(new Set(filteredSuggestions.map(item => item.category)));
 
     setLocationSuggestions(uniqueLocations);
     setCategorySuggestions(uniqueCategories);
-    setShowLocationSuggestions(true); // Show suggestions
+    setShowLocationSuggestions(true); 
   };
-  
-  
-  
 
   const onChangeCategory = (event) => {
     const { value } = event.target;
     setCategory(value);
-    
+
     // Filter suggestions based on the selected category and location
     const filteredSuggestions = gig.filter(venue => 
       venue.city && venue.city.toLowerCase() === location.toLowerCase() &&
@@ -65,23 +60,22 @@ export default function SearchVenue({ onSearch , onGig }) {
     );
     const uniqueCategory = Array.from(new Set(filteredSuggestions.map(item => item.category)));
     const uniqueVenues = Array.from(new Set(filteredSuggestions.map(item => item.venue)));
-    
+
     setCategorySuggestions(uniqueCategory);
     setVenueTypeSuggestions(uniqueVenues);
     setShowCategorySuggestions(true);
   };
-  
 
   const onChangeVenueType = (event) => {
     const { value } = event.target;
     setVenueType(value);
-    
+
     // Filter suggestions based on the selected category and location
     const filteredSuggestions = gig.filter(venue => 
       venue.category && venue.category.toLowerCase() === category.toLowerCase() &&
       venue.venue && venue.venue.toLowerCase().startsWith(value.toLowerCase())
     );
-  
+
     const uniqueVenues = Array.from(new Set(filteredSuggestions.map(item => item.venue)));
     setVenueTypeSuggestions(uniqueVenues);
     setShowVenueTypeSuggestions(true);
@@ -92,24 +86,22 @@ export default function SearchVenue({ onSearch , onGig }) {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/getAllGigs')
-    .then(response => response.json())
-    .then(data => setGig(data))
-    .catch(error => console.error('Error:', error));
-    
-}, []);
+    fetch('http://localhost:4000/getAllGigs')
+      .then(response => response.json())
+      .then(data => setGig(data))
+      .catch(error => console.error('Error:', error));
+  }, []);
 
-console.log("Hello gog",gig);
+  console.log("Hello gog", gig);
 
   return (
     <div>
-      <div className='flexCenter border-gradient box-shadow search'>
-        <div className='margin'>
-          <form action="">
+      <form onSubmit={handleSearch}>
+        <div className='flexCenter border-gradient box-shadow search'>
+          <div className='margin'>
             <div className='search-container'>
               <input
                 type="text"
-                name=''
                 placeholder="Location e.g Karachi"
                 className="search-input font"
                 value={location}
@@ -125,10 +117,8 @@ console.log("Hello gog",gig);
                 </div>
               )}
             </div>
-          </form>
-        </div>
-        <div className='margin'>
-          <form action="" method="get">
+          </div>
+          <div className='margin'>
             <div className='search-container'>
               <input
                 type="text"
@@ -136,23 +126,19 @@ console.log("Hello gog",gig);
                 className="search-input font"
                 value={category}
                 onChange={onChangeCategory}
-              />  
+              />
               {showCategorySuggestions && (
                 <div className="suggestions">
                   {categorySuggestions.map((item, index) => (
-                    <div className="suggestion-item">
-                    <div key={index} onClick={() => { setCategory(item); handleSuggestionClick(setShowCategorySuggestions); }} >
+                    <div key={index} onClick={() => { setCategory(item); handleSuggestionClick(setShowCategorySuggestions); }} className="suggestion-item">
                       {item}
-                    </div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
-          </form>
-        </div>
-        <div className='margin'>
-          <form action="" method="get">
+          </div>
+          <div className='margin'>
             <div className='search-container'>
               <input
                 type="text"
@@ -171,13 +157,12 @@ console.log("Hello gog",gig);
                 </div>
               )}
             </div>
-          </form>
+          </div>
+          <div className="margin">
+            <button type="submit" className='button font'>Search</button>
+          </div>
         </div>
-       
-        <div className="margin">
-          <button className='button font' onClick={handleSearch}>Search</button>
-        </div>
-      </div>
+      </form>
     </div>
-  )
+  );
 }

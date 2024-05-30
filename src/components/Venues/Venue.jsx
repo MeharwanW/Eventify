@@ -15,7 +15,7 @@ export default function Venue() {
 
   useEffect(() => {
     // Fetch gig data here
-    fetch('http://localhost:3000/getAllGigs')
+    fetch('http://localhost:4000/getAllGigs')
       .then(response => response.json())
       .then(data => {
         setGig(data);

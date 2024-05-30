@@ -85,7 +85,7 @@ const AdminHub = () => {
         formData.append("services", JSON.stringify(services));
 
         try {
-            const result = await axios.post("http://localhost:3000/addGig", formData, {
+            const result = await axios.post("http://localhost:4000/addGig", formData, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     "Content-Type": "multipart/form-data",
@@ -115,7 +115,7 @@ const getOrders = async () => {
     const organizerId = localStorage.getItem("currentOrganizer");
    
 
-    const result = await axios.get("http://localhost:3000/get/orders", {
+    const result = await axios.get("http://localhost:4000/get/orders", {
         params: {
             organizerId: organizerId
         }
@@ -137,7 +137,7 @@ const getOrders = async () => {
     // const clientIds=result.data.allOrders.map(order => order.client_id);
     // const clientIdsString = clientIds.join(',');
 
-    // const clientResult = await axios.get("http://localhost:3000/get/client/username", {
+    // const clientResult = await axios.get("http://localhost:4000/get/client/username", {
     //     params: {
     //         client_id: clientIdsString
     //     }
@@ -178,7 +178,7 @@ console.log("clientOrders",clientOrders)
 
     const handleDecision = async (decision, orderId, client_id) => {
         try {
-            const response = await axios.post('http://localhost:3000/handle/decision', { orderId, decision,client_id });
+            const response = await axios.post('http://localhost:4000/handle/decision', { orderId, decision,client_id });
     
             if (response.status) {
                 console.log(response.data.message);

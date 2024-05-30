@@ -18,11 +18,11 @@ const Residencies = () => {
   const handleSupplierClick = (category) => {
     setSelectedCategory(category);
     // Filter supplier data based on the selected category
-    const filteredSuppliers = data4.filter((supplier) => supplier.category === category);
+    const filteredSuppliers = gig.filter((supplier) => supplier.category === category);
     setSelectedSuppliers(filteredSuppliers);
   };
   useEffect(() => {
-    fetch('http://localhost:3000/getAllGigs')
+    fetch('http://localhost:4000/getAllGigs')
       .then(response => response.json())
       .then(data => setGig(data))
       .catch(error => console.error('Error:', error));
@@ -54,7 +54,7 @@ const Residencies = () => {
           {gig.map((card, i) => (
             <SwiperSlide key={i}>
               <div onClick={() => handleSupplierClick(card.venue)} className="flexCenter r-card">
-                <img src={card.image} alt="home" />
+                <img src={card.image} alt="home"  />
                 <span className="flexCenter heading">{card.venue}</span>
                 {/* <span className="flexCenter font">{card.detail}</span> */}
               </div>
@@ -99,7 +99,7 @@ const SupplierInfo = ({ selectedSuppliers, onClose }) => {
         {selectedSuppliers.map((supplier, index) => (
           <div key={index} className="flexCenter">
             <div className="r-card flexCenter" onClick={() => handleCardClick(index)}>
-              <img src={supplier.image} alt="home" />
+              <img src={`/1/${supplier.image}`} alt="home" />
               {selectedSupplierIndex === index && <p>{supplier.description}</p>}
             </div>
           </div>
