@@ -25,7 +25,7 @@ export const SignUp = () => {
         setIsLoading(true);
 
         try {
-                await axios.post("http://localhost:3000/signup", {
+                await axios.post("http://localhost:4000/signup", {
                 name,
                 email,
                 userName,
