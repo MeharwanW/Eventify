@@ -4,6 +4,8 @@ import { BiSolidDashboard, BiSolidCalendar, BiGroup, BiDollarCircle, BiStore, Bi
 import axios from 'axios';
 import './adminhub.css';
 
+const socket = io.connect("http://localhost:3001");
+
 const AdminHub = () => {
 
     const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
@@ -26,6 +28,8 @@ const AdminHub = () => {
     const handleAddEventClick = () => {
         setShowAddEventForm(true);
     };
+
+
 
     // async function handleOrganizerImage(e){
     //     e.preventDefault();
@@ -105,16 +109,35 @@ const AdminHub = () => {
     }
 
     useEffect(() => {
-        getOrders();
+        const userType =localStorage.getItem("userType");
+        console.log("userType from useEffect AdminHub",userType)
+        if(userType==='organizer'){
+        getOrganizersOrders();
+        }
+        else if (userType==='client') {
+            getClientOrders()
+        }
     }, []);
 
 
-const getOrders = async () => {
+const getClientOrders = async ()=>{
+
+    const clientId = localStorage.getItem("currentClient");
+    const result = await axios.get("http://localhost:4000/get/client/orders", {
+        params: {
+            clientId: clientId
+        }
+    });
+    console.log(result.data.allOrders);
+
+}
+
+const getOrganizersOrders = async () => {
 
     const organizerId = localStorage.getItem("currentOrganizer");
    
 
-    const result = await axios.get("http://localhost:4000/get/orders", {
+    const result = await axios.get("http://localhost:4000/get/organizer/orders", {
         params: {
             organizerId: organizerId
         }
@@ -129,29 +152,27 @@ const getOrders = async () => {
 	setLoadingData(true);
     }
 
-
-
-
-
-    // const clientIds=result.data.allOrders.map(order => order.client_id);
-    // const clientIdsString = clientIds.join(',');
-
-    // const clientResult = await axios.get("http://localhost:4000/get/client/username", {
-    //     params: {
-    //         client_id: clientIdsString
-    //     }
-    // });
-    // console.log(clientResult.data.clientData);
-
-    // if(clientResult.status){
-    //     setClientUsername(clientResult.data)
-    //     console.log("Orders Found")
-    // }
-
-
-    //setAllImage(result.data.data);
+   
 };
+
+const joinRoom = () => {
+        
+    const userType =localStorage.getItem("userType");
+
+    if(userType==='organizer'){
+        getOrganizersOrders();
+        }
+        else if (userType==='client') {
+            getClientOrders()
+        }
+    if (username !== "" && room !== "") {
+      socket.emit("join_room", room);
+      setShowChat(true);
+    }
+  };
+
 console.log("clientOrders",clientOrders)
+
 	  const handleAddService = () => {
         const newService = { name: '', price: 0 };
         setServices([...services, newService]);

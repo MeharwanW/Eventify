@@ -33,8 +33,15 @@ app.use(cors({
     origin: ["http://localhost:3000"],
     credentials:true
 }))
+
 app.use(cookieParser());
 app.use(bodyParser.json());
+
+const io = require("socket.io")(8800, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
 
 
 app.get("/all/orders", async (req, res) => {
@@ -280,8 +287,29 @@ app.get("/get/client/username", async (req, res) => {
   }
 });
 
+
+//SHOWING ALL ORDERS OF LOGIN CLIENT
+app.get("/get/client/orders", async (req, res) => {
+  try {
+    const clientId = req.query.clientId
+    console.log("organizerId from frontend: ", clientId);
+
+    // Use the organizerId to find orders in the Order model
+    const allOrders = await order.find({ client_id: clientId });
+
+    if (allOrders) {
+      res.status(201).json({ message: "Orders found ", allOrders: allOrders });
+    } else {
+      res.status(404).json({ message: "No orders found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 //SHOWING ALL ORDERS OF LOGIN ORGANIZER
-app.get("/get/orders", async (req, res) => {
+app.get("/get/organizer/orders", async (req, res) => {
   try {
     const organizerId = req.query.organizerId;
     console.log("organizerId from frontend: ", organizerId);
@@ -422,6 +450,23 @@ app.post("/signup", async (req, res) => {
     console.error("Error during user creation:", e);
     res.status(404).json({ message: "Internal server error" });
   }
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  });
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
 });
 
 // MongoDB connection URI
