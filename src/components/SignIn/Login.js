@@ -40,12 +40,14 @@ export const Login = (props) => {
                 localStorage.setItem("adminToken",authToken)
                 localStorage.setItem('currentOrganizer', response.data.userData._id);
                 localStorage.setItem('currentOrganizerUsername',response.data.userData.organizer_username)
+                localStorage.setItem('userType',response.data.userData.user_type);
                     navigate('/dashboard', { state: { userData: response.data } });
                 }
                 else if(response.data.userType==="client"){
                     localStorage.setItem("clientToken",authToken)
                     localStorage.setItem('currentClient', response.data.userData._id);
                     localStorage.setItem('currentClientUsername',response.data.userData.client_username)
+                    localStorage.setItem('userType',response.data.userData.user_type);
                     navigate('/home', { state: { userData: response.data } });
                 }
                 // Pass userData to the dashboard component
