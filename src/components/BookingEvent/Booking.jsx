@@ -11,10 +11,10 @@ const Booking = () => {
     const [selectedCard, setSelectedCard] = useState(state?.userData || {});
     const [servicesList, setServicesList] = useState(selectedCard.services_list || []);
     const [formData, setFormData] = useState({
-        client_username:clientusername,
-        client_id:clientId,
-        organizer_id:selectedCard.organizer_id,
-        gig_id:selectedCard._id,
+        client_username: clientusername,
+        client_id: clientId,
+        organizer_id: selectedCard.organizer_id,
+        gig_id: selectedCard._id,
         category: selectedCard.category || "",
         eventDate: "",
         eventTime: "",
@@ -22,7 +22,7 @@ const Booking = () => {
         state1: selectedCard.state1 || "",
         venue: selectedCard.venue || "",
         services: [],
-        totalPrice: 0, 
+        totalPrice: 0,
     });
 
     const [confirmation, setConfirmation] = useState("Order Has Not Been Placed");
@@ -84,7 +84,7 @@ const Booking = () => {
 
     const client_Id = localStorage.getItem("currentClient");
     // console.log("orgnaizerId from AdminHub ; ",client_Id )
-    
+
     // axios.post('http://localhost:4000/book/event', data)
     //     .then(response => {
     //         console.log('Response:', response.data);
@@ -109,14 +109,11 @@ const Booking = () => {
                 <div>For Direct Inquiries contact Meharwanw@gmail.com or call (03488365045)</div>
                 <br />
                 <label className="text flexCenter" htmlFor="event">Event:</label>
-                <select id="category" className="input" name="category" value={formData.category} onChange={handleChange} required>
-                    <option value="">Select Event</option>
-                    <option value="Wedding">Wedding</option>
-                    <option value="Meeting">Meeting</option>
-                    <option value="Party">Party</option>
-                    <option value="Reception">Reception</option>
-                </select>
+                <span className="input flexCenter" id="category" name="category">
+                    {formData.category}
+                </span>
                 {errors.event && <div className="error">{errors.event}</div>}
+                <br />
                 <br />
                 <label className="text" htmlFor="eventDate">Event Date & Time:</label>
                 <div className="input1">
@@ -126,15 +123,43 @@ const Booking = () => {
                 {errors.eventDate && <div className="error">{errors.eventDate}</div>}
                 {errors.eventTime && <div className="error">{errors.eventTime}</div>}
                 <br />
-                <div className="inputs flexCenter Address">
-                    <label className="text" htmlFor="eventDate">Address</label>
-                    <input type="text" id="venue" name="venue" placeholder="Venue" className="font input1" value={formData.venue} onChange={handleChange} required />
+                <label className="text flexCenter" htmlFor="event">Event:</label>
+                <span className="input flexCenter" id="category" name="category">
+                    {formData.category}
+                </span>
+                {errors.event && <div className="error">{errors.event}</div>}
+                <br />
+
+                <div className="input justify-content-around Address">
+                    <div className="flexColCenter ">
+                    <label className="text" htmlFor="venue">Venue:</label>
+                    <span id="venue" name="venue" className="font">
+                        {formData.venue}
+                    </span>
                     {errors.venue && <div className="error">{errors.venue}</div>}
-                    <input type="text" id="city" placeholder="City" className="font input1" name="city" value={formData.city} onChange={handleChange} required />
+                    </div>
+                    
+                    <div className="flexColCenter">
+                    <label className="text" htmlFor="city">City:</label>
+                    <span id="city" name="city" className="font ">
+                        {formData.city}
+                    </span>
                     {errors.city && <div className="error">{errors.city}</div>}
-                    <input type="text" id="state1" name="state1" placeholder="State" className="font input1" value={formData.state1} onChange={handleChange} required />
-                    {errors.state && <div className="error">{errors.state1}</div>}
+                    </div>
+                    
+                    <div className="flexColCenter">
+                    <label className="text" htmlFor="state1">State:</label>
+                    <span id="state1" name="state1" className="font">
+                        {formData.state1}
+                    </span>
+                    {errors.state1 && <div className="error">{errors.state1}</div>}
+                    </div>
+
+                    
                 </div>
+                <br />
+
+                <br />
                 <br />
                 <label className="text" htmlFor="services">Select Services:</label>
                 {servicesList.map(service => (
@@ -171,8 +196,10 @@ const Booking = () => {
                 </div>
                 <br />
                 <button className="button" type="submit">Submit</button>
+                {isSubmited && <div id="confirmation">{confirmation}</div>}
+                
             </form>
-            {isSubmited && <div id="confirmation">{confirmation}</div>}
+          
         </div>
     );
 };

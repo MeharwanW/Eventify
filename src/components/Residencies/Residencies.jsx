@@ -36,10 +36,11 @@ const Residencies = () => {
           <span className="heading">Browse By Category</span>
         </div>
         <Swiper {...sliderSettings}>
-        {[...new Set(gig.map(card => card.category))].map((category, i) => (
+        {data.map((card, i) => (
   <SwiperSlide key={i}>
-    <div onClick={() => handleSupplierClick(category)} className="r-card">
-      <span className="flexCenter heading font">{category}</span>
+    <div onClick={() => handleSupplierClick(card.name)} className="r-card">
+      <img src={card.image} alt="" srcset="" />
+      <span className="flexCenter heading font">{card.name}</span>
     </div>
   </SwiperSlide>
 ))}
@@ -54,7 +55,7 @@ const Residencies = () => {
           {gig.map((card, i) => (
             <SwiperSlide key={i}>
               <div onClick={() => handleSupplierClick(card.venue)} className="flexCenter r-card">
-                <img src={card.image} alt="home"  />
+                <img src={`/1/${card.image}`} alt="home"  />
                 <span className="flexCenter heading">{card.venue}</span>
                 {/* <span className="flexCenter font">{card.detail}</span> */}
               </div>
@@ -62,7 +63,6 @@ const Residencies = () => {
           ))}
         </Swiper>
       </div>
-
       <div className="paddings innerWidth r-container">
         <div className="r-head flexCenter">
           <span className="heading">Featured Video</span>
@@ -86,7 +86,7 @@ const Residencies = () => {
 
 export default Residencies;
 
-const SupplierInfo = ({ selectedSuppliers, onClose }) => {
+const SupplierInfo = ({selectedSuppliers, onClose }) => {
   const [selectedSupplierIndex, setSelectedSupplierIndex] = useState(null);
 
   const handleCardClick = (index) => {

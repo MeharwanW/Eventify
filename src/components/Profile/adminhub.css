@@ -281,6 +281,7 @@ ol, ul {
 }
 .form-group{
 	margin: 0 2% 0 2%;
+	width: 30%;
 }
 
 .eventFormField
@@ -292,6 +293,13 @@ ol, ul {
 
 .imageSet img{
 	width: 40%;
+}
+
+.inputField
+{
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
 }
 
 

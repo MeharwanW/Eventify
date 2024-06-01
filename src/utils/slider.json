@@ -2,40 +2,21 @@
   {
     "name": "wedding",
     "detail": "Khudad Plaza Islamabad",
-    "image": "./1/6.jpeg"
+    "image": "./1/5.jpeg"
   },
   {
     "name": "meeting",
     "detail": "Khudad Plaza Lahore Punjab",
-    "image": "./1/13.jpeg"
+    "image": "./1/meeting2.jpg"
   },
   {
     "name": "party",
     "detail": "Khudad Plaza Karachi Sindh",
-    "image": "./1/9.jpeg"
+    "image": "./1/party1.jpg"
   },
   {
     "name": "reception",
     "detail": "Khudad Plaza Sukkur Sindh",
-    "image": "./1/8.jpeg"
-  }, {
-    "name": "wedding",
-    "detail": "Khudad Plaza Islamabad",
-    "image": "./1/6.jpeg"
-  },
-  {
-    "name": "meeting",
-    "detail": "Khudad Plaza Lahore Punjab",
-    "image": "./1/13.jpeg"
-  },
-  {
-    "name": "party",
-    "detail": "Khudad Plaza Karachi Sindh",
-    "image": "./1/9.jpeg"
-  },
-  {
-    "name": "Reception",
-    "detail": "Khudad Plaza Sukkur Sindh",
-    "image": "./1/8.jpeg"
+    "image": "./1/sukkur5.jpeg"
   }
 ]

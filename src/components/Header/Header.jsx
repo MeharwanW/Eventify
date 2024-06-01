@@ -55,8 +55,11 @@ const Header = (props) => {
         </div>)}
 
         {props.isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
-          <button onClick={()=>{ props.login() }} className="button logout" variant="">
-            logout
+        <Link to="/dashboard" className="font"><button className="button buttonsinside" variant="">
+            Profile
+          </button></Link>
+          <button onClick={()=>{ props.login() }} className=" font button buttonsinside" variant="">
+            Logout
           </button> 
         </div>)}
         
