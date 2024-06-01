@@ -32,9 +32,9 @@ const Header = (props) => {
     <section>
       
     
-      <div className="justify-content-between navbar fixed-top" activeKey="/home">
+      <div className="justify-content-between navbar fixed-top">
         <div className="Logo1">
-          <Link to="home" >
+          <Link to="/home" >
             <div className="Logo">
               <img className="svgImg" src={Logo} alt="" srcSet="" />
             </div>
