@@ -13,10 +13,12 @@ import AdminHub from "./components/Profile/Adminhub";
 import { useState, useEffect } from "react";
 import Preloader from "./components/Preloader";
 import  Booking  from "./components/BookingEvent/Booking";
+import useLocalStorage from "./components/hooks/useLocalStorage";
 
 function App() {
   const [loaded, setLoaded] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   const authHandler = () => {
     setIsLoggedIn(!isLoggedIn);
