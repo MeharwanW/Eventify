@@ -36,6 +36,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
@@ -167,9 +168,13 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
       state1,
       services,
     } = req.body;
+
     console.log("reqbody", req.body);
+
     const servicesArray = JSON.parse(services);
+
     console.log("servicesArray", servicesArray);
+
     const newGig = new gig({
       organizer_id,
       description,
@@ -416,7 +421,9 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign({ id: validUser._id }, process.env.KEY, {
       expiresIn: "1hr",
     });
+
     console.log("token from login api ", token);
+
     if (validUser.user_type == "organizer") {
       return res.status(200).json({
         token,
@@ -425,6 +432,7 @@ app.post("/login", async (req, res) => {
         userType: "organizer",
       });
     }
+
     return res.status(200).json({
       token,
       message: "Login Succesfull",
@@ -477,6 +485,9 @@ app.post("/signup", async (req, res) => {
 });
 
 
+server.listen(3001, () => {
+  console.log("SOCKET SERVER RUNNING");
+});
 
 // MongoDB connection URI
 const uri =

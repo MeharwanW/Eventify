@@ -4,8 +4,24 @@ import { BiSolidDashboard, BiSolidCalendar, BiGroup, BiDollarCircle, BiStore, Bi
 import axios from 'axios';
 import './adminhub.css';
 import Form from 'react-bootstrap/Form';
+import io from "socket.io-client";
+import { useNavigate } from 'react-router-dom'
 
+import Chat from "./Chat";
+
+const socket = io.connect("http://localhost:3001");
 const AdminHub = () => {
+
+    
+    const navigate = useNavigate();
+
+    const authToken = localStorage.getItem("adminToken");
+    const token = localStorage.getItem("currentOrganizer");
+    const userData = JSON.parse(token);
+    const organizerId=userData._id;
+    const organizeUsername=userData.organizer_username
+
+
     const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
     const [showAddEventForm, setShowAddEventForm] = useState(false);
     const [description, setDescription] = useState('');
@@ -36,9 +52,7 @@ const AdminHub = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        setIsLoading(true);
-        const authToken = localStorage.getItem("adminToken");
-        const organizerId = localStorage.getItem("currentOrganizer");
+        setIsLoading(true);    
 
         const formData = new FormData();
         formData.append("organizer_id", organizerId);
@@ -52,6 +66,7 @@ const AdminHub = () => {
 
         try {
             const result = await axios.post("http://localhost:4000/addGig", formData, {
+
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     "Content-Type": "multipart/form-data",
@@ -60,8 +75,10 @@ const AdminHub = () => {
 
             if (result.status) {
                 alert("Gig created");
+                
             } else {
                 alert('Gig already exists');
+               
             }
         } catch (error) {
             alert('Failed to add. Please try again.');
@@ -137,6 +154,23 @@ const AdminHub = () => {
             alert(`Error ${decision === 'accept' ? 'accepting' : 'rejecting'} order`);
         }
     };
+
+    
+    const [userChat, setUserChat] = useState("");
+    const [room, setRoom] = useState("");
+    const [showChat, setShowChat] = useState(false);
+    
+
+    const joinRoom = () => {
+        setRoom("abc123");
+        setUserChat(organizeUsername)
+
+        if (userChat !== "" && room !== "") {
+        socket.emit("join_room", room);
+        setShowChat(true);
+        }
+    };
+
 
     return (
         <div>
@@ -247,6 +281,7 @@ const AdminHub = () => {
                                                     <div className="form-group flexColCenter">
                                                         <label className='text' htmlFor="category">Category:</label>
                                                         <Form.Select className='input1' id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+                                                            <option value="">Select Category</option>
                                                             <option value="wedding">Wedding</option>
                                                             <option value="meeting">Meeting</option>
                                                             <option value="party">Party</option>
@@ -257,6 +292,7 @@ const AdminHub = () => {
                                                     <div className="form-group flexColCenter">
                                                         <label className='text' htmlFor="city">City:</label>
                                                         <Form.Select className='input1' id="city" value={city} onChange={(e) => setCity(e.target.value)}>
+                                                            <option value="">Select City</option>
                                                             <option value="karachi">Karachi</option>
                                                             <option value="islamabad">Islamabad</option>
                                                             <option value="dera allah yar">Dera Allah Yar</option>
@@ -269,6 +305,7 @@ const AdminHub = () => {
                                                     <div className="form-group flexColCenter">
                                                         <label className='text' htmlFor="state">State:</label>
                                                         <Form.Select className='input1' id="state" value={state1} onChange={(e) => setState(e.target.value)}>
+                                                            <option value="">Select Province</option>
                                                             <option value="sindh">Sindh</option>
                                                             <option value="balochistan">Balochistan</option>
                                                             <option value="punjab">Punjab</option>
@@ -291,6 +328,7 @@ const AdminHub = () => {
                                                                     value={service.name}
                                                                     onChange={(e) => handleServiceNameChange(index, e.target.value)}
                                                                 >
+                                                                    <option value="">Select Services</option>
                                                                     <option value="Camera man">Camera Man</option>
                                                                     <option value="Catering">Catering</option>
                                                                     <option value="Chairs">Chairs</option>
@@ -348,15 +386,20 @@ const AdminHub = () => {
                                     </div>
                                 ))}
                             </div>
-                            <div className="send-message-form">
-                                <input 
-                                    type="text" 
-                                    value={newMessage} 
-                                    onChange={(e) => setNewMessage(e.target.value)} 
-                                    placeholder="Type a message" 
-                                />
-                                <button onClick={sendMessage}>Send</button>
-                            </div>
+                            {!showChat ?(
+                                <div className="send-message-form">
+                                    <input 
+                                        type="text" 
+                                        value={newMessage} 
+                                        onChange={(e) => setNewMessage(e.target.value)} 
+                                        placeholder="Type a message" 
+                                    />
+                                    <button onClick={sendMessage}>Send</button>
+                                    <button onClick={joinRoom}>Join Chat</button>
+                                </div>
+                            ):(
+                                <Chat socket={socket} username={userChat} room={room} />
+                            )}
                         </div>
                     )}
                 </main>

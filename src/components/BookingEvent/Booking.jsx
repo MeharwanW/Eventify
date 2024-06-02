@@ -5,9 +5,17 @@ import SignatureCanvas from 'react-signature-canvas';
 import { useLocation } from "react-router-dom";
 
 const Booking = () => {
-    const clientId = localStorage.getItem("currentClient");
     const { state } = useLocation();
-    const clientusername = localStorage.getItem("currentClientUsername");
+
+    const token = localStorage.getItem("currentClient");
+    const userData = JSON.parse(token);
+    const clientId=userData._id;
+    const clientusername=userData.client_username
+
+    //const clientusername = localStorage.getItem("currentClientUsername");
+    console.log("Client id through token Booking",clientId)
+    console.log("Client Username through token Booking",clientusername)
+   
     const [selectedCard, setSelectedCard] = useState(state?.userData || {});
     const [servicesList, setServicesList] = useState(selectedCard.services_list || []);
     const [formData, setFormData] = useState({
