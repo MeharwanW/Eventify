@@ -44,19 +44,19 @@ export const Login = (props) => {
     
             if (response.data) {
 
-                // console.log("returned token ",response.data.token)
+                 console.log("returned token ",response.data.token)
 
                 const authToken=response.data.token;
                 props.login()
                 if(response.data.userType==="organizer"){
-                localStorage.setItem("adminToken",authToken)
-                localStorage.setItem('currentOrganizer', response.data.userData);
+                    localStorage.setItem('adminToken', response.data.token);
+                    localStorage.setItem('currentOrganizer', JSON.stringify(response.data.userData));
                     navigate('/dashboard');
                 }
                 else if(response.data.userType==="client"){
-                    localStorage.setItem("clientToken",authToken)
-                    localStorage.setItem('currentClient', response.data.userData);
-                    navigate('/home');
+                    localStorage.setItem('clientToken', response.data.token);
+localStorage.setItem('currentClient', JSON.stringify(response.data.userData));
+                    navigate('/clientdashboard');
                 }
                 // Pass userData to the dashboard component
                 
