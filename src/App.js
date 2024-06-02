@@ -14,16 +14,37 @@ import { useState, useEffect } from "react";
 import Preloader from "./components/Preloader";
 import  Booking  from "./components/BookingEvent/Booking";
 import useLocalStorage from "./components/hooks/useLocalStorage";
+import ClientHub from "./components/Profile/ClientHub";
 
 function App() {
   const [loaded, setLoaded] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  // const [userType, setUserType] = useState('');
+  //   const [userId, setUserId] = useState('');
+    const authHandler = () => {
+      setIsLoggedIn(!isLoggedIn);
+    };
+    useEffect(() => {
+      
+      const currentClient = localStorage.getItem('currentClient');
+      const currentOrganizer = localStorage.getItem('currentOrganizer');
 
-  const authHandler = () => {
-    setIsLoggedIn(!isLoggedIn);
-  };
+      if (currentClient) {
+          setIsLoggedIn(true);
+          
+      }
+      else if(currentOrganizer)
+        
+        {
+          setIsLoggedIn(true);
+        }
+        else
+        {
+          setIsLoggedIn(false);
+        }
+  }, []);
 
+ 
   useEffect(() => {
     const handleLoad = () => {
       setLoaded(false);
@@ -70,6 +91,12 @@ function App() {
                 path="/dashboard"
                 element={
                   isLoggedIn ? <AdminHub /> : <Navigate to="/login" />
+                }
+              />
+              <Route
+                path="/clientdashboard"
+                element={
+                  isLoggedIn ? <ClientHub /> : <Navigate to="/login" />
                 }
               />
             </Route>

@@ -4,16 +4,17 @@ import "./SearchBar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.css";
 import Logo from "../../assets/logo2.png";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate  } from "react-router-dom";
 import venueSvg1 from "../../assets/Venue.svg";
 import aboutSvg1 from "../../assets/about.svg";
 import homeSvg1 from "../../assets/home.svg";
 import contactSvg1 from "../../assets/contact.svg";
 import mediaSvg1 from "../../assets/media.svg";
 import supplierSvg1 from "../../assets/supplier.svg";
-import { useState } from 'react';
+import { useState} from 'react';
 import { BiLogInCircle } from "react-icons/bi";
 import { VscSignIn } from "react-icons/vsc";
+
 
 
 import React from 'react';
@@ -23,11 +24,20 @@ const Header = (props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const navigate = useNavigate();
 
+  const currentClient = localStorage.getItem('currentClient');
+  const currentOrganizer = localStorage.getItem('currentOrganizer');
   window.addEventListener('resize', () => {
     setWindowWidth(window.innerWidth);
   });
- 
+  const handleProfileClick = () => {
+    if (currentClient) {
+      navigate("/clientdashboard");
+    } else if (currentOrganizer) {
+      navigate("/dashboard");
+    }
+  };
   return (
     <section>
       
@@ -54,14 +64,17 @@ const Header = (props) => {
           </button></Link> 
         </div>)}
 
-        {props.isLoggedIn && !showMenu && windowWidth > 952 &&(<div className="buttons">
-        <Link to="/dashboard" className="font"><button className="button buttonsinside" variant="">
-            Profile
-          </button></Link>
-          <button onClick={()=>{ props.login() }} className=" font button buttonsinside" variant="">
-            Logout
-          </button> 
-        </div>)}
+        
+        {props.isLoggedIn && !showMenu && windowWidth > 952 && (
+          <div className="buttons">
+            <button onClick={handleProfileClick} className="font button buttonsinside" variant="">
+              Profile
+            </button>
+            <button onClick={props.login} className=" font button buttonsinside" variant="">
+              Logout
+            </button> 
+          </div>
+        )}
         
       {windowWidth <953 && (<div className={`dropdown-menu ${showMenu ? 'show' : ''}`}>
           <div onClick={() => setShowMenu(!showMenu)}><NavItems props={props}/></div>
