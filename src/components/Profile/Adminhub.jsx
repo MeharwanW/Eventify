@@ -38,7 +38,7 @@ const AdminHub = () => {
     setIsLoading(true);
     const authToken = localStorage.getItem("adminToken");
     const organizerId = localStorage.getItem("currentOrganizer");
-    const organizerUsername = localStorage.getItem("currentOrganizerUsername");
+    //const organizerUsername = localStorage.getItem("currentOrganizerUsername");
 
     const formData = new FormData();
     formData.append("organizer_id", organizerId);
