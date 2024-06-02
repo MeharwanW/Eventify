@@ -3,20 +3,32 @@ import user from '../SignIn/user.svg'
 import pass from '../SignIn/lock.svg'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
-import { useState } from "react"
+import {useEffect, useState } from "react"
 
 
 export const Login = (props) => {
 
     const [client_username, setUserName] = useState("") 
     const [client_password, setPassword] = useState("")
-    
+
 
     const navigate = useNavigate();
     
   
-    
+    // useEffect(() => {
+    //     console.log("here");
 
+    //     // Use a flag to prevent multiple navigations
+    //     let didNavigate = false;
+
+    //     if (window.localStorage.getItem('adminToken') && !didNavigate) {
+    //         didNavigate = true;
+    //         navigate('/dashboard');
+    //     } else if (window.localStorage.getItem('clientToken') && !didNavigate) {
+    //         didNavigate = true;
+    //         navigate('/home');
+    //     }
+    // }, []);
     //axios.defaults.withCredentials = true; 
 
     async function submit(e)
@@ -38,17 +50,13 @@ export const Login = (props) => {
                 props.login()
                 if(response.data.userType==="organizer"){
                 localStorage.setItem("adminToken",authToken)
-                localStorage.setItem('currentOrganizer', response.data.userData._id);
-                localStorage.setItem('currentOrganizerUsername',response.data.userData.organizer_username)
-                localStorage.setItem('userType',response.data.userData.user_type);
-                    navigate('/dashboard', { state: { userData: response.data } });
+                localStorage.setItem('currentOrganizer', response.data.userData);
+                    navigate('/dashboard');
                 }
                 else if(response.data.userType==="client"){
                     localStorage.setItem("clientToken",authToken)
-                    localStorage.setItem('currentClient', response.data.userData._id);
-                    localStorage.setItem('currentClientUsername',response.data.userData.client_username)
-                    localStorage.setItem('userType',response.data.userData.user_type);
-                    navigate('/home', { state: { userData: response.data } });
+                    localStorage.setItem('currentClient', response.data.userData);
+                    navigate('/home');
                 }
                 // Pass userData to the dashboard component
                 
