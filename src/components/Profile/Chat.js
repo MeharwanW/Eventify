@@ -1,33 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef  } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
+import axios from "axios";
+import moment from "moment";
+import io from "socket.io-client";
+
+// Connect to the socket server
+const socket = io.connect("http://localhost:3001");
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const messagesEndRef = useRef(null);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
   const sendMessage = async () => {
-    if (currentMessage !== "") {
+    if (currentMessage.trim() !== "") {
       const messageData = {
         room: room,
         author: username,
         message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
+        time: new Date(), // Format the time using moment.js
       };
 
-      await socket.emit("send_message", messageData);
-      setMessageList((list) => [...list, messageData]);
-      setCurrentMessage("");
+      try {
+        await axios.post("http://localhost:4000/sendMessage", messageData);
+        await socket.emit("send_message", messageData);
+        setMessageList((list) => [...list, messageData]);
+        setCurrentMessage("");
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
     }
   };
 
+  const fetchMessages = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/getMessages", 
+      {
+        params: {
+          room:room
+        },
+      });
+      setMessageList(response.data.messages);
+      scrollToBottom();
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
   useEffect(() => {
+
+    fetchMessages();
+    socket.emit("join_room", room);
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
+      scrollToBottom();
     });
-  }, [socket]);
+
+
+    return () => {
+      socket.off("receive_message");
+    };
+  }, [room]);
+
+
+
 
   return (
     <div className="chat-window">
@@ -36,9 +74,10 @@ function Chat({ socket, username, room }) {
       </div>
       <div className="chat-body">
         <ScrollToBottom className="message-container">
-          {messageList.map((messageContent) => {
+          {messageList.map((messageContent, index) => {
             return (
               <div
+                key={index}
                 className="message"
                 id={username === messageContent.author ? "you" : "other"}
               >
@@ -47,9 +86,9 @@ function Chat({ socket, username, room }) {
                     <p>{messageContent.message}</p>
                   </div>
                   <div className="message-meta">
-                    <p id="time">{messageContent.time}</p>
-                    <p id="author">{messageContent.author}</p>
-                  </div>
+  <p id="time">{moment(messageContent.time).format("HH:mm")}</p>
+  <p id="author">{messageContent.author}</p>
+</div>
                 </div>
               </div>
             );
@@ -60,11 +99,11 @@ function Chat({ socket, username, room }) {
         <input
           type="text"
           value={currentMessage}
-          placeholder="Hey..."
+          placeholder="Send Message..."
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
-          onKeyPress={(event) => {
+          onKeyDown={(event) => {
             event.key === "Enter" && sendMessage();
           }}
         />

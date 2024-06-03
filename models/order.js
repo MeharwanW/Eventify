@@ -62,10 +62,21 @@ const orderSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
+    organizer_username: {
+      type: String,
+      required: true,
+    },
     order_status:{
       type:String,
       required:true
     },
+    message_list: {
+      type: [{
+          message: String,
+          author:String,
+          time: { type: Date, default: Date.now },
+      }],
+  }, 
     
   },
   {

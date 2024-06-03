@@ -29,6 +29,7 @@ const organizer = require("./models/organizers.js");
 const order = require("./models/order.js");
 
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
@@ -59,6 +60,7 @@ io.on("connection", (socket) => {
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
+
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
   });
@@ -67,7 +69,47 @@ io.on("connection", (socket) => {
     console.log("User Disconnected", socket.id);
   });
 });
+app.post("/sendMessage", async (req, res) => {
+  const { room, author , message , time } = req.body;
+  
 
+  if (!message || !author) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    const order1 = await order.findOne({_id:room});
+
+    if (!order1) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    order1.message_list.push({ message, author, time});
+    await order1.save();
+
+    res.status(201).json({ message: "Message appended successfully", data: order1 });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.get("/getMessages", async (req, res) => {
+  const room = req.query.room;
+
+  try {
+    const order1 = await order.findOne({_id:room});
+
+    if (!order1) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    res.status(200).json({ messages: order1.message_list });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 app.get("/all/orders", async (req, res) => {
   try {
@@ -98,6 +140,7 @@ app.post("/book/event", async (req, res) => {
       state1,
       services,
       client_username,
+      organizer_username,
       totalPrice,
     } = req.body;
 
@@ -133,6 +176,7 @@ app.post("/book/event", async (req, res) => {
       gig_id,
       client_username,
       organizer_id,
+      organizer_username
     });
 
     console.log("newOrder : ", newOrder);
@@ -161,6 +205,7 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
   try {
     const {
       organizer_id,
+      organizer_username,
       description,
       venue,
       category,
@@ -177,6 +222,7 @@ app.post("/addGig", upload.single("image"), verifyToken, async (req, res) => {
 
     const newGig = new gig({
       organizer_id,
+      organizer_username, 
       description,
       venue,
       category,
@@ -321,7 +367,7 @@ app.get("/get/client/username", async (req, res) => {
 app.get("/get/client/orders", async (req, res) => {
   try {
     const clientId = req.query.clientId
-    console.log("organizerId from frontend: ", clientId);
+    console.log("Client in clientOrders api: ", clientId);
 
     // Use the organizerId to find orders in the Order model
     const allOrders = await order.find({ client_id: clientId });
@@ -345,6 +391,8 @@ app.get("/get/organizer/orders", async (req, res) => {
 
     // Use the organizerId to find orders in the Order model
     const allOrders = await order.find({ organizer_id: organizerId });
+
+    console.log("All orders from organizer api", allOrders)
 
     if (allOrders) {
       res.status(201).json({ message: "Orders found ", allOrders: allOrders });

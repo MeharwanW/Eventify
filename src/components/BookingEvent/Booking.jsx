@@ -18,10 +18,12 @@ const Booking = () => {
    
     const [selectedCard, setSelectedCard] = useState(state?.userData || {});
     const [servicesList, setServicesList] = useState(selectedCard.services_list || []);
+
     const [formData, setFormData] = useState({
         client_username: clientusername,
         client_id: clientId,
         organizer_id: selectedCard.organizer_id,
+        organizer_username: selectedCard.organizer_username,
         gig_id: selectedCard._id,
         category: selectedCard.category || "",
         eventDate: "",
@@ -90,24 +92,7 @@ const Booking = () => {
         }
     };
 
-    const client_Id = localStorage.getItem("currentClient");
-    // console.log("orgnaizerId from AdminHub ; ",client_Id )
-
-    // axios.post('http://localhost:4000/book/event', data)
-    //     .then(response => {
-    //         console.log('Response:', response.data);
-    //         // Handle response data
-    //         alert("Order Placed")
-    //     })
-    //     .catch(error => {
-    //         if (error.response) {
-    //             console.error('Response Error:', error.response.data);
-    //         } else if (error.request) {
-    //             console.error('Request Error:', error.request);
-    //         } else {
-    //             console.error('Error:', error.message);
-    //         }
-    //     });
+    
 
     return (
         <div className="bookingscreen shadow-box flexCenter font">
